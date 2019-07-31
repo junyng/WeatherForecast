@@ -23,8 +23,16 @@ class SearchCityViewController: UIViewController {
         configureSearchController()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        DispatchQueue.main.async {
+            self.searchController.isActive = true
+        }
+    }
+    
     // MARK: - Methods
     func configureSearchController() {
+        searchController.delegate = self
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -61,6 +69,14 @@ extension SearchCityViewController: UITableViewDataSource {
     }
 }
 
+// MARK: UISearchControllerDelegate
+extension SearchCityViewController: UISearchControllerDelegate {
+    func didPresentSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.becomeFirstResponder()
+    }
+}
+
+// MARK: UISearchBarDelegate
 extension SearchCityViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.dismiss(animated: true, completion: nil)
