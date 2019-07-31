@@ -12,6 +12,8 @@ class SearchCityViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    fileprivate let cities = ["서울", "부산", "인천", "대구", "광주"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -20,12 +22,12 @@ class SearchCityViewController: UIViewController {
 // MARK: UITableViewDataSource
 extension SearchCityViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return cities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
-        cell.textLabel?.text = "도시"
+        cell.textLabel?.text = cities[indexPath.item]
         return cell
     }
 }
