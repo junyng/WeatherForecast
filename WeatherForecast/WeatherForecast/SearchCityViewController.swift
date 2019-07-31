@@ -37,17 +37,25 @@ class SearchCityViewController: UIViewController {
         })
         tableView.reloadData()
     }
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
 }
 
 // MARK: UITableViewDataSource
 extension SearchCityViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cities.count
+        return isFiltering() ? filteredCities.count : cities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
-        cell.textLabel?.text = cities[indexPath.item]
+        cell.textLabel?.text = isFiltering() ? filteredCities[indexPath.item] : cities[indexPath.item]
         return cell
     }
 }
