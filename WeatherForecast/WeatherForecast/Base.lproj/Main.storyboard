@@ -67,6 +67,9 @@
                                             <constraint firstItem="UM2-2j-kgP" firstAttribute="leading" secondItem="Ghq-dq-eow" secondAttribute="leadingMargin" constant="10" id="prq-ch-S19"/>
                                         </constraints>
                                         <size key="customSize" width="414" height="80"/>
+                                        <connections>
+                                            <segue destination="97f-Id-QUE" kind="show" id="rXt-K1-mcj"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="citiesFooter" id="ggD-6t-Ghk">
@@ -112,7 +115,7 @@
         <!--Page View Controller-->
         <scene sceneID="oeD-F9-kl0">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="97f-Id-QUE" customClass="PageViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="97f-Id-QUE" customClass="PageViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hFs-EA-C8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1187" y="417"/>
