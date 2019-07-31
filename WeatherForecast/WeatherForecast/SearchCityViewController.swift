@@ -10,12 +10,24 @@ import UIKit
 
 class SearchCityViewController: UIViewController {
     
+    // MARK: - Properties
     @IBOutlet weak var tableView: UITableView!
     
-    fileprivate let cities = ["서울", "부산", "인천", "대구", "광주"]
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
+    
+    fileprivate var cities = ["서울", "부산", "인천", "대구", "광주"]
+    fileprivate var filteredCities: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    // MARK: - Methods
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredCities = cities.filter({(city: String) -> Bool in
+            return city.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
     }
 }
 
