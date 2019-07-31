@@ -25,6 +25,7 @@ class SearchCityViewController: UIViewController {
     
     // MARK: - Methods
     func configureSearchController() {
+        searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
@@ -57,6 +58,12 @@ extension SearchCityViewController: UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
         cell.textLabel?.text = isFiltering() ? filteredCities[indexPath.item] : cities[indexPath.item]
         return cell
+    }
+}
+
+extension SearchCityViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
