@@ -9,8 +9,28 @@
 import UIKit
 
 class WeatherViewController: UIViewController {
-
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    fileprivate let days = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+}
+
+// MARK: UICollectionViewDataSource
+extension WeatherViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return days.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath)
+        return cell
     }
 }
