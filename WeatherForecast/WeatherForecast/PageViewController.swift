@@ -16,6 +16,7 @@ class PageViewController: UIPageViewController {
             UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "weatherViewController")
         ]
     }()
+    fileprivate let pageControl = UIPageControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,19 @@ class PageViewController: UIPageViewController {
         {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         }
+        configureToolbarItems()
+    }
+    
+    func configureToolbarItems() {
+        self.pageControl.frame = CGRect()
+        self.pageControl.currentPageIndicatorTintColor = UIColor.black
+        self.pageControl.pageIndicatorTintColor = UIColor.lightGray
+        self.pageControl.numberOfPages = self.pages.count
+        self.pageControl.currentPage = 0
+        let flexibleSpaceButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let pageControlButtonItem = UIBarButtonItem(customView: self.pageControl)
+        self.toolbarItems = [flexibleSpaceButtonItem, pageControlButtonItem, flexibleSpaceButtonItem]
+        self.navigationController?.isToolbarHidden = false
     }
 }
 
