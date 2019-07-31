@@ -109,6 +109,14 @@
             </objects>
             <point key="canvasLocation" x="1186.9565217391305" y="-297.32142857142856"/>
         </scene>
+        <!--Page View Controller-->
+        <scene sceneID="oeD-F9-kl0">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="97f-Id-QUE" customClass="PageViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hFs-EA-C8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1185" y="417"/>
+        </scene>
         <!--Search City View Controller-->
         <scene sceneID="mrZ-df-0BO">
             <objects>
