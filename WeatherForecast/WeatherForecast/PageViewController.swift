@@ -37,8 +37,13 @@ class PageViewController: UIPageViewController {
         self.pageControl.currentPage = 0
         let flexibleSpaceButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let pageControlButtonItem = UIBarButtonItem(customView: self.pageControl)
-        self.toolbarItems = [flexibleSpaceButtonItem, pageControlButtonItem, flexibleSpaceButtonItem]
+        let listButtonItem = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "list-with-dots"), style: .plain, target: self, action: #selector(popToPrevious))
+        self.toolbarItems = [flexibleSpaceButtonItem, pageControlButtonItem, flexibleSpaceButtonItem, listButtonItem]
         self.navigationController?.isToolbarHidden = false
+    }
+    
+    @objc func popToPrevious() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
