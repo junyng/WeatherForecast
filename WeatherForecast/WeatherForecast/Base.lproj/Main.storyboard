@@ -82,8 +82,17 @@
                                                 <segue destination="c4z-ww-0Bb" kind="show" id="LeH-3h-aJE"/>
                                             </connections>
                                         </button>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DCr-Ul-DH8">
+                                            <rect key="frame" x="18" y="11" width="61" height="29"/>
+                                            <segments>
+                                                <segment title="°C"/>
+                                                <segment title="°F"/>
+                                            </segments>
+                                        </segmentedControl>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="DCr-Ul-DH8" firstAttribute="leading" secondItem="ggD-6t-Ghk" secondAttribute="leadingMargin" constant="10" id="CLF-a4-LgZ"/>
+                                        <constraint firstItem="DCr-Ul-DH8" firstAttribute="centerY" secondItem="ggD-6t-Ghk" secondAttribute="centerY" id="EzX-BR-EQO"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Luv-mk-Ppy" secondAttribute="trailing" constant="10" id="aQJ-L1-isa"/>
                                         <constraint firstItem="Luv-mk-Ppy" firstAttribute="centerY" secondItem="ggD-6t-Ghk" secondAttribute="centerY" id="fAZ-x5-yVL"/>
                                     </constraints>
