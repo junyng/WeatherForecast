@@ -75,6 +75,9 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Luv-mk-Ppy">
                                             <rect key="frame" x="374" y="14" width="22" height="22"/>
+                                            <connections>
+                                                <segue destination="AOL-GX-dE5" kind="show" id="LeH-3h-aJE"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -104,6 +107,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P2O-XX-K6d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="404" y="-297"/>
+        </scene>
+        <!--Search City View Controller-->
+        <scene sceneID="mrZ-df-0BO">
+            <objects>
+                <viewController id="AOL-GX-dE5" customClass="SearchCityViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6ev-dF-iAI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="dog-yi-Y1U"/>
+                    </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="mkD-iF-thq" id="D4j-Er-aet"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fvV-p9-6MM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="mkD-iF-thq">
+                    <connections>
+                        <outlet property="delegate" destination="AOL-GX-dE5" id="TkG-Pc-92M"/>
+                        <outlet property="searchContentsController" destination="AOL-GX-dE5" id="NOA-xV-txV"/>
+                        <outlet property="searchResultsDataSource" destination="AOL-GX-dE5" id="j2e-jY-QxQ"/>
+                        <outlet property="searchResultsDelegate" destination="AOL-GX-dE5" id="YnN-jc-u6y"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="1286" y="-297"/>
         </scene>
     </scenes>
 </document>
