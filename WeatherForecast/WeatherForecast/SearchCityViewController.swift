@@ -20,9 +20,17 @@ class SearchCityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSearchController()
     }
     
     // MARK: - Methods
+    func configureSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         filteredCities = cities.filter({(city: String) -> Bool in
             return city.lowercased().contains(searchText.lowercased())
@@ -41,5 +49,13 @@ extension SearchCityViewController: UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
         cell.textLabel?.text = cities[indexPath.item]
         return cell
+    }
+}
+
+// MARK: UISearchResultsUpdating
+extension SearchCityViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
     }
 }
