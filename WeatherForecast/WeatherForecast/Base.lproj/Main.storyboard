@@ -115,7 +115,22 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="97f-Id-QUE" customClass="PageViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hFs-EA-C8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1185" y="417"/>
+            <point key="canvasLocation" x="1187" y="417"/>
+        </scene>
+        <!--Weather View Controller-->
+        <scene sceneID="6by-rs-5oN">
+            <objects>
+                <viewController storyboardIdentifier="weatherViewController" id="w8o-gM-z5A" customClass="WeatherViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zen-7V-Pys">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="LDA-iN-AiQ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="07O-t1-X5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2196" y="417"/>
         </scene>
         <!--Search City View Controller-->
         <scene sceneID="mrZ-df-0BO">
