@@ -12,10 +12,10 @@ struct WeatherAPI {
     private static let baseURLString = "https://api.darksky.net/forecast"
     private static let APIKey = "693b24d34c1e7088cefd6076c3c10fd3"
     
-    static func weatherURL(lat: Double, lon: Double) -> URL {
+    static func weatherURL(lat: Double, lng: Double) -> URL {
         var baseURL = URL(string: baseURLString)
         baseURL?.appendPathComponent(APIKey)
-        baseURL?.appendPathComponent("\(lat),\(lon)")
+        baseURL?.appendPathComponent("\(lat),\(lng)")
         return baseURL!
     }
 }
