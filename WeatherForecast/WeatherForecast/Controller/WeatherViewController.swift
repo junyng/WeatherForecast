@@ -10,12 +10,20 @@ import UIKit
 
 class WeatherViewController: UIViewController {
     
+    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
     fileprivate let days = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let weatherStore = WeatherStore()
+        weatherStore.fetchCurrentWeather(lat: 24, lng: 24) { weather in
+            OperationQueue.main.addOperation {
+                self.summaryLabel.text = weather.currently.summary
+            }
+        }
     }
 }
 
