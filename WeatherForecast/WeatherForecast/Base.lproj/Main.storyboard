@@ -80,7 +80,7 @@
                     <navigationItem key="navigationItem" id="d7F-dD-Lza"/>
                     <connections>
                         <outlet property="tableView" destination="X14-zx-daG" id="usI-75-Bxu"/>
-                        <segue destination="UK2-dp-jWv" kind="show" id="Djw-ub-MWJ"/>
+                        <segue destination="UK2-dp-jWv" kind="show" identifier="search" id="Djw-ub-MWJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CSi-5r-lKn" userLabel="First Responder" sceneMemberID="firstResponder"/>

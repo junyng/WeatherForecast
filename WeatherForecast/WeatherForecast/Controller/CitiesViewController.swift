@@ -27,12 +27,17 @@ class CitiesViewController: UIViewController {
         view.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        button.addTarget(self, action: #selector(searchButtonDidTapped), for: .touchUpInside)
         return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    @IBAction func searchButtonDidTapped() {
+        self.performSegue(withIdentifier: "search", sender: nil)
     }
 }
 
