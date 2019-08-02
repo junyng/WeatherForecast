@@ -46,6 +46,13 @@ class SearchLocationTableViewController: UITableViewController {
         definesPresentationContext = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        DispatchQueue.main.async {
+            self.searchController.searchBar.becomeFirstResponder()
+        }
+    }
+
     /// - Parameter suggestedCompletion: A search completion provided by `MKLocalSearchCompleter` when tapping on a search completion table row
     private func search(for suggestedCompletion: MKLocalSearchCompletion) {
         let searchRequest = MKLocalSearch.Request(completion: suggestedCompletion)
