@@ -30,21 +30,19 @@ class SearchLocationTableViewController: UITableViewController {
     private var boundingRegion: MKCoordinateRegion?
     
     override func awakeFromNib() {
+        super.awakeFromNib()
         suggestionController = SuggestionsTableTableViewController()
         suggestionController.tableView.delegate = self
         searchController = UISearchController(searchResultsController: suggestionController)
         searchController.searchResultsUpdater = suggestionController
-        searchController.searchBar.alpha = 0.5
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
-        
         definesPresentationContext = true
     }
     
@@ -87,6 +85,23 @@ class SearchLocationTableViewController: UITableViewController {
         }
     }
     
+    private func getCoordinate(addressString : String,
+                               completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(addressString) { (placemarks, error) in
+            if error == nil {
+                if let placemark = placemarks?[0] {
+                    let location = placemark.location!
+                    
+                    completionHandler(location.coordinate, nil)
+                    return
+                }
+            }
+            
+            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
+        }
+    }
+    
     private func displaySearchError(_ error: Error?) {
         if let error = error as NSError?, let errorString = error.userInfo[NSLocalizedDescriptionKey] as? String {
             let alertController = UIAlertController(title: "Could not find any places.", message: errorString, preferredStyle: .alert)
@@ -97,20 +112,31 @@ class SearchLocationTableViewController: UITableViewController {
 }
 
 extension SearchLocationTableViewController {
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "location", for: indexPath)
         
         if let mapItem = places?[indexPath.row] {
             cell.textLabel?.text = mapItem.name
         }
         
         return cell
+    }
+}
+
+extension SearchLocationTableViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if tableView == suggestionController.tableView, let suggestion = suggestionController.completerResults?[indexPath.row] {
+            searchController.isActive = false
+            searchController.searchBar.text = suggestion.title
+            search(for: suggestion)
+        }
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
