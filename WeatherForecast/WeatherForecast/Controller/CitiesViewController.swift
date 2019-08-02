@@ -10,33 +10,45 @@ import UIKit
 
 class CitiesViewController: UIViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.tableFooterView = footerView
+        }
+    }
+    
+    lazy var footerView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 50))
+        let segmentedControl = UISegmentedControl(items: ["°C", "°F"])
+        view.addSubview(segmentedControl)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        let button = UIButton(type: .contactAdd)
+        view.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 }
 
-// MARK: UICollectionViewDataSource
-extension CitiesViewController: UICollectionViewDataSource {
+// MARK: UITableViewDataSource
+extension CitiesViewController: UITableViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "city", for: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "city", for: indexPath)
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter,
-                                                                         withReuseIdentifier: "citiesFooter",
-                                                                         for: indexPath)
-        return footerView
     }
 }

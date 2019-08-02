@@ -15,6 +15,7 @@
 		3059766B22F378FB0035353D /* WeatherStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059766A22F378FB0035353D /* WeatherStore.swift */; };
 		3059767022F3E49E0035353D /* SearchLocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059766F22F3E49E0035353D /* SearchLocationTableViewController.swift */; };
 		3059767222F400840035353D /* SuggestionsTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059767122F400840035353D /* SuggestionsTableTableViewController.swift */; };
+		3059767622F47B280035353D /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059767522F47B280035353D /* TableViewController.swift */; };
 		30BDEE9822F18A97006E1C30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDEE9722F18A97006E1C30 /* AppDelegate.swift */; };
 		30BDEE9D22F18A97006E1C30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BDEE9B22F18A97006E1C30 /* Main.storyboard */; };
 		30BDEE9F22F18A98006E1C30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BDEE9E22F18A98006E1C30 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		3059766A22F378FB0035353D /* WeatherStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherStore.swift; sourceTree = "<group>"; };
 		3059766F22F3E49E0035353D /* SearchLocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationTableViewController.swift; sourceTree = "<group>"; };
 		3059767122F400840035353D /* SuggestionsTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsTableTableViewController.swift; sourceTree = "<group>"; };
+		3059767522F47B280035353D /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		30BDEE9422F18A97006E1C30 /* WeatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BDEE9722F18A97006E1C30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30BDEE9C22F18A97006E1C30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				30BDEEA322F18A98006E1C30 /* Info.plist */,
 				30BDEEAF22F19274006E1C30 /* CollectionViewController.swift */,
 				3059766A22F378FB0035353D /* WeatherStore.swift */,
+				3059767522F47B280035353D /* TableViewController.swift */,
 			);
 			path = WeatherForecast;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				3059766922F375A40035353D /* Currently.swift in Sources */,
 				3059767022F3E49E0035353D /* SearchLocationTableViewController.swift in Sources */,
 				305975D422F1EF550035353D /* WeatherViewController.swift in Sources */,
+				3059767622F47B280035353D /* TableViewController.swift in Sources */,
 				3059766722F375440035353D /* Weather.swift in Sources */,
 				305975D222F1EE350035353D /* PageViewController.swift in Sources */,
 				30BDEE9822F18A97006E1C30 /* AppDelegate.swift in Sources */,
