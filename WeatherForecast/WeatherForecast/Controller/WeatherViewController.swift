@@ -18,13 +18,6 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let weatherStore = WeatherStore()
-        let point = Point(latitude: 24, longitude: 24)
-        weatherStore.fetchCurrentWeather(point: point) { weather in
-            OperationQueue.main.addOperation {
-                self.summaryLabel.text = weather.currently.summary
-            }
-        }
     }
 }
 
