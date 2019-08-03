@@ -10,34 +10,30 @@ import UIKit
 
 class CitiesViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            tableView.tableFooterView = footerView
-        }
-    }
-    
-    lazy var footerView: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 50))
-        let segmentedControl = UISegmentedControl(items: ["°C", "°F"])
-        view.addSubview(segmentedControl)
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        let button = UIButton(type: .contactAdd)
-        view.addSubview(button)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        button.addTarget(self, action: #selector(searchButtonDidTapped), for: .touchUpInside)
-        return view
-    }()
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureFooterView()
     }
     
     @IBAction func searchButtonDidTapped() {
         self.performSegue(withIdentifier: "search", sender: nil)
+    }
+    
+    private func configureFooterView() {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 50))
+        let temperatureToggle = UISegmentedControl(items: ["°C", "°F"])
+        temperatureToggle.translatesAutoresizingMaskIntoConstraints = false
+        let addLocationButton = UIButton(type: .contactAdd)
+        addLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        footerView.addSubview(temperatureToggle)
+        footerView.addSubview(addLocationButton)
+        temperatureToggle.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
+        temperatureToggle.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 20).isActive = true
+        addLocationButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
+        addLocationButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -20).isActive = true
+        tableView.tableFooterView = footerView
     }
 }
 
