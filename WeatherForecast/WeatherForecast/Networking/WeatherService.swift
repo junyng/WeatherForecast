@@ -12,6 +12,7 @@ struct WeatherService {
     
     static func fetchWeather<ResponseType: Codable>(
         point: Point,
+        response: ResponseType.Type,
         dispatcher: NetworkDispatcher = NetworkDispatcher.instance,
         onSuccess: @escaping (ResponseType) -> Void,
         onError: @escaping (Error) -> Void
