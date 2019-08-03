@@ -32,7 +32,7 @@ extension WeatherViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "day", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "daily", for: indexPath) as! DailyCell
         return cell
     }
     
