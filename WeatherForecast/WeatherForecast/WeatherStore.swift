@@ -15,8 +15,9 @@ class WeatherStore {
         return URLSession(configuration: config)
     }()
     
-    func fetchCurrentWeather(lat: Double, lng: Double, completion: @escaping (Weather) -> Void) {
-        let url = WeatherAPI.weatherURL().appendingPathComponent("\(lat),\(lng)")
+    func fetchCurrentWeather(point: Point, completion: @escaping (Weather) -> Void) {
+        let pointPath = String(describing: point)
+        let url = WeatherAPI.weatherURL().appendingPathComponent(pointPath)
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) {
             (data, response, error) -> Void in
