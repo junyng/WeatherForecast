@@ -30,3 +30,16 @@ struct DarkSkyRequest: Request {
         self.point = point
     }
 }
+
+extension DarkSkyRequest {
+    /// URL을 만들어 반환
+    func buildURL() -> URL? {
+        var url = URL(string: baseURLString)
+        if let path = path {
+            url = url?.appendingPathComponent(path)
+        }
+        url = url?.appendingPathComponent(APIKey)
+        url = url?.appendingPathComponent(String(describing: point))
+        return url
+    }
+}
