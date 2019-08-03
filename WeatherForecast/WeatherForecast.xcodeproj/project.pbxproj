@@ -27,6 +27,7 @@
 		30BDEEB022F19274006E1C30 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDEEAF22F19274006E1C30 /* CollectionViewController.swift */; };
 		30F3199922F563CD00DE0A71 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F3199822F563CD00DE0A71 /* WeatherService.swift */; };
 		30F3199E22F56DF300DE0A71 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F3199D22F56DF300DE0A71 /* LocationCell.swift */; };
+		30F319A322F5C1CB00DE0A71 /* WeatherHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F319A222F5C1CB00DE0A71 /* WeatherHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		30BDEEAF22F19274006E1C30 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		30F3199822F563CD00DE0A71 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		30F3199D22F56DF300DE0A71 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		30F319A222F5C1CB00DE0A71 /* WeatherHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				30F3199D22F56DF300DE0A71 /* LocationCell.swift */,
+				30F319A222F5C1CB00DE0A71 /* WeatherHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				3059766722F375440035353D /* Weather.swift in Sources */,
 				305975D222F1EE350035353D /* PageViewController.swift in Sources */,
 				30BDEE9822F18A97006E1C30 /* AppDelegate.swift in Sources */,
+				30F319A322F5C1CB00DE0A71 /* WeatherHeaderView.swift in Sources */,
 				30BDEEAE22F191D7006E1C30 /* CitiesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
