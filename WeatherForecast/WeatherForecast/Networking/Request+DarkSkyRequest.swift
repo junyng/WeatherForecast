@@ -12,6 +12,7 @@ import Foundation
 protocol Request {
     var baseURLString: String { get }
     var path: String? { get }
+    func buildURL() -> URL?
 }
 
 struct DarkSkyRequest: Request {
