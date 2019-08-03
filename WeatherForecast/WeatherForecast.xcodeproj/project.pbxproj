@@ -27,7 +27,6 @@
 		30BDEEA222F18A98006E1C30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BDEEA022F18A98006E1C30 /* LaunchScreen.storyboard */; };
 		30BDEEAE22F191D7006E1C30 /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDEEAD22F191D7006E1C30 /* CitiesViewController.swift */; };
 		30BDEEB022F19274006E1C30 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDEEAF22F19274006E1C30 /* CollectionViewController.swift */; };
-		30F3199922F563CD00DE0A71 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F3199822F563CD00DE0A71 /* WeatherService.swift */; };
 		30F3199E22F56DF300DE0A71 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F3199D22F56DF300DE0A71 /* LocationCell.swift */; };
 		30F319A322F5C1CB00DE0A71 /* WeatherHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F319A222F5C1CB00DE0A71 /* WeatherHeaderView.swift */; };
 		30F319A522F5C58E00DE0A71 /* HourlyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F319A422F5C58E00DE0A71 /* HourlyCell.swift */; };
@@ -57,7 +56,6 @@
 		30BDEEA322F18A98006E1C30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30BDEEAD22F191D7006E1C30 /* CitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewController.swift; sourceTree = "<group>"; };
 		30BDEEAF22F19274006E1C30 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
-		30F3199822F563CD00DE0A71 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		30F3199D22F56DF300DE0A71 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		30F319A222F5C1CB00DE0A71 /* WeatherHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHeaderView.swift; sourceTree = "<group>"; };
 		30F319A422F5C58E00DE0A71 /* HourlyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCell.swift; sourceTree = "<group>"; };
@@ -75,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		300F199D22F5FBE1002A494E /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Datasource;
+			path = Datasource.temp_caseinsensitive_rename.;
+			sourceTree = "<group>";
+		};
 		3059766522F375360035353D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,7 +108,6 @@
 			children = (
 				3059767C22F535960035353D /* Request+DarkSkyRequest.swift */,
 				3059768D22F5464D0035353D /* Dispatcher+NetworkDispatcher.swift */,
-				30F3199822F563CD00DE0A71 /* WeatherService.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 		30BDEE9622F18A97006E1C30 /* WeatherForecast */ = {
 			isa = PBXGroup;
 			children = (
+				300F199D22F5FBE1002A494E /* Datasource */,
 				3059767922F51FCA0035353D /* Networking */,
 				3059766522F375360035353D /* Model */,
 				30F3199A22F56D5B00DE0A71 /* View */,
@@ -242,7 +248,6 @@
 				3059767022F3E49E0035353D /* SearchLocationTableViewController.swift in Sources */,
 				305975D422F1EF550035353D /* WeatherViewController.swift in Sources */,
 				3059767622F47B280035353D /* TableViewController.swift in Sources */,
-				30F3199922F563CD00DE0A71 /* WeatherService.swift in Sources */,
 				3059766722F375440035353D /* Weather.swift in Sources */,
 				300F199922F5CA5B002A494E /* SummaryCell.swift in Sources */,
 				305975D222F1EE350035353D /* PageViewController.swift in Sources */,
