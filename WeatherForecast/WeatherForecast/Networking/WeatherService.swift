@@ -10,7 +10,7 @@ import Foundation
 
 struct WeatherService {
     
-    func fetchWeather<ResponseType: Codable>(
+    static func fetchWeather<ResponseType: Codable>(
         point: Point,
         dispatcher: NetworkDispatcher = NetworkDispatcher.instance,
         onSuccess: @escaping (ResponseType) -> Void,
