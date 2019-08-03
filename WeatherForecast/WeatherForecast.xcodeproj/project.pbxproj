@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300F199922F5CA5B002A494E /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300F199822F5CA5B002A494E /* SummaryCell.swift */; };
+		300F199B22F5CB91002A494E /* InformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300F199A22F5CB91002A494E /* InformationCell.swift */; };
 		305975D222F1EE350035353D /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305975D122F1EE350035353D /* PageViewController.swift */; };
 		305975D422F1EF550035353D /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305975D322F1EF550035353D /* WeatherViewController.swift */; };
 		3059766022F352AD0035353D /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059765F22F352AD0035353D /* WeatherAPI.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		300F199822F5CA5B002A494E /* SummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCell.swift; sourceTree = "<group>"; };
+		300F199A22F5CB91002A494E /* InformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationCell.swift; sourceTree = "<group>"; };
 		305975D122F1EE350035353D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		305975D322F1EF550035353D /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		3059765F22F352AD0035353D /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				30F319A222F5C1CB00DE0A71 /* WeatherHeaderView.swift */,
 				30F319A422F5C58E00DE0A71 /* HourlyCell.swift */,
 				30F319A622F5C6FF00DE0A71 /* DailyCell.swift */,
+				300F199822F5CA5B002A494E /* SummaryCell.swift */,
+				300F199A22F5CB91002A494E /* InformationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -229,6 +235,7 @@
 				30F3199E22F56DF300DE0A71 /* LocationCell.swift in Sources */,
 				30BDEEB022F19274006E1C30 /* CollectionViewController.swift in Sources */,
 				3059766022F352AD0035353D /* WeatherAPI.swift in Sources */,
+				300F199B22F5CB91002A494E /* InformationCell.swift in Sources */,
 				3059767B22F521C40035353D /* Point.swift in Sources */,
 				30F319A522F5C58E00DE0A71 /* HourlyCell.swift in Sources */,
 				3059766922F375A40035353D /* Currently.swift in Sources */,
@@ -237,6 +244,7 @@
 				3059767622F47B280035353D /* TableViewController.swift in Sources */,
 				30F3199922F563CD00DE0A71 /* WeatherService.swift in Sources */,
 				3059766722F375440035353D /* Weather.swift in Sources */,
+				300F199922F5CA5B002A494E /* SummaryCell.swift in Sources */,
 				305975D222F1EE350035353D /* PageViewController.swift in Sources */,
 				30BDEE9822F18A97006E1C30 /* AppDelegate.swift in Sources */,
 				30F319A322F5C1CB00DE0A71 /* WeatherHeaderView.swift in Sources */,
