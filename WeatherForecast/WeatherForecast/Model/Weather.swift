@@ -17,30 +17,26 @@ extension Weather {
     static func fetch (
         point: Point,
         dispatcher: NetworkDispatcher = NetworkDispatcher.instance,
-        onSuccess: @escaping (Weather) -> Void,
-        onError: @escaping (Error) -> Void
+        completion: @escaping (Result<Weather, Error>) -> Void
         ) {
         let darkSkyRequest = DarkSkyRequest(point: point)
-        dispatcher.dispatch(
-            request: darkSkyRequest,
-            onSuccess: { (responseData: Data) in
+        dispatcher.dispatch(request: darkSkyRequest) { (result) in
+            switch result {
+            case .success(let data):
                 do {
                     let jsonDecoder = JSONDecoder()
-                    let result = try jsonDecoder.decode(Weather.self, from: responseData)
+                    let result = try jsonDecoder.decode(Weather.self, from: data)
                     DispatchQueue.main.async {
-                        onSuccess(result)
+                        completion(.success(result))
                     }
-                } catch let error {
+                } catch {
                     DispatchQueue.main.async {
-                        onError(error)
+                        completion(.failure(error))
                     }
                 }
-        },
-            onError: { (error: Error) in
-                DispatchQueue.main.async {
-                    onError(error)
-                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
-        )
     }
 }

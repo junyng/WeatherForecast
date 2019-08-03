@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Dispatcher {
-    func dispatch(request: Request, onSuccess: @escaping (Data) -> Void, onError: @escaping (Error) -> Void)
+    func dispatch(request: Request, completion: @escaping (Result<Data, Error>) -> Void)
 }
 
 struct NetworkDispatcher: Dispatcher {
@@ -17,11 +17,10 @@ struct NetworkDispatcher: Dispatcher {
     private init() {}
     
     func dispatch(request: Request,
-                  onSuccess: @escaping (Data) -> Void,
-                  onError: @escaping (Error) -> Void) {
+                    completion: @escaping (Result<Data, Error>) -> Void) {
         
         guard let url = request.buildURL() else {
-            onError(DarkSkyError.invalidURL)
+            completion(.failure(DarkSkyError.invalidURL))
             return
         }
         
@@ -31,7 +30,7 @@ struct NetworkDispatcher: Dispatcher {
             (data, response, error) -> Void in
             
             if let error = error {
-                onError(error)
+                completion(.failure(error))
                 return
             }
             
@@ -39,7 +38,7 @@ struct NetworkDispatcher: Dispatcher {
                 return
             }
             
-            onSuccess(data)
+            completion(.success(data))
             }.resume()
     }
 }
