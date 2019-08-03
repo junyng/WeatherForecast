@@ -28,6 +28,7 @@
 		30F3199922F563CD00DE0A71 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F3199822F563CD00DE0A71 /* WeatherService.swift */; };
 		30F3199E22F56DF300DE0A71 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F3199D22F56DF300DE0A71 /* LocationCell.swift */; };
 		30F319A322F5C1CB00DE0A71 /* WeatherHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F319A222F5C1CB00DE0A71 /* WeatherHeaderView.swift */; };
+		30F319A522F5C58E00DE0A71 /* HourlyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F319A422F5C58E00DE0A71 /* HourlyCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		30F3199822F563CD00DE0A71 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		30F3199D22F56DF300DE0A71 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		30F319A222F5C1CB00DE0A71 /* WeatherHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHeaderView.swift; sourceTree = "<group>"; };
+		30F319A422F5C58E00DE0A71 /* HourlyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 			children = (
 				30F3199D22F56DF300DE0A71 /* LocationCell.swift */,
 				30F319A222F5C1CB00DE0A71 /* WeatherHeaderView.swift */,
+				30F319A422F5C58E00DE0A71 /* HourlyCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				30BDEEB022F19274006E1C30 /* CollectionViewController.swift in Sources */,
 				3059766022F352AD0035353D /* WeatherAPI.swift in Sources */,
 				3059767B22F521C40035353D /* Point.swift in Sources */,
+				30F319A522F5C58E00DE0A71 /* HourlyCell.swift in Sources */,
 				3059766922F375A40035353D /* Currently.swift in Sources */,
 				3059767022F3E49E0035353D /* SearchLocationTableViewController.swift in Sources */,
 				305975D422F1EF550035353D /* WeatherViewController.swift in Sources */,
