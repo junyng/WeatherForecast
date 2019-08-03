@@ -49,7 +49,7 @@ extension CitiesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "city", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "city", for: indexPath) as! LocationCell
         return cell
     }
 }
