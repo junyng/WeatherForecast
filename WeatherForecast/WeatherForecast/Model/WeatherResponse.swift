@@ -13,9 +13,13 @@ struct WeatherResponse: Codable {
     
     private enum CodingKeys : String, CodingKey {
         case currentWeather = "currently"
+        case weatherHourly = "hourly"
+        case weatherDaily = "daily"
     }
     
     let currentWeather: CurrentWeather
+    let weatherHourly: WeatherHourly
+    let weatherDaily: WeatherDaily
 }
 
 extension WeatherResponse {
