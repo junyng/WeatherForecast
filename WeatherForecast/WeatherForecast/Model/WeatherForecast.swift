@@ -12,12 +12,12 @@ import Foundation
 struct WeatherForecast: Codable {
     
     private enum CodingKeys : String, CodingKey {
-        case currentWeather = "currently"
+        case weatherCurrently = "currently"
         case weatherHourly = "hourly"
         case weatherDaily = "daily"
     }
     
-    let currentWeather: WeatherCurrently
+    let weatherCurrently: WeatherCurrently
     let weatherHourly: WeatherHourly
     let weatherDaily: WeatherDaily
 }
