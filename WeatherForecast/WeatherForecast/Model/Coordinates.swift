@@ -12,9 +12,9 @@ class Coordinates: NSObject, NSCoding {
     let latitude: Double
     let longitude: Double
     
-    init(lat: Double, lng: Double) {
-        self.latitude = lat
-        self.longitude = lng
+    init(latitude: Double, longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
     }
     
     override var description: String {
