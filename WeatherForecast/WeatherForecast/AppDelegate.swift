@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let coordinatesDataStore = CoordinatesDataStore()
+        let coordinatesDataStore = CoordinatesDataStore.sharedInstance
         let navigationController = window!.rootViewController as! UINavigationController
         let citiesViewController = navigationController.topViewController as! CitiesViewController
         citiesViewController.coordinatesDataStore = coordinatesDataStore

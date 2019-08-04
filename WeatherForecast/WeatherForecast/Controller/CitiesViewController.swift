@@ -46,11 +46,21 @@ extension CitiesViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return coordinatesDataStore.coordinatesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "city", for: indexPath) as! LocationCell
+        let coordinates = coordinatesDataStore.coordinatesList[indexPath.item]
+        Weather.fetch(coordinates: coordinates) { (result) in
+            switch result {
+            case .success(let weather):
+                cell.timeLabel.text = "\(weather.currently.time)"
+                cell.temperatureLabel.text = "\(weather.currently.temperature)"
+            case .failure(let error):
+                print(error)
+            }
+        }
         return cell
     }
 }
