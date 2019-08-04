@@ -15,17 +15,28 @@ class CitiesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotification()
         configureFooterView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let navigationController = segue.destination as! UINavigationController
-        let searchLocationController = navigationController.viewControllers.first as! SearchLocationTableViewController
-        searchLocationController.coordinatesDataStore = coordinatesDataStore
+        if segue.identifier == "search" {
+            let navigationController = segue.destination as! UINavigationController
+            let searchLocationController = navigationController.viewControllers.first as! SearchLocationTableViewController
+            searchLocationController.coordinatesDataStore = coordinatesDataStore
+        }
     }
     
     @objc func searchButtonDidTapped() {
         self.performSegue(withIdentifier: "search", sender: nil)
+    }
+    
+    private func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshTable(_:)), name: .reloadCoordinatesList, object: nil)
+    }
+    
+    @objc func refreshTable(_ notification:Notification) {
+        self.tableView.reloadData()
     }
     
     private func configureFooterView() {
