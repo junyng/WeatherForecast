@@ -8,9 +8,8 @@
 
 import UIKit
 
-class CitiesViewController: UIViewController {
+class CitiesViewController: UITableViewController {
     
-    @IBOutlet weak var tableView: UITableView!
     var coordinatesDataStore: CoordinatesDataStore!
     
     override func viewDidLoad() {
@@ -60,17 +59,17 @@ class CitiesViewController: UIViewController {
 }
 
 // MARK: UITableViewDataSource
-extension CitiesViewController: UITableViewDataSource {
+extension CitiesViewController {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return coordinatesDataStore.coordinatesList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "city", for: indexPath) as! LocationCell
         let coordinates = coordinatesDataStore.coordinatesList[indexPath.item]
         WeatherForecast.fetch(coordinates: coordinates) { (result) in
