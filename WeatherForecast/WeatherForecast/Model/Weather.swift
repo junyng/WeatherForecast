@@ -16,7 +16,7 @@ struct Weather: Codable {
 extension Weather {
     static func fetch (
         coordinates: Coordinates,
-        dispatcher: NetworkDispatcher = NetworkDispatcher.instance,
+        dispatcher: NetworkDispatcher = NetworkDispatcher.sharedInstance,
         completion: @escaping (Result<Weather, Error>) -> Void
         ) {
         let darkSkyRequest = DarkSkyRequest(coordinates: coordinates)

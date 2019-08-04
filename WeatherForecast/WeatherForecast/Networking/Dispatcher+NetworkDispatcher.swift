@@ -13,7 +13,7 @@ protocol Dispatcher {
 }
 
 struct NetworkDispatcher: Dispatcher {
-    static let instance = NetworkDispatcher()
+    static let sharedInstance = NetworkDispatcher()
     private init() {}
     
     func dispatch(request: Request,
