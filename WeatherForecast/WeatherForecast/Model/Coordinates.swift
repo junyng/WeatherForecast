@@ -31,3 +31,10 @@ class Coordinates: NSObject, NSCoding {
         longitude = aDecoder.decodeDouble(forKey: "lng")
     }
 }
+
+extension Coordinates {
+    // 위도 경도가 같으면 두 좌표는 같다.
+    static func == (lhs: Coordinates, rhs: Coordinates) -> Bool {
+        return (lhs.latitude == rhs.latitude) && (lhs.longitude == rhs.longitude)
+    }
+}
