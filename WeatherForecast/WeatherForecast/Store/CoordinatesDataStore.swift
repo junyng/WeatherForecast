@@ -8,6 +8,10 @@
 
 import Foundation
 
+extension Notification.Name {
+    static let reloadCoordinatesList = Notification.Name("reloadCoordinatesList")
+}
+
 final class CoordinatesDataStore {
     static let sharedInstance = CoordinatesDataStore()
     private let storeKey = "coordinates"
@@ -22,6 +26,7 @@ final class CoordinatesDataStore {
             return
         }
         coordinatesList.append(coordinates)
+        notifyReload()
     }
     
     func saveData() {
@@ -41,5 +46,10 @@ final class CoordinatesDataStore {
         } catch {
             print(error)
         }
+    }
+    
+    /// 좌표 목록이 변경됨을 알림
+    private func notifyReload() {
+        NotificationCenter.default.post(name: .reloadCoordinatesList, object: nil)
     }
 }
