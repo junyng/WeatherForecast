@@ -1,5 +1,5 @@
 //
-//  CoordinatesDataStore.swift
+//  CoordinateStore.swift
 //  WeatherForecast
 //
 //  Created by BLU on 04/08/2019.
@@ -12,8 +12,8 @@ extension Notification.Name {
     static let reloadCoordinatesList = Notification.Name("reloadCoordinatesList")
 }
 
-final class CoordinatesDataStore {
-    static let sharedInstance = CoordinatesDataStore()
+final class CoordinateStore {
+    static let sharedInstance = CoordinateStore()
     private let storeKey = "coordinates"
     private(set) var coordinatesList = [Coordinates]()
     

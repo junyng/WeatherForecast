@@ -10,10 +10,10 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
-    var coordinatesDataStore: CoordinatesDataStore!
+    var coordinateStore: CoordinateStore!
     fileprivate lazy var pages: [UIViewController] = {
         let weatherController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "weatherViewController")
-        let viewControllers = self.coordinatesDataStore.coordinatesList.map { _ in weatherController }
+        let viewControllers = self.coordinateStore.coordinatesList.map { _ in weatherController }
         return viewControllers
     }()
     fileprivate let pageControl = UIPageControl()
@@ -25,7 +25,7 @@ class PageViewController: UIPageViewController {
         if let firstViewController = pages.first,
             let weatherController = firstViewController as? WeatherViewController
         {
-            weatherController.coordinates = coordinatesDataStore.coordinatesList[0]
+            weatherController.coordinates = coordinateStore.coordinatesList[0]
             setViewControllers([weatherController], direction: .forward, animated: true, completion: nil)
         }
         if let scrollView = self.view.subviews.filter({$0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
@@ -60,7 +60,7 @@ extension PageViewController: UIPageViewControllerDataSource {
         guard previousIndex >= 0 else { return pages.last }
         guard pages.count > previousIndex else { return nil }
         let weatherController = pages[previousIndex] as? WeatherViewController
-        weatherController?.coordinates = self.coordinatesDataStore.coordinatesList[0]
+        weatherController?.coordinates = self.coordinateStore.coordinatesList[0]
         return weatherController
     }
     
@@ -71,7 +71,7 @@ extension PageViewController: UIPageViewControllerDataSource {
         guard nextIndex < pages.count else { return pages.first }
         guard pages.count > nextIndex else { return nil }
         let weatherController = pages[nextIndex] as? WeatherViewController
-        weatherController?.coordinates = self.coordinatesDataStore.coordinatesList[0]
+        weatherController?.coordinates = self.coordinateStore.coordinatesList[0]
         return weatherController
     }
 }

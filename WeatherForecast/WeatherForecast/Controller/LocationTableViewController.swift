@@ -10,7 +10,7 @@ import UIKit
 
 class LocationTableViewController: UITableViewController {
     
-    var coordinatesDataStore: CoordinatesDataStore!
+    var coordinateStore: CoordinateStore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +22,10 @@ class LocationTableViewController: UITableViewController {
         if segue.identifier == "search" {
             let navigationController = segue.destination as! UINavigationController
             let searchLocationController = navigationController.viewControllers.first as! SearchLocationTableViewController
-            searchLocationController.coordinatesDataStore = coordinatesDataStore
+            searchLocationController.coordinateStore = coordinateStore
         } else if segue.identifier == "pages" {
             let pageController = segue.destination as! PageViewController
-            pageController.coordinatesDataStore = coordinatesDataStore
+            pageController.coordinateStore = coordinateStore
         }
     }
     
@@ -66,12 +66,12 @@ extension LocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coordinatesDataStore.coordinatesList.count
+        return coordinateStore.coordinatesList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationCell
-        let coordinates = coordinatesDataStore.coordinatesList[indexPath.item]
+        let coordinates = coordinateStore.coordinatesList[indexPath.item]
         WeatherForecast.fetch(coordinates: coordinates) { (result) in
             switch result {
             case .success(let response):
