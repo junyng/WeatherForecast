@@ -11,6 +11,7 @@ import UIKit
 class CitiesViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    var coordinatesDataStore: CoordinatesDataStore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
