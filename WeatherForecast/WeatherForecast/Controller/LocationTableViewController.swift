@@ -1,5 +1,5 @@
 //
-//  CitiesViewController.swift
+//  LocationsTableViewController.swift
 //  WeatherForecast
 //
 //  Created by BLU on 31/07/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CitiesViewController: UITableViewController {
+class LocationTableViewController: UITableViewController {
     
     var coordinatesDataStore: CoordinatesDataStore!
     
@@ -59,7 +59,7 @@ class CitiesViewController: UITableViewController {
 }
 
 // MARK: UITableViewDataSource
-extension CitiesViewController {
+extension LocationTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

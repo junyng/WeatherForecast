@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Cities View Controller-->
+        <!--Location Table View Controller-->
         <scene sceneID="Ca4-YL-OTG">
             <objects>
-                <tableViewController id="8nx-GF-R05" customClass="CitiesViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="8nx-GF-R05" customClass="LocationTableViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vV3-ne-r9v">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

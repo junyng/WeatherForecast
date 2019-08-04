@@ -27,7 +27,7 @@
 		30BDEE9D22F18A97006E1C30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BDEE9B22F18A97006E1C30 /* Main.storyboard */; };
 		30BDEE9F22F18A98006E1C30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BDEE9E22F18A98006E1C30 /* Assets.xcassets */; };
 		30BDEEA222F18A98006E1C30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BDEEA022F18A98006E1C30 /* LaunchScreen.storyboard */; };
-		30BDEEAE22F191D7006E1C30 /* CitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDEEAD22F191D7006E1C30 /* CitiesViewController.swift */; };
+		30BDEEAE22F191D7006E1C30 /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDEEAD22F191D7006E1C30 /* LocationTableViewController.swift */; };
 		30F3199E22F56DF300DE0A71 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F3199D22F56DF300DE0A71 /* LocationCell.swift */; };
 		30F319A522F5C58E00DE0A71 /* HourlyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F319A422F5C58E00DE0A71 /* HourlyCell.swift */; };
 		30F319A722F5C6FF00DE0A71 /* DailyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F319A622F5C6FF00DE0A71 /* DailyCell.swift */; };
@@ -56,7 +56,7 @@
 		30BDEE9E22F18A98006E1C30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30BDEEA122F18A98006E1C30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30BDEEA322F18A98006E1C30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		30BDEEAD22F191D7006E1C30 /* CitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesViewController.swift; sourceTree = "<group>"; };
+		30BDEEAD22F191D7006E1C30 /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
 		30F3199D22F56DF300DE0A71 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		30F319A422F5C58E00DE0A71 /* HourlyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCell.swift; sourceTree = "<group>"; };
 		30F319A622F5C6FF00DE0A71 /* DailyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCell.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		3059766E22F3D4F50035353D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				30BDEEAD22F191D7006E1C30 /* CitiesViewController.swift */,
+				30BDEEAD22F191D7006E1C30 /* LocationTableViewController.swift */,
 				305975D122F1EE350035353D /* PageViewController.swift */,
 				305975D322F1EF550035353D /* WeatherViewController.swift */,
 				3059766F22F3E49E0035353D /* SearchLocationTableViewController.swift */,
@@ -261,7 +261,7 @@
 				305975D222F1EE350035353D /* PageViewController.swift in Sources */,
 				30BDEE9822F18A97006E1C30 /* AppDelegate.swift in Sources */,
 				300F19A722F678DB002A494E /* CoordinatesDataStore.swift in Sources */,
-				30BDEEAE22F191D7006E1C30 /* CitiesViewController.swift in Sources */,
+				30BDEEAE22F191D7006E1C30 /* LocationTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
