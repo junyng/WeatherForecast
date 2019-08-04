@@ -16,8 +16,8 @@
 		305975D222F1EE350035353D /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305975D122F1EE350035353D /* PageViewController.swift */; };
 		305975D422F1EF550035353D /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305975D322F1EF550035353D /* WeatherViewController.swift */; };
 		3059766022F352AD0035353D /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059765F22F352AD0035353D /* WeatherAPI.swift */; };
-		3059766722F375440035353D /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059766622F375440035353D /* WeatherResponse.swift */; };
-		3059766922F375A40035353D /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059766822F375A40035353D /* CurrentWeather.swift */; };
+		3059766722F375440035353D /* WeatherForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059766622F375440035353D /* WeatherForecast.swift */; };
+		3059766922F375A40035353D /* WeatherCurrently.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059766822F375A40035353D /* WeatherCurrently.swift */; };
 		3059767022F3E49E0035353D /* SearchLocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059766F22F3E49E0035353D /* SearchLocationTableViewController.swift */; };
 		3059767222F400840035353D /* SuggestionsTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059767122F400840035353D /* SuggestionsTableTableViewController.swift */; };
 		3059767B22F521C40035353D /* Coordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059767A22F521C40035353D /* Coordinates.swift */; };
@@ -43,8 +43,8 @@
 		305975D122F1EE350035353D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		305975D322F1EF550035353D /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		3059765F22F352AD0035353D /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
-		3059766622F375440035353D /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
-		3059766822F375A40035353D /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
+		3059766622F375440035353D /* WeatherForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherForecast.swift; sourceTree = "<group>"; };
+		3059766822F375A40035353D /* WeatherCurrently.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCurrently.swift; sourceTree = "<group>"; };
 		3059766F22F3E49E0035353D /* SearchLocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationTableViewController.swift; sourceTree = "<group>"; };
 		3059767122F400840035353D /* SuggestionsTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsTableTableViewController.swift; sourceTree = "<group>"; };
 		3059767A22F521C40035353D /* Coordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinates.swift; sourceTree = "<group>"; };
@@ -92,8 +92,8 @@
 		3059766522F375360035353D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3059766622F375440035353D /* WeatherResponse.swift */,
-				3059766822F375A40035353D /* CurrentWeather.swift */,
+				3059766622F375440035353D /* WeatherForecast.swift */,
+				3059766822F375A40035353D /* WeatherCurrently.swift */,
 				300F19AE22F74B03002A494E /* WeatherDaily.swift */,
 				300F19B022F74B0E002A494E /* WeatherHourly.swift */,
 				300F19B222F74B1C002A494E /* WeatherDetail.swift */,
@@ -252,11 +252,11 @@
 				3059767B22F521C40035353D /* Coordinates.swift in Sources */,
 				300F19B322F74B1C002A494E /* WeatherDetail.swift in Sources */,
 				30F319A522F5C58E00DE0A71 /* HourlyCell.swift in Sources */,
-				3059766922F375A40035353D /* CurrentWeather.swift in Sources */,
+				3059766922F375A40035353D /* WeatherCurrently.swift in Sources */,
 				3059767022F3E49E0035353D /* SearchLocationTableViewController.swift in Sources */,
 				305975D422F1EF550035353D /* WeatherViewController.swift in Sources */,
 				300F19B122F74B0E002A494E /* WeatherHourly.swift in Sources */,
-				3059766722F375440035353D /* WeatherResponse.swift in Sources */,
+				3059766722F375440035353D /* WeatherForecast.swift in Sources */,
 				300F199922F5CA5B002A494E /* SummaryCell.swift in Sources */,
 				305975D222F1EE350035353D /* PageViewController.swift in Sources */,
 				30BDEE9822F18A97006E1C30 /* AppDelegate.swift in Sources */,

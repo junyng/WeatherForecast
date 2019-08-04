@@ -18,5 +18,5 @@ struct WeatherHourly: Codable {
     
     let summary: String
     let icon: Icon
-    let currentArray: [CurrentWeather]
+    let currentArray: [WeatherCurrently]
 }

@@ -73,7 +73,7 @@ extension CitiesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "city", for: indexPath) as! LocationCell
         let coordinates = coordinatesDataStore.coordinatesList[indexPath.item]
-        WeatherResponse.fetch(coordinates: coordinates) { (result) in
+        WeatherForecast.fetch(coordinates: coordinates) { (result) in
             switch result {
             case .success(let response):
                 cell.timeLabel.text = "\(response.currentWeather.time)"
