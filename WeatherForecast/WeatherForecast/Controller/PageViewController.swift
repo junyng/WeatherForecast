@@ -10,11 +10,11 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
+    var coordinatesDataStore: CoordinatesDataStore!
     fileprivate lazy var pages: [UIViewController] = {
-        return [
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "weatherViewController"),
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "weatherViewController")
-        ]
+        let weatherController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "weatherViewController")
+        let viewControllers = self.coordinatesDataStore.coordinatesList.map { _ in weatherController }
+        return viewControllers
     }()
     fileprivate let pageControl = UIPageControl()
     
@@ -22,9 +22,14 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
         self.dataSource = self
         self.delegate   = self
-        if let firstViewController = pages.first
+        if let firstViewController = pages.first,
+            let weatherController = firstViewController as? WeatherViewController
         {
-            setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
+            weatherController.coordinates = coordinatesDataStore.coordinatesList[0]
+            setViewControllers([weatherController], direction: .forward, animated: true, completion: nil)
+        }
+        if let scrollView = self.view.subviews.filter({$0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
+            scrollView.isScrollEnabled = false
         }
         configureToolbarItems()
     }
@@ -54,7 +59,9 @@ extension PageViewController: UIPageViewControllerDataSource {
         let previousIndex = viewControllerIndex - 1
         guard previousIndex >= 0 else { return pages.last }
         guard pages.count > previousIndex else { return nil }
-        return pages[previousIndex]
+        let weatherController = pages[previousIndex] as? WeatherViewController
+        weatherController?.coordinates = self.coordinatesDataStore.coordinatesList[0]
+        return weatherController
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
@@ -63,7 +70,9 @@ extension PageViewController: UIPageViewControllerDataSource {
         let nextIndex = viewControllerIndex + 1
         guard nextIndex < pages.count else { return pages.first }
         guard pages.count > nextIndex else { return nil }
-        return pages[nextIndex]
+        let weatherController = pages[nextIndex] as? WeatherViewController
+        weatherController?.coordinates = self.coordinatesDataStore.coordinatesList[0]
+        return weatherController
     }
 }
 

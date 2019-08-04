@@ -65,7 +65,7 @@
                                             <outlet property="locationLabel" destination="2rC-3D-VxU" id="swL-Qa-Khx"/>
                                             <outlet property="temperatureLabel" destination="Arw-U7-w1Z" id="O4c-4Z-jtK"/>
                                             <outlet property="timeLabel" destination="n7z-WH-yw9" id="nL4-eA-mFP"/>
-                                            <segue destination="97f-Id-QUE" kind="show" id="WQn-K7-3cy"/>
+                                            <segue destination="97f-Id-QUE" kind="show" identifier="pages" id="WQn-K7-3cy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

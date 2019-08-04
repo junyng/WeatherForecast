@@ -24,6 +24,9 @@ class CitiesViewController: UIViewController {
             let navigationController = segue.destination as! UINavigationController
             let searchLocationController = navigationController.viewControllers.first as! SearchLocationTableViewController
             searchLocationController.coordinatesDataStore = coordinatesDataStore
+        } else if segue.identifier == "pages" {
+            let pageController = segue.destination as! PageViewController
+            pageController.coordinatesDataStore = coordinatesDataStore
         }
     }
     
