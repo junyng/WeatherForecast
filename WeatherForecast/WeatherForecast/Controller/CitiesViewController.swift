@@ -18,7 +18,7 @@ class CitiesViewController: UIViewController {
         configureFooterView()
     }
     
-    @IBAction func searchButtonDidTapped() {
+    @objc func searchButtonDidTapped() {
         self.performSegue(withIdentifier: "search", sender: nil)
     }
     
@@ -28,6 +28,7 @@ class CitiesViewController: UIViewController {
         temperatureToggle.translatesAutoresizingMaskIntoConstraints = false
         let addLocationButton = UIButton(type: .contactAdd)
         addLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        addLocationButton.addTarget(self, action: #selector(searchButtonDidTapped), for: .touchUpInside)
         footerView.addSubview(temperatureToggle)
         footerView.addSubview(addLocationButton)
         temperatureToggle.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
@@ -57,6 +58,7 @@ extension CitiesViewController: UITableViewDataSource {
             case .success(let weather):
                 cell.timeLabel.text = "\(weather.currently.time)"
                 cell.temperatureLabel.text = "\(weather.currently.temperature)"
+                print("반영", coordinates)
             case .failure(let error):
                 print(error)
             }
