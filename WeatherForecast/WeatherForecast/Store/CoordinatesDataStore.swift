@@ -13,12 +13,33 @@ final class CoordinatesDataStore {
     private let storeKey = "coordinates"
     private(set) var coordinatesList = [Coordinates]()
     
-    private init() {}
+    private init() {
+        loadData()
+    }
     
     func addCoordinates(_ coordinates: Coordinates) {
         if coordinatesList.contains(coordinates) {
             return
         }
         coordinatesList.append(coordinates)
+    }
+    
+    func saveData() {
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: coordinatesList, requiringSecureCoding: false)
+            UserDefaults.standard.set(data, forKey: storeKey)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadData() {
+        do {
+            if let data = UserDefaults.standard.object(forKey: storeKey) as? Data {
+                coordinatesList = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [Coordinates]
+            }
+        } catch {
+            print(error)
+        }
     }
 }
