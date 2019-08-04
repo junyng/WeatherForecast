@@ -143,9 +143,16 @@ extension SearchLocationTableViewController {
         if tableView == suggestionController.tableView, let suggestion = suggestionController.completerResults?[indexPath.row] {
             searchController.isActive = false
             searchController.searchBar.text = suggestion.title
-            search(for: suggestion)
+            OperationQueue().addOperation {
+                self.getCoordinate(addressString: suggestion.title) { (coordinate, error) in
+                    let coordinates = Coordinates(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                    self.coordinatesDataStore.addCoordinates(coordinates)
+                }
+                OperationQueue.main.addOperation {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
         }
-        self.dismiss(animated: true, completion: nil)
     }
 }
 
