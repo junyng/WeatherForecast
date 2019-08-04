@@ -8,30 +8,14 @@
 
 import Foundation
 
-class CoordinatesDataStore {
-    
+final class CoordinatesDataStore {
+    static let sharedInstance = CoordinatesDataStore()
     private let storeKey = "coordinates"
-    var coordinatesList = [Coordinates]()
+    private var coordinatesList = [Coordinates]()
     
-    func save() {
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: coordinatesList, requiringSecureCoding: false)
-            UserDefaults.standard.set(data, forKey: storeKey)
-        } catch {
-            print(error)
-        }
-        //        let data = NSKeyedArchiver.archivedData(withRootObject: coordinatesList, requiringSecureCoding: true)
-        //        UserDefaults.standard.set(coordinatesList, forKey: storeKey)
-    }
+    private init() {}
     
-    func load() {
-        let my = UserDefaults.standard.object(forKey: storeKey)
-        do {
-            //            let un = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, Coordinates.self], from: my as! Data) as? [Coordinates]
-            let un = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(my as! Data) as? [Coordinates]
-            print(un?.count)
-        } catch {
-            print(error)
-        }
+    func addCoordinates(_ coordinates: Coordinates) {
+        coordinatesList.append(coordinates)
     }
 }
