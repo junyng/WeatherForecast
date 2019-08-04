@@ -9,15 +9,20 @@
 import Foundation
 
 /// 전체 날씨 정보
-struct Weather: Codable {
-    let currently: Currently
+struct WeatherResponse: Codable {
+    
+    private enum CodingKeys : String, CodingKey {
+        case currentWeather = "currently"
+    }
+    
+    let currentWeather: CurrentWeather
 }
 
-extension Weather {
+extension WeatherResponse {
     static func fetch (
         coordinates: Coordinates,
         dispatcher: NetworkDispatcher = NetworkDispatcher.sharedInstance,
-        completion: @escaping (Result<Weather, Error>) -> Void
+        completion: @escaping (Result<WeatherResponse, Error>) -> Void
         ) {
         let darkSkyRequest = DarkSkyRequest(coordinates: coordinates)
         dispatcher.dispatch(request: darkSkyRequest) { (result) in
@@ -25,7 +30,7 @@ extension Weather {
             case .success(let data):
                 do {
                     let jsonDecoder = JSONDecoder()
-                    let result = try jsonDecoder.decode(Weather.self, from: data)
+                    let result = try jsonDecoder.decode(WeatherResponse.self, from: data)
                     DispatchQueue.main.async {
                         completion(.success(result))
                     }

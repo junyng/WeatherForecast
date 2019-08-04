@@ -9,7 +9,7 @@
 import Foundation
 
 /// 현재 시간의 날씨 정보
-struct Currently: Codable {
+struct CurrentWeather: Codable {
     let time: Int
     let summary: String
     let icon: Icon
