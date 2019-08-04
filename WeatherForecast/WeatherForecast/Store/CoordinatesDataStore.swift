@@ -11,11 +11,14 @@ import Foundation
 final class CoordinatesDataStore {
     static let sharedInstance = CoordinatesDataStore()
     private let storeKey = "coordinates"
-    private var coordinatesList = [Coordinates]()
+    private(set) var coordinatesList = [Coordinates]()
     
     private init() {}
     
     func addCoordinates(_ coordinates: Coordinates) {
+        if coordinatesList.contains(coordinates) {
+            return
+        }
         coordinatesList.append(coordinates)
     }
 }
