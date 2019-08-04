@@ -18,6 +18,12 @@ class CitiesViewController: UIViewController {
         configureFooterView()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navigationController = segue.destination as! UINavigationController
+        let searchLocationController = navigationController.viewControllers.first as! SearchLocationTableViewController
+        searchLocationController.coordinatesDataStore = coordinatesDataStore
+    }
+    
     @objc func searchButtonDidTapped() {
         self.performSegue(withIdentifier: "search", sender: nil)
     }
@@ -58,7 +64,6 @@ extension CitiesViewController: UITableViewDataSource {
             case .success(let weather):
                 cell.timeLabel.text = "\(weather.currently.time)"
                 cell.temperatureLabel.text = "\(weather.currently.temperature)"
-                print("반영", coordinates)
             case .failure(let error):
                 print(error)
             }

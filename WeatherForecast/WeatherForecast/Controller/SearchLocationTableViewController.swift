@@ -11,6 +11,8 @@ import MapKit
 
 class SearchLocationTableViewController: UITableViewController {
     
+    var coordinatesDataStore: CoordinatesDataStore!
+    
     private var places: [MKMapItem]? {
         didSet {
             tableView.reloadData()
