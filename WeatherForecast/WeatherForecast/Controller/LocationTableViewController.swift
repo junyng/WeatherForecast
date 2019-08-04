@@ -70,7 +70,7 @@ extension LocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "city", for: indexPath) as! LocationCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationCell
         let coordinates = coordinatesDataStore.coordinatesList[indexPath.item]
         WeatherForecast.fetch(coordinates: coordinates) { (result) in
             switch result {
