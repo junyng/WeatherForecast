@@ -20,7 +20,7 @@ struct NetworkDispatcher: Dispatcher {
                     completion: @escaping (Result<Data, Error>) -> Void) {
         
         guard let url = request.buildURL() else {
-            completion(.failure(DarkSkyError.invalidURL))
+            completion(.failure(RequestError.invalidURL))
             return
         }
         
@@ -41,8 +41,4 @@ struct NetworkDispatcher: Dispatcher {
             completion(.success(data))
             }.resume()
     }
-}
-
-enum DarkSkyError: Error {
-    case invalidURL
 }
