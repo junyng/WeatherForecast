@@ -10,9 +10,9 @@ import Foundation
 
 /// 위치 정보를 갖는 커스텀 클래스
 class Location: NSObject, NSCoding {
-    let latitude: Double
-    let longitude: Double
-    let address: String
+    private let latitude: Double
+    private let longitude: Double
+    private let address: String
     
     init(latitude: Double, longitude: Double, address: String) {
         self.latitude = latitude
@@ -34,6 +34,10 @@ class Location: NSObject, NSCoding {
     
     func coordinate() -> (Double, Double) {
         return (latitude, longitude)
+    }
+    
+    func addressString() -> String {
+        return address
     }
 }
 

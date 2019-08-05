@@ -91,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				300F19A622F678DB002A494E /* LocationStore.swift */,
+				3059767A22F521C40035353D /* Location.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -110,7 +111,6 @@
 		3059766522F375360035353D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3059767A22F521C40035353D /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
