@@ -26,6 +26,7 @@ class LocationTableViewController: UITableViewController {
         } else if segue.identifier == "pages" {
             let pageController = segue.destination as! PageViewController
             pageController.coordinateStore = coordinateStore
+            pageController.currentPageIndex = tableView.indexPathForSelectedRow?.item ?? 0
         }
     }
     
@@ -75,8 +76,8 @@ extension LocationTableViewController {
         WeatherForecast.fetchWeather(coordinates: coordinates) { (result) in
             switch result {
             case .success(let response):
-                cell.timeLabel.text = "\(response.currentWeather.time)"
-                cell.temperatureLabel.text = "\(response.currentWeather.temperature)"
+                cell.timeLabel.text = "\(response.weatherCurrently.time)"
+                cell.temperatureLabel.text = "\(response.weatherCurrently.temperature)"
             case .failure(let error):
                 print(error)
             }

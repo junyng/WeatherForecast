@@ -11,6 +11,10 @@ import UIKit
 class PageViewController: UIPageViewController {
     
     var coordinateStore: CoordinateStore!
+    var currentPageIndex: Int = 0
+    private var pagesCount: Int {
+        return coordinateStore.coordinatesList.count
+    }
     fileprivate lazy var pages: [UIViewController] = {
         let weatherController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "weatherViewController")
         let viewControllers = self.coordinateStore.coordinatesList.map { _ in weatherController }
@@ -22,14 +26,8 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
         self.dataSource = self
         self.delegate   = self
-        if let firstViewController = pages.first,
-            let weatherController = firstViewController as? WeatherViewController
-        {
-            weatherController.coordinates = coordinateStore.coordinatesList[0]
-            setViewControllers([weatherController], direction: .forward, animated: true, completion: nil)
-        }
-        if let scrollView = self.view.subviews.filter({$0.isKind(of: UIScrollView.self)}).first as? UIScrollView {
-            scrollView.isScrollEnabled = false
+        if let firstViewController = self.viewControllerAtIndex(index: pagesCount - currentPageIndex - 1) {
+            self.setViewControllers([firstViewController], direction: .forward, animated: false, completion: nil)
         }
         configureToolbarItems()
     }
@@ -38,8 +36,8 @@ class PageViewController: UIPageViewController {
         self.pageControl.frame = CGRect()
         self.pageControl.currentPageIndicatorTintColor = UIColor.black
         self.pageControl.pageIndicatorTintColor = UIColor.lightGray
-        self.pageControl.numberOfPages = self.pages.count
-        self.pageControl.currentPage = 0
+        self.pageControl.numberOfPages = pagesCount
+        self.pageControl.currentPage = currentPageIndex
         let flexibleSpaceButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let pageControlButtonItem = UIBarButtonItem(customView: self.pageControl)
         let listButtonItem = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "list-with-dots"), style: .plain, target: self, action: #selector(popToPrevious))
@@ -55,35 +53,40 @@ class PageViewController: UIPageViewController {
 // MARK: UIPageViewControllerDataSource
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = pages.firstIndex(of: viewController) else { return nil }
-        let previousIndex = viewControllerIndex - 1
-        guard previousIndex >= 0 else { return pages.last }
-        guard pages.count > previousIndex else { return nil }
-        let weatherController = pages[previousIndex] as? WeatherViewController
-        weatherController?.coordinates = self.coordinateStore.coordinatesList[0]
-        return weatherController
+        if let currentPageViewController = viewController as? WeatherViewController,
+            let coordinates: Coordinates = currentPageViewController.coordinates {
+            guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: coordinates) else { return nil }
+            currentPageIndex = currentIndex
+            return viewControllerAtIndex(index: currentIndex + 1)
+        }
+        return nil
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
     {
-        guard let viewControllerIndex = pages.firstIndex(of: viewController) else { return nil }
-        let nextIndex = viewControllerIndex + 1
-        guard nextIndex < pages.count else { return pages.first }
-        guard pages.count > nextIndex else { return nil }
-        let weatherController = pages[nextIndex] as? WeatherViewController
-        weatherController?.coordinates = self.coordinateStore.coordinatesList[0]
-        return weatherController
+        if let currentPageViewController = viewController as? WeatherViewController,
+            let coordinates: Coordinates = currentPageViewController.coordinates {
+            guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: coordinates) else { return nil }
+            currentPageIndex = currentIndex
+            return viewControllerAtIndex(index: currentIndex - 1)
+        }
+        return nil
     }
 }
 
 // MARK: UIPageViewControllerDelegate
 extension PageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        
-        if let viewControllers = pageViewController.viewControllers {
-            if let viewControllerIndex = self.pages.firstIndex(of: viewControllers[0]) {
-                self.pageControl.currentPage = viewControllerIndex
-            }
-        }
+    }
+}
+
+extension PageViewController {
+    func viewControllerAtIndex(index: Int) -> UIViewController? {
+        guard index < pagesCount && index >= 0 else { return nil }
+        let coordinates = coordinateStore.coordinatesList[index]
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let weatherViewController = storyboard.instantiateViewController(withIdentifier: "weatherViewController") as! WeatherViewController
+        weatherViewController.coordinates = coordinates
+        return weatherViewController
     }
 }
