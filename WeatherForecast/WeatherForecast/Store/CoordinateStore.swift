@@ -29,6 +29,12 @@ final class CoordinateStore {
         notifyReload()
     }
     
+    func removeCoordinate(_ coordinate: Coordinate) {
+        if let index = coordinateList.firstIndex(of: coordinate) {
+            coordinateList.remove(at: index)
+        }
+    }
+    
     func saveData() {
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: coordinateList, requiringSecureCoding: false)

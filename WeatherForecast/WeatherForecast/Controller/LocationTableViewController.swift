@@ -85,3 +85,14 @@ extension LocationTableViewController {
         return cell
     }
 }
+
+// MARK: UITableViewDelegate
+extension LocationTableViewController {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let coordinate = coordinateStore.coordinateList[indexPath.item]
+            coordinateStore.removeCoordinate(coordinate)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
+}
