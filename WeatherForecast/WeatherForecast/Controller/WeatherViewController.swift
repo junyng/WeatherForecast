@@ -12,28 +12,29 @@ class WeatherViewController: UIViewController {
     
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private let hourlyCollectionViewDataSource = HourlyCollectionViewDataSource()
+    private let detailCollectionViewDataSource = DetailCollectionViewDataSource()
     var coordinates: Coordinates!
-    fileprivate let days = ["월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"]
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        WeatherForecast.fetchWeather(coordinates: coordinates) { (result) in
+            switch result {
+            case .success(let response):
+                self.hourlyCollectionViewDataSource.currentArray = response.weatherHourly.currentArray
+                self.hourlyCollectionView.dataSource = self.hourlyCollectionViewDataSource
+                self.detailCollectionViewDataSource.detailArray = response.weatherDaily.detailArray
+                self.collectionView.dataSource = self.detailCollectionViewDataSource
+            case .failure(let error):
+                break
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-}
-
-// MARK: UICollectionViewDataSource
-extension WeatherViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return days.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "daily", for: indexPath) as! DailyCell
-        return cell
     }
 }
