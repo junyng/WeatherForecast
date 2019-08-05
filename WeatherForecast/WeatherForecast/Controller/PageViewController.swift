@@ -12,15 +12,20 @@ class PageViewController: UIPageViewController {
     
     var coordinateStore: CoordinateStore!
     var currentPageIndex: Int = 0
+    
     private var pagesCount: Int {
         return coordinateStore.coordinatesList.count
     }
-    fileprivate lazy var pages: [UIViewController] = {
-        let weatherController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "weatherViewController")
-        let viewControllers = self.coordinateStore.coordinatesList.map { _ in weatherController }
-        return viewControllers
+    
+    private lazy var pageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.frame = CGRect()
+        pageControl.currentPageIndicatorTintColor = UIColor.black
+        pageControl.pageIndicatorTintColor = UIColor.lightGray
+        pageControl.numberOfPages = pagesCount
+        pageControl.currentPage = currentPageIndex
+        return pageControl
     }()
-    fileprivate let pageControl = UIPageControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +38,6 @@ class PageViewController: UIPageViewController {
     }
     
     func configureToolbarItems() {
-        self.pageControl.frame = CGRect()
-        self.pageControl.currentPageIndicatorTintColor = UIColor.black
-        self.pageControl.pageIndicatorTintColor = UIColor.lightGray
-        self.pageControl.numberOfPages = pagesCount
-        self.pageControl.currentPage = currentPageIndex
         let flexibleSpaceButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let pageControlButtonItem = UIBarButtonItem(customView: self.pageControl)
         let listButtonItem = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "list-with-dots"), style: .plain, target: self, action: #selector(popToPrevious))
