@@ -147,8 +147,8 @@ extension SearchLocationTableViewController {
             let dispatchGroup = DispatchGroup()
             DispatchQueue(label: "serial").async(group: dispatchGroup) {
                 self.getCoordinate(addressString: suggestion.title) { (coordinate, error) in
-                    let coordinate = Coordinate(latitude: coordinate.latitude, longitude: coordinate.longitude)
-                    self.coordinateStore.addCoordinate(coordinate)
+                    let location = Location(latitude: coordinate.latitude, longitude: coordinate.longitude, address: suggestion.title)
+                    self.coordinateStore.addCoordinate(location)
                 }
             }
             dispatchGroup.notify(queue: .global()) {

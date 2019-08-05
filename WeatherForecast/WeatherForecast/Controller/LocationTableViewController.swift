@@ -67,13 +67,13 @@ extension LocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coordinateStore.coordinateList.count
+        return coordinateStore.locations.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationCell
-        let coordinate = coordinateStore.coordinateList[indexPath.item]
-        WeatherForecast.fetchWeather(coordinate: coordinate) { (result) in
+        let location = coordinateStore.locations[indexPath.item]
+        WeatherForecast.fetchWeather(coordinate: location.coordinate()) { (result) in
             switch result {
             case .success(let response):
                 cell.timeLabel.text = "\(response.weatherCurrently.time)"
@@ -90,8 +90,8 @@ extension LocationTableViewController {
 extension LocationTableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let coordinate = coordinateStore.coordinateList[indexPath.item]
-            coordinateStore.removeCoordinate(coordinate)
+            let location = coordinateStore.locations[indexPath.item]
+            coordinateStore.removeCoordinate(location)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

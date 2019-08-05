@@ -15,29 +15,29 @@ extension Notification.Name {
 final class CoordinateStore {
     static let sharedInstance = CoordinateStore()
     private let storeKey = "coordinate"
-    private(set) var coordinateList = [Coordinate]()
+    private(set) var locations = [Location]()
     
     private init() {
         loadData()
     }
     
-    func addCoordinate(_ coordinate: Coordinate) {
-        if coordinateList.contains(coordinate) {
+    func addCoordinate(_ coordinate: Location) {
+        if locations.contains(coordinate) {
             return
         }
-        coordinateList.append(coordinate)
+        locations.append(coordinate)
         notifyReload()
     }
     
-    func removeCoordinate(_ coordinate: Coordinate) {
-        if let index = coordinateList.firstIndex(of: coordinate) {
-            coordinateList.remove(at: index)
+    func removeCoordinate(_ coordinate: Location) {
+        if let index = locations.firstIndex(of: coordinate) {
+            locations.remove(at: index)
         }
     }
     
     func saveData() {
         do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: coordinateList, requiringSecureCoding: false)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: locations, requiringSecureCoding: false)
             UserDefaults.standard.set(data, forKey: storeKey)
         } catch {
             print(error)
@@ -47,7 +47,7 @@ final class CoordinateStore {
     func loadData() {
         do {
             if let data = UserDefaults.standard.object(forKey: storeKey) as? Data {
-                coordinateList = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [Coordinate]
+                locations = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [Location]
             }
         } catch {
             print(error)

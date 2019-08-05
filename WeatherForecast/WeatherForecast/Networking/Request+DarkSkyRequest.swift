@@ -17,7 +17,7 @@ protocol Request {
 
 struct DarkSkyRequest: Request {
     private let APIKey = "693b24d34c1e7088cefd6076c3c10fd3"
-    private let coordinate: Coordinate
+    private let coordinate: (latitude: Double, longitude: Double)
     
     var baseURLString: String {
         return "https://api.darksky.net/"
@@ -27,7 +27,7 @@ struct DarkSkyRequest: Request {
         return "forecast"
     }
     
-    init(coordinate: Coordinate) {
+    init(coordinate: (Double, Double)) {
         self.coordinate = coordinate
     }
 }
@@ -40,7 +40,7 @@ extension DarkSkyRequest {
             url = url?.appendingPathComponent(path)
         }
         url = url?.appendingPathComponent(APIKey)
-        url = url?.appendingPathComponent(String(describing: coordinate))
+        url = url?.appendingPathComponent("\(coordinate.latitude),\(coordinate.longitude)")
         return url
     }
 }

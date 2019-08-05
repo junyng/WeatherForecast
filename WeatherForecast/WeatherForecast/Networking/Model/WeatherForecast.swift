@@ -24,7 +24,7 @@ struct WeatherForecast: Codable {
 
 extension WeatherForecast {
     static func fetchWeather(
-        coordinate: Coordinate,
+        coordinate: (Double, Double),
         dispatcher: NetworkDispatcher = NetworkDispatcher.sharedInstance,
         completion: @escaping (Result<WeatherForecast, Error>) -> Void
         ) {
