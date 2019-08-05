@@ -31,7 +31,7 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
         self.dataSource = self
         self.delegate   = self
-        if let firstViewController = self.viewControllerAtIndex(index: pagesCount - currentPageIndex - 1) {
+        if let firstViewController = self.viewControllerAtIndex(pagesCount - currentPageIndex - 1) {
             self.setViewControllers([firstViewController], direction: .forward, animated: false, completion: nil)
         }
         configureToolbarItems()
@@ -57,7 +57,7 @@ extension PageViewController: UIPageViewControllerDataSource {
             let coordinates: Coordinates = currentPageViewController.coordinates {
             guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: coordinates) else { return nil }
             currentPageIndex = currentIndex
-            return viewControllerAtIndex(index: currentIndex + 1)
+            return viewControllerAtIndex(currentIndex + 1)
         }
         return nil
     }
@@ -68,7 +68,7 @@ extension PageViewController: UIPageViewControllerDataSource {
             let coordinates: Coordinates = currentPageViewController.coordinates {
             guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: coordinates) else { return nil }
             currentPageIndex = currentIndex
-            return viewControllerAtIndex(index: currentIndex - 1)
+            return viewControllerAtIndex(currentIndex - 1)
         }
         return nil
     }
@@ -85,7 +85,7 @@ extension PageViewController: UIPageViewControllerDelegate {
 }
 
 extension PageViewController {
-    func viewControllerAtIndex(index: Int) -> UIViewController? {
+    func viewControllerAtIndex(_ index: Int) -> UIViewController? {
         guard index < pagesCount && index >= 0 else { return nil }
         let coordinates = coordinateStore.coordinatesList[index]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
