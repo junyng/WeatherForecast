@@ -30,13 +30,27 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
         self.dataSource = self
         self.delegate   = self
+        configureToolbarItems()
+        configureCurrentPage()
+    }
+    
+    // MARK: - Custom Methods
+    private func viewControllerAtIndex(_ index: Int) -> UIViewController? {
+        guard index < pagesCount && index >= 0 else { return nil }
+        let coordinates = coordinateStore.coordinatesList[index]
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let weatherViewController = storyboard.instantiateViewController(withIdentifier: "weatherViewController") as! WeatherViewController
+        weatherViewController.coordinates = coordinates
+        return weatherViewController
+    }
+    
+    private func configureCurrentPage() {
         if let firstViewController = self.viewControllerAtIndex(currentPageIndex) {
             self.setViewControllers([firstViewController], direction: .forward, animated: false, completion: nil)
         }
-        configureToolbarItems()
     }
     
-    func configureToolbarItems() {
+    private func configureToolbarItems() {
         let flexibleSpaceButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let pageControlButtonItem = UIBarButtonItem(customView: self.pageControl)
         let listButtonItem = UIBarButtonItem(image: UIImage(imageLiteralResourceName: "list-with-dots"), style: .plain, target: self, action: #selector(popToPrevious))
@@ -44,7 +58,7 @@ class PageViewController: UIPageViewController {
         self.navigationController?.isToolbarHidden = false
     }
     
-    @objc func popToPrevious() {
+    @objc private func popToPrevious() {
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -80,16 +94,5 @@ extension PageViewController: UIPageViewControllerDelegate {
             guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: viewController.coordinates) else { return }
             self.pageControl.currentPage = currentIndex
         }
-    }
-}
-
-extension PageViewController {
-    func viewControllerAtIndex(_ index: Int) -> UIViewController? {
-        guard index < pagesCount && index >= 0 else { return nil }
-        let coordinates = coordinateStore.coordinatesList[index]
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let weatherViewController = storyboard.instantiateViewController(withIdentifier: "weatherViewController") as! WeatherViewController
-        weatherViewController.coordinates = coordinates
-        return weatherViewController
     }
 }
