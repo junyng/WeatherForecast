@@ -19,9 +19,8 @@ class PageViewController: UIPageViewController {
     
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.frame = CGRect()
-        pageControl.currentPageIndicatorTintColor = UIColor.black
-        pageControl.pageIndicatorTintColor = UIColor.lightGray
+        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.pageIndicatorTintColor = .lightGray
         pageControl.numberOfPages = pagesCount
         pageControl.currentPage = currentPageIndex
         return pageControl
@@ -31,7 +30,7 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
         self.dataSource = self
         self.delegate   = self
-        if let firstViewController = self.viewControllerAtIndex(pagesCount - currentPageIndex - 1) {
+        if let firstViewController = self.viewControllerAtIndex(currentPageIndex) {
             self.setViewControllers([firstViewController], direction: .forward, animated: false, completion: nil)
         }
         configureToolbarItems()
@@ -57,7 +56,7 @@ extension PageViewController: UIPageViewControllerDataSource {
             let coordinates: Coordinates = currentPageViewController.coordinates {
             guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: coordinates) else { return nil }
             currentPageIndex = currentIndex
-            return viewControllerAtIndex(currentIndex + 1)
+            return viewControllerAtIndex(currentIndex - 1)
         }
         return nil
     }
@@ -68,7 +67,7 @@ extension PageViewController: UIPageViewControllerDataSource {
             let coordinates: Coordinates = currentPageViewController.coordinates {
             guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: coordinates) else { return nil }
             currentPageIndex = currentIndex
-            return viewControllerAtIndex(currentIndex - 1)
+            return viewControllerAtIndex(currentIndex + 1)
         }
         return nil
     }
@@ -79,7 +78,7 @@ extension PageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]){
         if let viewController = pendingViewControllers[0] as? WeatherViewController {
             guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: viewController.coordinates) else { return }
-            self.pageControl.currentPage = pagesCount - currentIndex - 1
+            self.pageControl.currentPage = currentIndex
         }
     }
 }
