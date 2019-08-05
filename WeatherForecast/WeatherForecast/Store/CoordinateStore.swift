@@ -9,29 +9,29 @@
 import Foundation
 
 extension Notification.Name {
-    static let reloadCoordinatesList = Notification.Name("reloadCoordinatesList")
+    static let reloadCoordinateList = Notification.Name("reloadCoordinateList")
 }
 
 final class CoordinateStore {
     static let sharedInstance = CoordinateStore()
-    private let storeKey = "coordinates"
-    private(set) var coordinatesList = [Coordinates]()
+    private let storeKey = "coordinate"
+    private(set) var coordinateList = [Coordinate]()
     
     private init() {
         loadData()
     }
     
-    func addCoordinates(_ coordinates: Coordinates) {
-        if coordinatesList.contains(coordinates) {
+    func addCoordinate(_ coordinate: Coordinate) {
+        if coordinateList.contains(coordinate) {
             return
         }
-        coordinatesList.append(coordinates)
+        coordinateList.append(coordinate)
         notifyReload()
     }
     
     func saveData() {
         do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: coordinatesList, requiringSecureCoding: false)
+            let data = try NSKeyedArchiver.archivedData(withRootObject: coordinateList, requiringSecureCoding: false)
             UserDefaults.standard.set(data, forKey: storeKey)
         } catch {
             print(error)
@@ -41,7 +41,7 @@ final class CoordinateStore {
     func loadData() {
         do {
             if let data = UserDefaults.standard.object(forKey: storeKey) as? Data {
-                coordinatesList = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [Coordinates]
+                coordinateList = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [Coordinate]
             }
         } catch {
             print(error)
@@ -50,6 +50,6 @@ final class CoordinateStore {
     
     /// 좌표 목록이 변경됨을 알림
     private func notifyReload() {
-        NotificationCenter.default.post(name: .reloadCoordinatesList, object: nil)
+        NotificationCenter.default.post(name: .reloadCoordinateList, object: nil)
     }
 }

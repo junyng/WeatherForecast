@@ -24,11 +24,11 @@ struct WeatherForecast: Codable {
 
 extension WeatherForecast {
     static func fetchWeather(
-        coordinates: Coordinates,
+        coordinate: Coordinate,
         dispatcher: NetworkDispatcher = NetworkDispatcher.sharedInstance,
         completion: @escaping (Result<WeatherForecast, Error>) -> Void
         ) {
-        let darkSkyRequest = DarkSkyRequest(coordinates: coordinates)
+        let darkSkyRequest = DarkSkyRequest(coordinate: coordinate)
         dispatcher.dispatch(request: darkSkyRequest) { (result) in
             switch result {
             case .success(let data):

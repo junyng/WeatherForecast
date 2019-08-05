@@ -14,7 +14,7 @@ class PageViewController: UIPageViewController {
     var currentPageIndex: Int = 0
     
     private var pagesCount: Int {
-        return coordinateStore.coordinatesList.count
+        return coordinateStore.coordinateList.count
     }
     
     private lazy var pageControl: UIPageControl = {
@@ -37,10 +37,10 @@ class PageViewController: UIPageViewController {
     // MARK: - Custom Methods
     private func viewControllerAtIndex(_ index: Int) -> UIViewController? {
         guard index < pagesCount && index >= 0 else { return nil }
-        let coordinates = coordinateStore.coordinatesList[index]
+        let coordinate = coordinateStore.coordinateList[index]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let weatherViewController = storyboard.instantiateViewController(withIdentifier: "weatherViewController") as! WeatherViewController
-        weatherViewController.coordinates = coordinates
+        weatherViewController.coordinate = coordinate
         return weatherViewController
     }
     
@@ -67,8 +67,8 @@ class PageViewController: UIPageViewController {
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let currentPageViewController = viewController as? WeatherViewController,
-            let coordinates: Coordinates = currentPageViewController.coordinates {
-            guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: coordinates) else { return nil }
+            let coordinate: Coordinate = currentPageViewController.coordinate {
+            guard let currentIndex = coordinateStore.coordinateList.firstIndex(of: coordinate) else { return nil }
             currentPageIndex = currentIndex
             return viewControllerAtIndex(currentIndex - 1)
         }
@@ -78,8 +78,8 @@ extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
     {
         if let currentPageViewController = viewController as? WeatherViewController,
-            let coordinates: Coordinates = currentPageViewController.coordinates {
-            guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: coordinates) else { return nil }
+            let coordinate: Coordinate = currentPageViewController.coordinate {
+            guard let currentIndex = coordinateStore.coordinateList.firstIndex(of: coordinate) else { return nil }
             currentPageIndex = currentIndex
             return viewControllerAtIndex(currentIndex + 1)
         }
@@ -91,7 +91,7 @@ extension PageViewController: UIPageViewControllerDataSource {
 extension PageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]){
         if let viewController = pendingViewControllers[0] as? WeatherViewController {
-            guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: viewController.coordinates) else { return }
+            guard let currentIndex = coordinateStore.coordinateList.firstIndex(of: viewController.coordinate) else { return }
             self.pageControl.currentPage = currentIndex
         }
     }

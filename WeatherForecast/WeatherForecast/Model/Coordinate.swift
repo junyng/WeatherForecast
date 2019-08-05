@@ -1,5 +1,5 @@
 //
-//  Coordinates.swift
+//  Coordinate.swift
 //  WeatherForecast
 //
 //  Created by BLU on 03/08/2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Coordinates: NSObject, NSCoding {
+class Coordinate: NSObject, NSCoding {
     let latitude: Double
     let longitude: Double
     
@@ -32,9 +32,9 @@ class Coordinates: NSObject, NSCoding {
     }
 }
 
-extension Coordinates {
+extension Coordinate {
     // 위도 경도가 같으면 두 좌표는 같다.
-    static func == (lhs: Coordinates, rhs: Coordinates) -> Bool {
+    static func == (lhs: Coordinate, rhs: Coordinate) -> Bool {
         return (lhs.latitude == rhs.latitude) && (lhs.longitude == rhs.longitude)
     }
 }

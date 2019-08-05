@@ -35,7 +35,7 @@ class LocationTableViewController: UITableViewController {
     }
     
     private func setupNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshTable(_:)), name: .reloadCoordinatesList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshTable(_:)), name: .reloadCoordinateList, object: nil)
     }
     
     @objc func refreshTable(_ notification:Notification) {
@@ -67,13 +67,13 @@ extension LocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coordinateStore.coordinatesList.count
+        return coordinateStore.coordinateList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationCell
-        let coordinates = coordinateStore.coordinatesList[indexPath.item]
-        WeatherForecast.fetchWeather(coordinates: coordinates) { (result) in
+        let coordinate = coordinateStore.coordinateList[indexPath.item]
+        WeatherForecast.fetchWeather(coordinate: coordinate) { (result) in
             switch result {
             case .success(let response):
                 cell.timeLabel.text = "\(response.weatherCurrently.time)"

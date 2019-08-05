@@ -17,11 +17,11 @@ class WeatherViewController: UIViewController {
     
     private let hourlyCollectionViewDataSource = HourlyCollectionViewDataSource()
     private let detailCollectionViewDataSource = DetailCollectionViewDataSource()
-    var coordinates: Coordinates!
+    var coordinate: Coordinate!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        WeatherForecast.fetchWeather(coordinates: coordinates) { (result) in
+        WeatherForecast.fetchWeather(coordinate: coordinate) { (result) in
             switch result {
             case .success(let response):
                 self.hourlyCollectionViewDataSource.currentArray = response.weatherHourly.currentArray
