@@ -12,17 +12,17 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let coordinateStore = CoordinateStore.sharedInstance
+    let locationStore = LocationStore.sharedInstance
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let navigationController = window!.rootViewController as! UINavigationController
         let locationTableViewController = navigationController.topViewController as! LocationTableViewController
-        locationTableViewController.coordinateStore = coordinateStore
+        locationTableViewController.locationStore = locationStore
         return true
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        coordinateStore.saveData()
+        locationStore.saveLocations()
     }
 }
 

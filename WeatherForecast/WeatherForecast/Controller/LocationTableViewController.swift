@@ -10,7 +10,7 @@ import UIKit
 
 class LocationTableViewController: UITableViewController {
     
-    var coordinateStore: CoordinateStore!
+    var locationStore: LocationStore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,10 +22,10 @@ class LocationTableViewController: UITableViewController {
         if segue.identifier == "search" {
             let navigationController = segue.destination as! UINavigationController
             let searchLocationController = navigationController.viewControllers.first as! SearchLocationTableViewController
-            searchLocationController.coordinateStore = coordinateStore
+            searchLocationController.locationStore = locationStore
         } else if segue.identifier == "pages" {
             let pageController = segue.destination as! PageViewController
-            pageController.coordinateStore = coordinateStore
+            pageController.locationStore = locationStore
             pageController.currentPageIndex = tableView.indexPathForSelectedRow?.item ?? 0
         }
     }
@@ -35,7 +35,7 @@ class LocationTableViewController: UITableViewController {
     }
     
     private func setupNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshTable(_:)), name: .reloadCoordinateList, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshTable(_:)), name: .reloadLocations, object: nil)
     }
     
     @objc func refreshTable(_ notification:Notification) {
@@ -67,12 +67,12 @@ extension LocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coordinateStore.locations.count
+        return locationStore.locations.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationCell
-        let location = coordinateStore.locations[indexPath.item]
+        let location = locationStore.locations[indexPath.item]
         WeatherForecast.fetchWeather(coordinate: location.coordinate()) { (result) in
             switch result {
             case .success(let response):
@@ -90,8 +90,8 @@ extension LocationTableViewController {
 extension LocationTableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let location = coordinateStore.locations[indexPath.item]
-            coordinateStore.removeCoordinate(location)
+            let location = locationStore.locations[indexPath.item]
+            locationStore.removeLocation(location)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

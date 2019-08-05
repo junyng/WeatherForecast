@@ -1,5 +1,5 @@
 //
-//  CoordinateStore.swift
+//  LocationStore.swift
 //  WeatherForecast
 //
 //  Created by BLU on 04/08/2019.
@@ -9,33 +9,33 @@
 import Foundation
 
 extension Notification.Name {
-    static let reloadCoordinateList = Notification.Name("reloadCoordinateList")
+    static let reloadLocations = Notification.Name("reloadLocations")
 }
 
-final class CoordinateStore {
-    static let sharedInstance = CoordinateStore()
-    private let storeKey = "coordinate"
+final class LocationStore {
+    static let sharedInstance = LocationStore()
+    private let storeKey = "location"
     private(set) var locations = [Location]()
     
     private init() {
-        loadData()
+        loadLocations()
     }
     
-    func addCoordinate(_ coordinate: Location) {
-        if locations.contains(coordinate) {
+    func addLocation(_ location: Location) {
+        if locations.contains(location) {
             return
         }
-        locations.append(coordinate)
+        locations.append(location)
         notifyReload()
     }
     
-    func removeCoordinate(_ coordinate: Location) {
-        if let index = locations.firstIndex(of: coordinate) {
+    func removeLocation(_ location: Location) {
+        if let index = locations.firstIndex(of: location) {
             locations.remove(at: index)
         }
     }
     
-    func saveData() {
+    func saveLocations() {
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: locations, requiringSecureCoding: false)
             UserDefaults.standard.set(data, forKey: storeKey)
@@ -44,7 +44,7 @@ final class CoordinateStore {
         }
     }
     
-    func loadData() {
+    func loadLocations() {
         do {
             if let data = UserDefaults.standard.object(forKey: storeKey) as? Data {
                 locations = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [Location]
@@ -54,8 +54,8 @@ final class CoordinateStore {
         }
     }
     
-    /// 좌표 목록이 변경됨을 알림
+    /// 위치 목록이 변경됨을 알림
     private func notifyReload() {
-        NotificationCenter.default.post(name: .reloadCoordinateList, object: nil)
+        NotificationCenter.default.post(name: .reloadLocations, object: nil)
     }
 }

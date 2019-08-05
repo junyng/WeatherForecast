@@ -10,11 +10,11 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
-    var coordinateStore: CoordinateStore!
+    var locationStore: LocationStore!
     var currentPageIndex: Int = 0
     
     private var pagesCount: Int {
-        return coordinateStore.locations.count
+        return locationStore.locations.count
     }
     
     private lazy var pageControl: UIPageControl = {
@@ -37,7 +37,7 @@ class PageViewController: UIPageViewController {
     // MARK: - Custom Methods
     private func viewControllerAtIndex(_ index: Int) -> UIViewController? {
         guard index < pagesCount && index >= 0 else { return nil }
-        let location = coordinateStore.locations[index]
+        let location = locationStore.locations[index]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let weatherViewController = storyboard.instantiateViewController(withIdentifier: "weatherViewController") as! WeatherViewController
         weatherViewController.location = location
@@ -68,7 +68,7 @@ extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let currentPageViewController = viewController as? WeatherViewController,
             let location: Location = currentPageViewController.location {
-            guard let currentIndex = coordinateStore.locations.firstIndex(of: location) else { return nil }
+            guard let currentIndex = locationStore.locations.firstIndex(of: location) else { return nil }
             currentPageIndex = currentIndex
             return viewControllerAtIndex(currentIndex - 1)
         }
@@ -79,7 +79,7 @@ extension PageViewController: UIPageViewControllerDataSource {
     {
         if let currentPageViewController = viewController as? WeatherViewController,
             let location: Location = currentPageViewController.location {
-            guard let currentIndex = coordinateStore.locations.firstIndex(of: location) else { return nil }
+            guard let currentIndex = locationStore.locations.firstIndex(of: location) else { return nil }
             currentPageIndex = currentIndex
             return viewControllerAtIndex(currentIndex + 1)
         }
@@ -91,7 +91,7 @@ extension PageViewController: UIPageViewControllerDataSource {
 extension PageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]){
         if let viewController = pendingViewControllers[0] as? WeatherViewController {
-            guard let currentIndex = coordinateStore.locations.firstIndex(of: viewController.location) else { return }
+            guard let currentIndex = locationStore.locations.firstIndex(of: viewController.location) else { return }
             self.pageControl.currentPage = currentIndex
         }
     }

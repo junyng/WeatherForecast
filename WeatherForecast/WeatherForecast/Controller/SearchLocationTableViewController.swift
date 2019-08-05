@@ -11,7 +11,7 @@ import MapKit
 
 class SearchLocationTableViewController: UITableViewController {
     
-    var coordinateStore: CoordinateStore!
+    var locationStore: LocationStore!
     
     private var places: [MKMapItem]? {
         didSet {
@@ -148,7 +148,7 @@ extension SearchLocationTableViewController {
             DispatchQueue(label: "serial").async(group: dispatchGroup) {
                 self.getCoordinate(addressString: suggestion.title) { (coordinate, error) in
                     let location = Location(latitude: coordinate.latitude, longitude: coordinate.longitude, address: suggestion.title)
-                    self.coordinateStore.addCoordinate(location)
+                    self.locationStore.addLocation(location)
                 }
             }
             dispatchGroup.notify(queue: .global()) {
