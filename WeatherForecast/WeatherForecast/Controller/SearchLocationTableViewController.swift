@@ -140,16 +140,20 @@ extension SearchLocationTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if tableView == suggestionController.tableView, let suggestion = suggestionController.completerResults?[indexPath.row] {
+        if tableView == suggestionController.tableView,
+            let suggestion = suggestionController.completerResults?[indexPath.row] {
             searchController.isActive = false
             searchController.searchBar.text = suggestion.title
-            OperationQueue().addOperation {
+            let dispatchGroup = DispatchGroup()
+            DispatchQueue(label: "serial").async(group: dispatchGroup) {
                 self.getCoordinate(addressString: suggestion.title) { (coordinate, error) in
                     let coordinates = Coordinates(latitude: coordinate.latitude, longitude: coordinate.longitude)
                     self.coordinateStore.addCoordinates(coordinates)
                 }
-                OperationQueue.main.addOperation {
-                    self.dismiss(animated: true, completion: nil)
+            }
+            dispatchGroup.notify(queue: .global()) {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true)
                 }
             }
         }
