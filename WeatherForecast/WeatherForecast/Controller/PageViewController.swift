@@ -76,7 +76,11 @@ extension PageViewController: UIPageViewControllerDataSource {
 
 // MARK: UIPageViewControllerDelegate
 extension PageViewController: UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]){
+        if let viewController = pendingViewControllers[0] as? WeatherViewController {
+            guard let currentIndex = coordinateStore.coordinatesList.firstIndex(of: viewController.coordinates) else { return }
+            self.pageControl.currentPage = pagesCount - currentIndex - 1
+        }
     }
 }
 
