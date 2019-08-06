@@ -96,8 +96,8 @@
 		300F19A522F678CB002A494E /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				30696A5A22F9E7EC00A886E8 /* Location.swift */,
-				30696A5B22F9E7EC00A886E8 /* LocationStore.swift */,
+				30696A6022F9F77100A886E8 /* Model */,
+				30696A5F22F9F76D00A886E8 /* Store */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -144,6 +144,22 @@
 				300F19E022F9E313002A494E /* WeatherClient.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		30696A5F22F9F76D00A886E8 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				30696A5B22F9E7EC00A886E8 /* LocationStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		30696A6022F9F77100A886E8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				30696A5A22F9E7EC00A886E8 /* Location.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		30BDEE8B22F18A97006E1C30 = {
