@@ -19,6 +19,7 @@ extension Endpoint {
     var urlComponents: URLComponents {
         var components = URLComponents(string: base)!
         components.path = path
+        components.queryItems = [URLQueryItem(name: "lang", value: "ko")]
         return components
     }
     

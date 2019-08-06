@@ -91,11 +91,14 @@ extension LocationTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationCell
         let location = locationStore.locations[indexPath.item]
-        WeatherForecast.fetchWeather(coordinate: location.coordinate()) { (result) in
+        
+        WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
             switch result {
             case .success(let response):
-                cell.timeLabel.text = "\(response.weatherCurrently.time)"
-                cell.temperatureLabel.text = "\(response.weatherCurrently.temperature)"
+                if let response = response {
+                    cell.timeLabel.text = "\(response.weatherCurrently.time)"
+                    cell.temperatureLabel.text = "\(response.weatherCurrently.temperature)"
+                }
             case .failure(let error):
                 print(error)
             }

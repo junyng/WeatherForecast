@@ -65,20 +65,13 @@ extension APIClient {
 }
 
 class WeatherClient: APIClient {
+    static let shared = WeatherClient()
+    private init() { }
+    let session = URLSession(configuration: .default)
     
-    let session: URLSession
-    
-    init(configuration: URLSessionConfiguration) {
-        self.session = URLSession(configuration: configuration)
-    }
-    
-    convenience init() {
-        self.init(configuration: .default)
-    }
-    
-    func getFeed(from weatherFeedType: WeatherFeed, completion: @escaping (Result<WeatherForecast?, Error>) -> Void) {
+    func getFeed(from coordinate: (Double, Double), completion: @escaping (Result<WeatherForecast?, Error>) -> Void) {
         
-        let endpoint = weatherFeedType
+        let endpoint = WeatherFeed(coordinate: coordinate)
         let request = endpoint.request
         
         fetch(with: request, decode: { json -> WeatherForecast? in
