@@ -17,8 +17,11 @@ class WeatherClient: APIClient {
         
         let endpoint = WeatherFeed(coordinate: coordinate)
         let request = endpoint.request
+        let dispatchGroup = DispatchGroup()
         
+        dispatchGroup.enter()
         fetch(with: request, decode: { json -> WeatherForecast? in
+            dispatchGroup.leave()
             guard let weatherFeedResult = json as? WeatherForecast else { return nil }
             return weatherFeedResult
         }, completion: completion)
