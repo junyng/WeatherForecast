@@ -347,7 +347,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="MpJ-he-9Np" kind="relationship" relationship="rootViewController" id="dvz-EV-mr3"/>
+                        <segue destination="b8k-14-GHL" kind="relationship" relationship="rootViewController" id="cxX-iM-0Me"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvh-oj-Mg8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -355,46 +355,33 @@
             <point key="canvasLocation" x="2081" y="-297"/>
         </scene>
         <!--Search Location Table View Controller-->
-        <scene sceneID="4ri-rX-DkN">
+        <scene sceneID="CaW-Uu-bih">
             <objects>
-                <tableViewController id="MpJ-he-9Np" customClass="SearchLocationTableViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hWu-LL-PQR">
+                <tableViewController id="b8k-14-GHL" customClass="SearchLocationTableViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ido-73-bgX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="location" textLabel="uEN-pL-VPb" detailTextLabel="aFj-ZP-911" style="IBUITableViewCellStyleSubtitle" id="iVh-wx-vtt">
-                                <rect key="frame" x="0.0" y="22" width="414" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="mK5-H3-6cR">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iVh-wx-vtt" id="ncn-0E-5wm">
-                                    <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mK5-H3-6cR" id="8jA-d0-41u">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uEN-pL-VPb">
-                                            <rect key="frame" x="20" y="5" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aFj-ZP-911">
-                                            <rect key="frame" x="20" y="25.5" width="44" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="b8k-14-GHL" id="Lcz-Vq-b6O"/>
+                            <outlet property="delegate" destination="b8k-14-GHL" id="LQC-7l-hbG"/>
+                        </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="NUt-1y-8bM"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="hOl-Xz-yAd"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uxa-q3-9Tz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="jBk-dy-brZ"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6om-x3-gcP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2846" y="-297"/>
+            <point key="canvasLocation" x="2851" y="-300"/>
         </scene>
     </scenes>
 </document>

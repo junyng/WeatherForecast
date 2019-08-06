@@ -38,7 +38,7 @@ class LocationTableViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTable(_:)), name: .reloadLocations, object: nil)
     }
     
-    @objc func refreshTable(_ notification:Notification) {
+    @objc func refreshTable(_ notification: Notification) {
         self.tableView.reloadData()
     }
     
