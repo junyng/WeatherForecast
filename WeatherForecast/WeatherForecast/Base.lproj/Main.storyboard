@@ -265,7 +265,7 @@
                                             <outlet property="summaryTextView" destination="AKw-Cn-rYQ" id="4iE-eU-cXH"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Zdp-WD-bLs" customClass="InformationCell" customModule="WeatherForecast" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Zdp-WD-bLs" customClass="DailyDetailCell" customModule="WeatherForecast" customModuleProvider="target">
                                         <rect key="frame" x="101" y="120" width="212" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
