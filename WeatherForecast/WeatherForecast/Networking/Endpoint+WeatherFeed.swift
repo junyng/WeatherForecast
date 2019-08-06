@@ -28,19 +28,3 @@ extension Endpoint {
         return URLRequest(url: url)
     }
 }
-
-struct WeatherFeed: Endpoint {
-    private let coordinate: (latitude: Double, longitude: Double)
-    
-    var base: String {
-        return "https://api.darksky.net"
-    }
-    
-    var path: String {
-        return "/forecast/693b24d34c1e7088cefd6076c3c10fd3/\(coordinate.latitude),\(coordinate.longitude)"
-    }
-    
-    init(coordinate: (Double, Double)) {
-        self.coordinate = coordinate
-    }
-}
