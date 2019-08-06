@@ -10,6 +10,23 @@ import UIKit
 
 class LocationTableViewController: UITableViewController {
     
+    private lazy var temperatureToggle: UISegmentedControl = {
+        let toggle = UISegmentedControl(items: ["°C", "°F"])
+        toggle.selectedSegmentIndex = 0
+        return toggle
+    }()
+    
+    private lazy var addLocationButton: UIButton = {
+        let button = UIButton(type: .contactAdd)
+        button.addTarget(self, action: #selector(searchButtonDidTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var footerView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 50))
+        return view
+    }()
+    
     var locationStore: LocationStore!
     
     override func viewDidLoad() {
@@ -43,12 +60,8 @@ class LocationTableViewController: UITableViewController {
     }
     
     private func configureFooterView() {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 50))
-        let temperatureToggle = UISegmentedControl(items: ["°C", "°F"])
         temperatureToggle.translatesAutoresizingMaskIntoConstraints = false
-        let addLocationButton = UIButton(type: .contactAdd)
         addLocationButton.translatesAutoresizingMaskIntoConstraints = false
-        addLocationButton.addTarget(self, action: #selector(searchButtonDidTapped), for: .touchUpInside)
         footerView.addSubview(temperatureToggle)
         footerView.addSubview(addLocationButton)
         temperatureToggle.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
