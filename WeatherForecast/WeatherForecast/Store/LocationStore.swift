@@ -13,7 +13,7 @@ extension Notification.Name {
 }
 
 final class LocationStore {
-    static let sharedInstance = LocationStore()
+    static let shared = LocationStore()
     private let storeKey = "location"
     private(set) var locations = [Location]()
     

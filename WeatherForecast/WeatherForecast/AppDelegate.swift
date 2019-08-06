@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    let locationStore = LocationStore.sharedInstance
+    let locationStore = LocationStore.shared
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let navigationController = window!.rootViewController as! UINavigationController
