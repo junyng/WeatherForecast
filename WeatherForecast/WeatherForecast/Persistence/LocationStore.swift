@@ -13,12 +13,24 @@ extension Notification.Name {
 }
 
 final class LocationStore {
-    static let shared = LocationStore()
-    private let storeKey = "location"
     private(set) var locations = [Location]()
     
-    private init() {
-        loadLocations()
+    private let archiveURL: URL = {
+        let documentsDirectories =
+            FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = documentsDirectories.first!
+        return documentDirectory.appendingPathComponent("locations")
+    }()
+    
+    init() {
+        do {
+            let data = try Data(contentsOf: archiveURL)
+            if let archivedLocations = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Location] {
+                locations = archivedLocations
+            }
+        } catch {
+            print("파일을 읽지 못하였습니다.")
+        }
     }
     
     func addLocation(_ location: Location) {
@@ -35,22 +47,12 @@ final class LocationStore {
         }
     }
     
-    func saveLocations() {
+    func saveChanges() {
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: locations, requiringSecureCoding: false)
-            UserDefaults.standard.set(data, forKey: storeKey)
+            try data.write(to: archiveURL)
         } catch {
-            print(error)
-        }
-    }
-    
-    func loadLocations() {
-        do {
-            if let data = UserDefaults.standard.object(forKey: storeKey) as? Data {
-                locations = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [Location]
-            }
-        } catch {
-            print(error)
+            print("파일을 저장하지 못하였습니다.")
         }
     }
     
