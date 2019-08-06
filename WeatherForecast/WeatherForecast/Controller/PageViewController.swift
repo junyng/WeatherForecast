@@ -42,14 +42,12 @@ class PageViewController: UIPageViewController {
         }
         let location = locations[index]
         weatherViewController.location = location
-        weatherViewController.address = location.addressString()
         return weatherViewController
     }
     
     private func configureCurrentPage() {
         if let firstViewController = self.viewControllerAtIndex(currentIndex),
             let weatherController = firstViewController as? WeatherViewController {
-            weatherController.address = locations[currentIndex].addressString()
             self.setViewControllers([weatherController], direction: .forward, animated: false, completion: nil)
         }
     }
@@ -71,7 +69,7 @@ class PageViewController: UIPageViewController {
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let currentPageViewController = viewController as? WeatherViewController,
-            let location: Location = currentPageViewController.location {
+            let location = currentPageViewController.location {
             guard let index = locations.firstIndex(of: location) else { return nil }
             currentIndex = index
             return viewControllerAtIndex(index - 1)
@@ -82,7 +80,7 @@ extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
     {
         if let currentPageViewController = viewController as? WeatherViewController,
-            let location: Location = currentPageViewController.location {
+            let location = currentPageViewController.location {
             guard let index = locations.firstIndex(of: location) else { return nil }
             currentIndex = index
             return viewControllerAtIndex(index + 1)
