@@ -12,7 +12,7 @@ import Foundation
 class Location: NSObject, NSCoding {
     private let latitude: Double
     private let longitude: Double
-    private let address: String
+    private let address: String?
     
     init(latitude: Double, longitude: Double, address: String) {
         self.latitude = latitude
@@ -29,14 +29,14 @@ class Location: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         latitude = aDecoder.decodeDouble(forKey: "latitude")
         longitude = aDecoder.decodeDouble(forKey: "longitude")
-        address = aDecoder.decodeObject(forKey: "address") as! String
+        address = aDecoder.decodeObject(forKey: "address") as? String
     }
     
     func coordinate() -> (Double, Double) {
         return (latitude, longitude)
     }
     
-    func addressString() -> String {
+    func addressString() -> String? {
         return address
     }
 }
