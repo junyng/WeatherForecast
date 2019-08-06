@@ -24,15 +24,18 @@ class WeatherViewController: UIViewController {
         super.viewWillAppear(true)
         cityLabel.text = address ?? "-"
         displayActivityIndicator(shouldDisplay: true)
-        WeatherForecast.fetchWeather(coordinate: location.coordinate()) { (result) in
+        WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
             switch result {
             case .success(let response):
-                self.hourlyCollectionViewDataSource.currentArray = response.weatherHourly.currentArray
-                self.hourlyCollectionView.dataSource = self.hourlyCollectionViewDataSource
-                self.detailCollectionViewDataSource.detailArray = response.weatherDaily.detailArray
-                self.collectionView.dataSource = self.detailCollectionViewDataSource
-                self.displayActivityIndicator(shouldDisplay: false)
+                if let response = response {
+                    self.hourlyCollectionViewDataSource.currentArray = response.weatherHourly.currentArray
+                    self.hourlyCollectionView.dataSource = self.hourlyCollectionViewDataSource
+                    self.detailCollectionViewDataSource.detailArray = response.weatherDaily.detailArray
+                    self.collectionView.dataSource = self.detailCollectionViewDataSource
+                    self.displayActivityIndicator(shouldDisplay: false)
+                }
             case .failure(let error):
+                print(error)
                 break
             }
         }
