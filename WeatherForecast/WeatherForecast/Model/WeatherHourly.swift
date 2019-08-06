@@ -7,8 +7,22 @@
 //
 
 import Foundation
+import UIKit
 
-struct WeatherHourly: Decodable {
+struct WeatherHourly {
+    let summary: String
+    let icon: UIImage?
+    let currentArray: [WeatherCurrently]
+    
+    init(dto: WeatherHourlyDTO) {
+        self.summary = dto.summary ?? "-"
+        self.icon = UIImage(named: dto.icon?.rawValue ?? "")
+        self.currentArray = dto.currentArray?.compactMap { WeatherCurrently(dto: $0) } ?? []
+    }
+}
+
+
+struct WeatherHourlyDTO: Decodable {
     
     private enum CodingKeys: String, CodingKey {
         case summary
@@ -16,7 +30,7 @@ struct WeatherHourly: Decodable {
         case currentArray = "data"
     }
     
-    let summary: String
-    let icon: Icon
-    let currentArray: [WeatherCurrently]
+    let summary: String?
+    let icon: Icon?
+    let currentArray: [WeatherCurrentlyDTO]?
 }

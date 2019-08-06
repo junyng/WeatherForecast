@@ -7,8 +7,21 @@
 //
 
 import Foundation
+import UIKit
 
-struct WeatherDaily: Decodable {
+struct WeatherDaily {
+    let summary: String
+    let icon: UIImage?
+    let detailArray: [WeatherDetail]
+    
+    init(dto: WeatherDailyDTO) {
+        self.summary = dto.summary ?? "-"
+        self.icon = UIImage(named: dto.icon?.rawValue ?? "")
+        self.detailArray = dto.detailArray?.compactMap { WeatherDetail(dto: $0) } ?? []
+    }
+}
+
+struct WeatherDailyDTO: Decodable {
     
     private enum CodingKeys: String, CodingKey {
         case summary
@@ -16,7 +29,7 @@ struct WeatherDaily: Decodable {
         case detailArray = "data"
     }
     
-    let summary: String
-    let icon: Icon
-    let detailArray: [WeatherDetail]
+    let summary: String?
+    let icon: Icon?
+    let detailArray: [WeatherDetailDTO]?
 }

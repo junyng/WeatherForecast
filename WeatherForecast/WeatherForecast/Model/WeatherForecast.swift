@@ -8,8 +8,20 @@
 
 import Foundation
 
+struct WeatherForecast {
+    let weatherCurrently: WeatherCurrently
+    let weatherHourly: WeatherHourly
+    let weatherDaily: WeatherDaily
+    
+    init(dto: WeatherForecastDTO) {
+        self.weatherCurrently = WeatherCurrently(dto: dto.weatherCurrently)
+        self.weatherHourly = WeatherHourly(dto: dto.weatherHourly)
+        self.weatherDaily = WeatherDaily(dto: dto.weatherDaily)
+    }
+}
+
 /// 전체 날씨 정보
-struct WeatherForecast: Decodable {
+struct WeatherForecastDTO: Decodable {
     
     private enum CodingKeys : String, CodingKey {
         case weatherCurrently = "currently"
@@ -17,7 +29,7 @@ struct WeatherForecast: Decodable {
         case weatherDaily = "daily"
     }
     
-    let weatherCurrently: WeatherCurrently
-    let weatherHourly: WeatherHourly
-    let weatherDaily: WeatherDaily
+    let weatherCurrently: WeatherCurrentlyDTO
+    let weatherHourly: WeatherHourlyDTO
+    let weatherDaily: WeatherDailyDTO
 }

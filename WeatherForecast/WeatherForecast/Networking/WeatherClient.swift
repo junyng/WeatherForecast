@@ -13,16 +13,17 @@ class WeatherClient: APIClient {
     private init() { }
     let session = URLSession(configuration: .default)
     
-    func getFeed(from coordinate: (Double, Double), completion: @escaping (Result<WeatherForecast?, Error>) -> Void) {
+    func getFeed(from coordinate: (Double, Double), completion: @escaping (Result<WeatherForecastDTO?, Error>) -> Void) {
         
         let endpoint = WeatherFeed(coordinate: coordinate)
         let request = endpoint.request
         let dispatchGroup = DispatchGroup()
         
         dispatchGroup.enter()
-        fetch(with: request, decode: { json -> WeatherForecast? in
+        fetch(with: request, decode: { json -> WeatherForecastDTO? in
             dispatchGroup.leave()
-            guard let weatherFeedResult = json as? WeatherForecast else { return nil }
+            guard let weatherFeedResult = json as? WeatherForecastDTO else { return nil }
+            
             return weatherFeedResult
         }, completion: completion)
     }

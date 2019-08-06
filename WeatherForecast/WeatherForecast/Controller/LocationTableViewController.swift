@@ -93,12 +93,16 @@ extension LocationTableViewController {
         let location = locationStore.locations[indexPath.item]
         
         WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
+            print(result)
             switch result {
             case .success(let response):
                 if let response = response {
-                    cell.timeLabel.text = "\(response.weatherCurrently.time)"
-                    cell.temperatureLabel.text = "\(response.weatherCurrently.temperature)"
+                    let weatherCurrently = WeatherCurrently(dto: response.weatherCurrently)
+                    cell.timeLabel.text = weatherCurrently.time.description
+                    cell.locationLabel.text = location.addressString() ?? "-"
+                    cell.temperatureLabel.text = "\(weatherCurrently.temperature)"
                 }
+                break
             case .failure(let error):
                 print(error)
             }
