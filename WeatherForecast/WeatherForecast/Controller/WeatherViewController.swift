@@ -21,6 +21,7 @@ class WeatherViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        displayActivityIndicator(shouldDisplay: true)
         WeatherForecast.fetchWeather(coordinate: location.coordinate()) { (result) in
             switch result {
             case .success(let response):
@@ -28,6 +29,7 @@ class WeatherViewController: UIViewController {
                 self.hourlyCollectionView.dataSource = self.hourlyCollectionViewDataSource
                 self.detailCollectionViewDataSource.detailArray = response.weatherDaily.detailArray
                 self.collectionView.dataSource = self.detailCollectionViewDataSource
+                self.displayActivityIndicator(shouldDisplay: false)
             case .failure(let error):
                 break
             }
