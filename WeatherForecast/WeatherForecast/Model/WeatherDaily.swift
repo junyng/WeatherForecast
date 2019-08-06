@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WeatherDaily: Codable {
+struct WeatherDaily: Decodable {
     
     private enum CodingKeys: String, CodingKey {
         case summary

@@ -9,7 +9,7 @@
 import Foundation
 
 /// 전체 날씨 정보
-struct WeatherForecast: Codable {
+struct WeatherForecast: Decodable {
     
     private enum CodingKeys : String, CodingKey {
         case weatherCurrently = "currently"

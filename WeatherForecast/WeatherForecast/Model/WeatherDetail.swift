@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WeatherDetail: Codable {
+struct WeatherDetail: Decodable {
     let time: Int
     let summary: String
     let icon: Icon

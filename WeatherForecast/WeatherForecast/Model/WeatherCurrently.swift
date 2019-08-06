@@ -9,14 +9,14 @@
 import Foundation
 
 /// 현재 시간의 날씨 정보
-struct WeatherCurrently: Codable {
+struct WeatherCurrently: Decodable {
     let time: Int
     let summary: String
     let icon: Icon
     let temperature: Double
 }
 
-enum Icon: String, Codable {
+enum Icon: String, Decodable {
     case clearDay = "clear-day"
     case clearNight = "clear-night"
     case rain = "rain"
