@@ -39,14 +39,19 @@ class PageViewController: UIPageViewController {
         guard index < pagesCount && index >= 0 else { return nil }
         let location = locationStore.locations[index]
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let weatherViewController = storyboard.instantiateViewController(withIdentifier: "weatherViewController") as! WeatherViewController
+        guard let weatherViewController = storyboard.instantiateViewController(withIdentifier: "weatherViewController") as? WeatherViewController else {
+            return nil
+        }
         weatherViewController.location = location
+        weatherViewController.address = location.addressString()
         return weatherViewController
     }
     
     private func configureCurrentPage() {
-        if let firstViewController = self.viewControllerAtIndex(currentPageIndex) {
-            self.setViewControllers([firstViewController], direction: .forward, animated: false, completion: nil)
+        if let firstViewController = self.viewControllerAtIndex(currentPageIndex),
+            let weatherController = firstViewController as? WeatherViewController {
+            weatherController.address = locationStore.locations[currentPageIndex].addressString()
+            self.setViewControllers([weatherController], direction: .forward, animated: false, completion: nil)
         }
     }
     

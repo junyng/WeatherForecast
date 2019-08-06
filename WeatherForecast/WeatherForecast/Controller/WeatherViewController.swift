@@ -18,9 +18,11 @@ class WeatherViewController: UIViewController {
     private let hourlyCollectionViewDataSource = HourlyCollectionViewDataSource()
     private let detailCollectionViewDataSource = DetailCollectionViewDataSource()
     var location: Location!
+    var address: String?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        cityLabel.text = address ?? "-"
         displayActivityIndicator(shouldDisplay: true)
         WeatherForecast.fetchWeather(coordinate: location.coordinate()) { (result) in
             switch result {
