@@ -47,8 +47,8 @@ class LocationTableViewController: UITableViewController {
             searchLocationController.locationStore = locationStore
         } else if segue.identifier == "pages" {
             let pageController = segue.destination as! PageViewController
-            pageController.locationStore = locationStore
-            pageController.currentPageIndex = tableView.indexPathForSelectedRow?.item ?? 0
+            pageController.locations = locationStore.locations
+            pageController.currentIndex = tableView.indexPathForSelectedRow?.item ?? 0
         }
     }
     

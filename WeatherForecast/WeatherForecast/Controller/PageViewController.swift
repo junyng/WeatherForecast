@@ -10,11 +10,11 @@ import UIKit
 
 class PageViewController: UIPageViewController {
     
-    var locationStore: LocationStore!
-    var currentPageIndex: Int = 0
+    var locations = [Location]()
+    var currentIndex: Int = 0
     
     private var pagesCount: Int {
-        return locationStore.locations.count
+        return locations.count
     }
     
     private lazy var pageControl: UIPageControl = {
@@ -22,7 +22,7 @@ class PageViewController: UIPageViewController {
         pageControl.currentPageIndicatorTintColor = .black
         pageControl.pageIndicatorTintColor = .lightGray
         pageControl.numberOfPages = pagesCount
-        pageControl.currentPage = currentPageIndex
+        pageControl.currentPage = currentIndex
         return pageControl
     }()
     
@@ -37,20 +37,19 @@ class PageViewController: UIPageViewController {
     // MARK: - Custom Methods
     private func viewControllerAtIndex(_ index: Int) -> UIViewController? {
         guard index < pagesCount && index >= 0 else { return nil }
-        let location = locationStore.locations[index]
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        guard let weatherViewController = storyboard.instantiateViewController(withIdentifier: "weatherViewController") as? WeatherViewController else {
+        guard let weatherViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "weatherViewController") as? WeatherViewController else {
             return nil
         }
+        let location = locations[index]
         weatherViewController.location = location
         weatherViewController.address = location.addressString()
         return weatherViewController
     }
     
     private func configureCurrentPage() {
-        if let firstViewController = self.viewControllerAtIndex(currentPageIndex),
+        if let firstViewController = self.viewControllerAtIndex(currentIndex),
             let weatherController = firstViewController as? WeatherViewController {
-            weatherController.address = locationStore.locations[currentPageIndex].addressString()
+            weatherController.address = locations[currentIndex].addressString()
             self.setViewControllers([weatherController], direction: .forward, animated: false, completion: nil)
         }
     }
@@ -73,9 +72,9 @@ extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if let currentPageViewController = viewController as? WeatherViewController,
             let location: Location = currentPageViewController.location {
-            guard let currentIndex = locationStore.locations.firstIndex(of: location) else { return nil }
-            currentPageIndex = currentIndex
-            return viewControllerAtIndex(currentIndex - 1)
+            guard let index = locations.firstIndex(of: location) else { return nil }
+            currentIndex = index
+            return viewControllerAtIndex(index - 1)
         }
         return nil
     }
@@ -84,9 +83,9 @@ extension PageViewController: UIPageViewControllerDataSource {
     {
         if let currentPageViewController = viewController as? WeatherViewController,
             let location: Location = currentPageViewController.location {
-            guard let currentIndex = locationStore.locations.firstIndex(of: location) else { return nil }
-            currentPageIndex = currentIndex
-            return viewControllerAtIndex(currentIndex + 1)
+            guard let index = locations.firstIndex(of: location) else { return nil }
+            currentIndex = index
+            return viewControllerAtIndex(index + 1)
         }
         return nil
     }
@@ -95,9 +94,9 @@ extension PageViewController: UIPageViewControllerDataSource {
 // MARK: UIPageViewControllerDelegate
 extension PageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]){
-        if let viewController = pendingViewControllers[0] as? WeatherViewController {
-            guard let currentIndex = locationStore.locations.firstIndex(of: viewController.location) else { return }
-            self.pageControl.currentPage = currentIndex
+        if let viewController = pendingViewControllers.first as? WeatherViewController,
+            let index = locations.firstIndex(of: viewController.location) {
+            self.pageControl.currentPage = index
         }
     }
 }
