@@ -19,7 +19,7 @@ class SearchLocationTableViewController: UITableViewController {
         }
     }
     
-    private var suggestionController: SuggestionsTableTableViewController!
+    private var suggestionController: SuggestedLocationTableViewController!
     private var searchController: UISearchController!
     
     override func awakeFromNib() {
@@ -57,7 +57,7 @@ class SearchLocationTableViewController: UITableViewController {
     }
     
     private func configureSearchController() {
-        suggestionController = SuggestionsTableTableViewController()
+        suggestionController = SuggestedLocationTableViewController()
         suggestionController.tableView.delegate = self
         searchController = UISearchController(searchResultsController: suggestionController)
         searchController.searchResultsUpdater = suggestionController
