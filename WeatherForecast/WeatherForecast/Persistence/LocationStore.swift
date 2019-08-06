@@ -9,7 +9,7 @@
 import Foundation
 
 extension Notification.Name {
-    static let reloadLocations = Notification.Name("reloadLocations")
+    static let locationsAdded = Notification.Name("locationsAdded")
 }
 
 final class LocationStore {
@@ -38,7 +38,7 @@ final class LocationStore {
             return
         }
         locations.append(location)
-        notifyReload()
+        locationsAdded()
     }
     
     func removeLocation(_ location: Location) {
@@ -56,8 +56,8 @@ final class LocationStore {
         }
     }
     
-    /// 위치 목록이 변경됨을 알림
-    private func notifyReload() {
-        NotificationCenter.default.post(name: .reloadLocations, object: nil)
+    /// 위치 목록이 추가됨을 알림
+    private func locationsAdded() {
+        NotificationCenter.default.post(name: .locationsAdded, object: nil)
     }
 }
