@@ -90,7 +90,7 @@
 				300F19E222F9E3E6002A494E /* HourlyCollectionViewDataSource.swift */,
 			);
 			name = Datasource;
-			path = Datasource.temp_caseinsensitive_rename.;
+			path = ../Datasource.temp_caseinsensitive_rename.;
 			sourceTree = "<group>";
 		};
 		300F19A522F678CB002A494E /* Persistence */ = {
@@ -113,6 +113,7 @@
 		3059766522F375360035353D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				300F199D22F5FBE1002A494E /* Datasource */,
 				300F19E722F9E55C002A494E /* WeatherCurrently.swift */,
 				300F19E922F9E55D002A494E /* WeatherDaily.swift */,
 				300F19E822F9E55D002A494E /* WeatherDetail.swift */,
@@ -182,7 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				300F19A522F678CB002A494E /* Persistence */,
-				300F199D22F5FBE1002A494E /* Datasource */,
 				3059767922F51FCA0035353D /* Networking */,
 				3059766522F375360035353D /* Model */,
 				30F3199A22F56D5B00DE0A71 /* View */,
