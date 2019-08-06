@@ -29,6 +29,11 @@ class LocationTableViewController: UITableViewController {
     
     var locationStore: LocationStore!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.isToolbarHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNotification()
