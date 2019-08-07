@@ -122,21 +122,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		3059766522F375360035353D /* Model */ = {
+		3059766522F375360035353D /* Model&Parser */ = {
 			isa = PBXGroup;
 			children = (
+				30696A7422FA716400A886E8 /* Model */,
+				30696A7322FA6F4700A886E8 /* Parser */,
 				300F199D22F5FBE1002A494E /* Datasource */,
-				300F19EA22F9E55D002A494E /* WeatherForecast.swift */,
-				300F19E622F9E55C002A494E /* WeatherHourly.swift */,
-				300F19E722F9E55C002A494E /* WeatherCurrently.swift */,
-				300F19E922F9E55D002A494E /* WeatherDaily.swift */,
-				300F19E822F9E55D002A494E /* WeatherDetail.swift */,
-				30696A6822FA559A00A886E8 /* HourlyWeatherParser.swift */,
-				30696A6A22FA567600A886E8 /* DailyWeatherParser.swift */,
-				30696A6622FA4E9900A886E8 /* CurrentlyWeatherParser.swift */,
-				30696A6C22FA569000A886E8 /* DetailWeatherParser.swift */,
 			);
-			path = Model;
+			path = "Model&Parser";
 			sourceTree = "<group>";
 		};
 		3059766E22F3D4F50035353D /* Controller */ = {
@@ -179,13 +172,36 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		30696A7022FA639900A886E8 /* Util */ = {
+		30696A7022FA639900A886E8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				30696A6E22FA5FF700A886E8 /* DateUtil.swift */,
 				30696A7122FA63AB00A886E8 /* ConversionUtil.swift */,
 			);
-			path = Util;
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		30696A7322FA6F4700A886E8 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				30696A6822FA559A00A886E8 /* HourlyWeatherParser.swift */,
+				30696A6A22FA567600A886E8 /* DailyWeatherParser.swift */,
+				30696A6622FA4E9900A886E8 /* CurrentlyWeatherParser.swift */,
+				30696A6C22FA569000A886E8 /* DetailWeatherParser.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		30696A7422FA716400A886E8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				300F19EA22F9E55D002A494E /* WeatherForecast.swift */,
+				300F19E622F9E55C002A494E /* WeatherHourly.swift */,
+				300F19E722F9E55C002A494E /* WeatherCurrently.swift */,
+				300F19E922F9E55D002A494E /* WeatherDaily.swift */,
+				300F19E822F9E55D002A494E /* WeatherDetail.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		30BDEE8B22F18A97006E1C30 = {
@@ -207,10 +223,10 @@
 		30BDEE9622F18A97006E1C30 /* WeatherForecast */ = {
 			isa = PBXGroup;
 			children = (
-				30696A7022FA639900A886E8 /* Util */,
+				30696A7022FA639900A886E8 /* Utils */,
 				300F19A522F678CB002A494E /* Persistence */,
 				3059767922F51FCA0035353D /* Networking */,
-				3059766522F375360035353D /* Model */,
+				3059766522F375360035353D /* Model&Parser */,
 				30F3199A22F56D5B00DE0A71 /* View */,
 				3059766E22F3D4F50035353D /* Controller */,
 				300F19DB22F9AD33002A494E /* Extension */,

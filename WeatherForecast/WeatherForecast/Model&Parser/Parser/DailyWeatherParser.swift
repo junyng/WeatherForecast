@@ -18,9 +18,3 @@ struct DailyWeatherParser {
         )
     }
 }
-
-//init(dto: WeatherDailyDTO) {
-//    self.summary = dto.summary ?? "-"
-//    self.icon = UIImage(named: dto.icon?.rawValue ?? "")
-//    self.detailArray = dto.detailArray?.compactMap { WeatherDetail(dto: $0) } ?? []
-//}
