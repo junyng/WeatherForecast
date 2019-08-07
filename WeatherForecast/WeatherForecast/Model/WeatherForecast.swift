@@ -12,12 +12,6 @@ struct WeatherForecast {
     let weatherCurrently: WeatherCurrently
     let weatherHourly: WeatherHourly
     let weatherDaily: WeatherDaily
-    
-    init(dto: WeatherForecastDTO) {
-        self.weatherCurrently = WeatherCurrently(dto: dto.weatherCurrently)
-        self.weatherHourly = WeatherHourly(dto: dto.weatherHourly)
-        self.weatherDaily = WeatherDaily(dto: dto.weatherDaily)
-    }
 }
 
 /// 전체 날씨 정보

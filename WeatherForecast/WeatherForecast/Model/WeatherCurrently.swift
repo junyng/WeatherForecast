@@ -14,15 +14,7 @@ struct WeatherCurrently {
     let summary: String
     let icon: UIImage?
     let temperature: Double
-    
-    init(dto: WeatherCurrentlyDTO) {
-        self.time = Date(timeIntervalSince1970: Double(dto.time ?? 0))
-        self.summary = dto.summary ?? "-"
-        self.icon = UIImage(named: dto.icon?.rawValue ?? "")
-        self.temperature = dto.temperature ?? 0.0
-    }
 }
-
 
 /// 현재 시간의 날씨 정보
 struct WeatherCurrentlyDTO: Decodable {

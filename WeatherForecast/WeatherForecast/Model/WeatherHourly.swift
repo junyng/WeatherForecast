@@ -13,12 +13,6 @@ struct WeatherHourly {
     let summary: String
     let icon: UIImage?
     let currentArray: [WeatherCurrently]
-    
-    init(dto: WeatherHourlyDTO) {
-        self.summary = dto.summary ?? "-"
-        self.icon = UIImage(named: dto.icon?.rawValue ?? "")
-        self.currentArray = dto.currentArray?.compactMap { WeatherCurrently(dto: $0) } ?? []
-    }
 }
 
 
