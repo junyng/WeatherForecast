@@ -8,13 +8,13 @@
 
 import UIKit
 
-@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     private let locationStore = LocationStore()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         let navigationController = window!.rootViewController as! UINavigationController
         let locationTableViewController = navigationController.topViewController as! LocationTableViewController
         locationTableViewController.locationStore = locationStore
