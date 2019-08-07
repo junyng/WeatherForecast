@@ -21,11 +21,11 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "summaryCell", for: indexPath) as! SummaryCell
         let dailyDetailCell = collectionView.dequeueReusableCell(withReuseIdentifier: "dailyDetailCell", for: indexPath) as! DailyDetailCell
         if indexPath.item < detailArray.count {
-            let item = detailArray[indexPath.item]
-            dailyCell.weatherImageView.image = item.icon
-            dailyCell.dayLabel.text = DateUtil.weekDay(from: item.time) ?? ""
-            dailyCell.temperatureHighLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: item.feature.temperatureHigh))
-            dailyCell.temperatureLowLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: item.feature.temperatureLow))
+            let weatherDetail = detailArray[indexPath.item]
+            dailyCell.weatherImageView.image = weatherDetail.icon
+            dailyCell.dayLabel.text = DateUtil.weekDay(from: weatherDetail.time) ?? ""
+            dailyCell.temperatureHighLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: weatherDetail.feature.temperatureHigh))
+            dailyCell.temperatureLowLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: weatherDetail.feature.temperatureLow))
             return dailyCell
         } else {
             

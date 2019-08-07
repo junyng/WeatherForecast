@@ -312,9 +312,9 @@
                         <viewLayoutGuide key="safeArea" id="LDA-iN-AiQ"/>
                     </view>
                     <connections>
-                        <outlet property="cityLabel" destination="CqG-l7-a4l" id="lhT-cd-OKz"/>
                         <outlet property="collectionView" destination="I1P-Ni-kog" id="ib4-Ak-jnK"/>
                         <outlet property="hourlyCollectionView" destination="CZP-fa-ieT" id="xay-ee-ROZ"/>
+                        <outlet property="locationLabel" destination="CqG-l7-a4l" id="lhT-cd-OKz"/>
                         <outlet property="summaryLabel" destination="Zua-eP-5RN" id="150-XQ-1gq"/>
                     </connections>
                 </viewController>

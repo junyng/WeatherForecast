@@ -10,7 +10,7 @@ import UIKit
 
 class WeatherViewController: UIViewController {
     
-    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -21,7 +21,7 @@ class WeatherViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        cityLabel.text = location.addressString() ?? "-"
+        locationLabel.text = location.addressString() ?? "-"
         displayActivityIndicator(shouldDisplay: true)
         WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
             switch result {

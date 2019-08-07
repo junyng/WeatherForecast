@@ -10,12 +10,6 @@ import UIKit
 
 class LocationTableViewController: UITableViewController {
     
-    private lazy var temperatureToggle: UISegmentedControl = {
-        let toggle = UISegmentedControl(items: [UnitTemperature.celsius.symbol, UnitTemperature.fahrenheit.symbol])
-        toggle.selectedSegmentIndex = 0
-        return toggle
-    }()
-    
     private lazy var addLocationButton: UIButton = {
         let button = UIButton(type: .contactAdd)
         button.addTarget(self, action: #selector(searchButtonDidTapped), for: .touchUpInside)
@@ -65,12 +59,8 @@ class LocationTableViewController: UITableViewController {
     }
     
     private func configureFooterView() {
-        temperatureToggle.translatesAutoresizingMaskIntoConstraints = false
         addLocationButton.translatesAutoresizingMaskIntoConstraints = false
-        footerView.addSubview(temperatureToggle)
         footerView.addSubview(addLocationButton)
-        temperatureToggle.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
-        temperatureToggle.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 20).isActive = true
         addLocationButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor).isActive = true
         addLocationButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -20).isActive = true
         tableView.tableFooterView = footerView
@@ -89,9 +79,9 @@ extension LocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as! LocationCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as? LocationCell else { return UITableViewCell() }
         let location = locationStore.locations[indexPath.item]
-        
+        /// location의 개수 만큼 좌표별 API를 호출한다.
         WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
             switch result {
             case .success(let response):

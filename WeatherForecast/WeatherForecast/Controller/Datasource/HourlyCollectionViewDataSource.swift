@@ -17,11 +17,11 @@ class HourlyCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherHourlyCell", for: indexPath) as! HourlyCell
-        let item = currentArray[indexPath.item]
-        cell.timeLabel.text = DateUtil.currentTime(from: item.time)
-        cell.weatherImage.image = item.icon
-        cell.temperatureLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: item.temperature))
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherHourlyCell", for: indexPath) as? HourlyCell else { return UICollectionViewCell() }
+        let weatherCurrently = currentArray[indexPath.item]
+        cell.timeLabel.text = DateUtil.currentTime(from: weatherCurrently.time)
+        cell.weatherImage.image = weatherCurrently.icon
+        cell.temperatureLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: weatherCurrently.temperature))
         return cell
     }
 }
