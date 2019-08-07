@@ -10,7 +10,7 @@ import UIKit
 
 class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
-    var detailArray = [WeatherDetailDTO]()
+    var detailArray = [WeatherDetail]()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return detailArray.count
@@ -19,10 +19,9 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherDailyCell", for: indexPath) as! DailyCell
         let item = detailArray[indexPath.item]
-//        cell.dayLabel.text = "월요일"
-//        cell.weatherImageView.image = UIImage(named: item.icon.rawValue)
-//        cell.temperatureHighLabel.text = "\(item.temperatureHigh)"
-//        cell.temperatureLowLabel.text = "\(item.temperatureLow)"
+        cell.weatherImageView.image = item.icon
+        cell.temperatureHighLabel.text = "\(item.temperatureHigh)"
+        cell.temperatureLowLabel.text = "\(item.temperatureLow)"
         return cell
     }
 }

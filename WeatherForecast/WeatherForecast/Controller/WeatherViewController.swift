@@ -26,14 +26,15 @@ class WeatherViewController: UIViewController {
         WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
             switch result {
             case .success(let response):
-//                if let response = response {
-//                    self.hourlyCollectionViewDataSource.currentArray = response.weatherHourly.currentArray
-//                    self.hourlyCollectionView.dataSource = self.hourlyCollectionViewDataSource
-//                    self.detailCollectionViewDataSource.detailArray = response.weatherDaily.detailArray
-//                    self.collectionView.dataSource = self.detailCollectionViewDataSource
-//                    self.displayActivityIndicator(shouldDisplay: false)
-//                }
-                break
+                if let response = response {
+                    let hourlyWeather = HourlyWeatherParser.parse(dto: response.weatherHourly)
+                    let dailyWeather = DailyWeatherParser.parse(dto: response.weatherDaily)
+                    self.hourlyCollectionViewDataSource.currentArray = hourlyWeather.currentArray
+                    self.detailCollectionViewDataSource.detailArray = dailyWeather.detailArray
+                    self.hourlyCollectionView.dataSource = self.hourlyCollectionViewDataSource
+                    self.collectionView.dataSource = self.detailCollectionViewDataSource
+                    self.displayActivityIndicator(shouldDisplay: false)
+                }
             case .failure(let error):
                 print(error)
                 break
