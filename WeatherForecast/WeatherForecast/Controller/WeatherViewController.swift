@@ -22,7 +22,6 @@ class WeatherViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         locationLabel.text = location.addressString() ?? "-"
-        displayActivityIndicator(shouldDisplay: true)
         WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
             switch result {
             case .success(let response):
@@ -33,7 +32,6 @@ class WeatherViewController: UIViewController {
                     self.detailCollectionViewDataSource.detailArray = dailyWeather.detailArray
                     self.hourlyCollectionView.dataSource = self.hourlyCollectionViewDataSource
                     self.collectionView.dataSource = self.detailCollectionViewDataSource
-                    self.displayActivityIndicator(shouldDisplay: false)
                 }
             case .failure(let error):
                 print(error)

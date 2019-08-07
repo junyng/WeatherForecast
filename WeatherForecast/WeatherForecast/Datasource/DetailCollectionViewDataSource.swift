@@ -11,15 +11,17 @@ import UIKit
 class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     
     var detailArray = [WeatherDetail]()
+    var feature: Feature? {
+        return detailArray.first?.feature
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return detailArray.count
+        return detailArray.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let dailyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherDailyCell", for: indexPath) as! DailyCell
-        let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "summaryCell", for: indexPath) as! SummaryCell
-        let dailyDetailCell = collectionView.dequeueReusableCell(withReuseIdentifier: "dailyDetailCell", for: indexPath) as! DailyDetailCell
+        guard let dailyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherDailyCell", for: indexPath) as? DailyCell,
+            let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "summaryCell", for: indexPath) as? SummaryCell else { return UICollectionViewCell() }
         if indexPath.item < detailArray.count {
             let weatherDetail = detailArray[indexPath.item]
             dailyCell.weatherImageView.image = weatherDetail.icon
@@ -27,10 +29,13 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             dailyCell.temperatureHighLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: weatherDetail.feature.temperatureHigh))
             dailyCell.temperatureLowLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: weatherDetail.feature.temperatureLow))
             return dailyCell
-        } else {
-            
+        } else if indexPath.item == detailArray.count {
+            if let feature = feature {
+                summaryCell.summaryTextView.text = feature.summary
+            }
             return summaryCell
         }
+        return UICollectionViewCell()
     }
 }
 
