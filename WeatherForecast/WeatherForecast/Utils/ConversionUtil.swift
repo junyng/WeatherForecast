@@ -10,7 +10,7 @@ import Foundation
 
 /// 단위 변환 편의 유틸
 struct ConversionUtil {
-    /// 화씨 -> 섭씨 변환
+    /// 온도 화씨 -> 섭씨 변환
     static func fahrenheitToCelsius(temperature: Double) -> Double {
         let celsius = (temperature - 32.0) * (5 / 9)
         return celsius

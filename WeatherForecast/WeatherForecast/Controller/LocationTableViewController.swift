@@ -54,6 +54,7 @@ class LocationTableViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTable(_:)), name: .locationsAdded, object: nil)
     }
     
+    /// Notification 이 발생하면 테이블 뷰를 리로드
     @objc func refreshTable(_ notification: Notification) {
         self.tableView.reloadData()
     }
@@ -86,6 +87,7 @@ extension LocationTableViewController {
             switch result {
             case .success(let response):
                 if let dto = response?.weatherCurrently {
+                    /// 모델 파싱 작업
                     let currentWeather = CurrentlyWeatherParser.parse(dto: dto)
                     cell.timeLabel.text = DateUtil.currentTime(from: currentWeather.time)
                     cell.locationLabel.text = location.addressString() ?? "-"

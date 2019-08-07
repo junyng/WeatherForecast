@@ -9,6 +9,7 @@ import UIKit
 fileprivate let overlayViewTag = 999
 fileprivate let activityIndicatorTag = 1000
 
+/// 데이터가 로드될 때 사용하는 로딩 뷰 익스텐션
 extension UIViewController {
     public func displayActivityIndicator(shouldDisplay: Bool) -> Void {
         if shouldDisplay {

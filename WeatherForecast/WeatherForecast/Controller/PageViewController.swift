@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+/// 동적인 여러 개의  콘텐츠 뷰 컨트롤러를 생성하는 페이지 뷰 컨트롤러
 class PageViewController: UIPageViewController {
     
     var locations = [Location]()

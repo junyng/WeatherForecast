@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 
+/// 검색 결과에 따라 위치 정보를 나열하는 테이블 뷰 컨트롤러
 class SearchLocationTableViewController: UITableViewController {
     
     var locationStore: LocationStore!
@@ -39,6 +40,7 @@ class SearchLocationTableViewController: UITableViewController {
     }
     
     // MARK: - Custom Methods
+    /// 주소 문자열을 기준으로 좌표 정보를 반환한다.
     private func getCoordinate(addressString : String,
                                completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void) {
         let geocoder = CLGeocoder()
@@ -71,7 +73,7 @@ class SearchLocationTableViewController: UITableViewController {
         self.definesPresentationContext = true
     }
     
-    // MARK: - TableViewDataSource
+    // MARK: - UITableViewDataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places?.count ?? 0
     }
@@ -85,7 +87,7 @@ class SearchLocationTableViewController: UITableViewController {
         return cell
     }
     
-    // MARK: - TableViewDelegate
+    // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -93,6 +95,7 @@ class SearchLocationTableViewController: UITableViewController {
             let suggestion = suggestionController.completerResults?[indexPath.row] {
             searchController.isActive = false
             searchController.searchBar.text = suggestion.title
+            /// 직렬 큐를 생성하여 비동기 작업이 처리
             let dispatchGroup = DispatchGroup()
             DispatchQueue(label: "serial").async(group: dispatchGroup) {
                 self.getCoordinate(addressString: suggestion.title) { (coordinate, error) in
@@ -100,6 +103,7 @@ class SearchLocationTableViewController: UITableViewController {
                     self.locationStore.addLocation(location)
                 }
             }
+            /// 작업이 처리 된 후, 현재 뷰 컨트롤러를 메인 스레드에서 dismiss 한다
             dispatchGroup.notify(queue: .global()) {
                 DispatchQueue.main.async {
                     self.dismiss(animated: true)
