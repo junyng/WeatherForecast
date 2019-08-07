@@ -17,13 +17,20 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherDailyCell", for: indexPath) as! DailyCell
-        let item = detailArray[indexPath.item]
-        cell.weatherImageView.image = item.icon
-        cell.dayLabel.text = DateUtil.weekDay(from: item.time) ?? ""
-        cell.temperatureHighLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: item.temperatureHigh))
-        cell.temperatureLowLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: item.temperatureLow))
-        return cell
+        let dailyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherDailyCell", for: indexPath) as! DailyCell
+        let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "summaryCell", for: indexPath) as! SummaryCell
+        let dailyDetailCell = collectionView.dequeueReusableCell(withReuseIdentifier: "dailyDetailCell", for: indexPath) as! DailyDetailCell
+        if indexPath.item < detailArray.count {
+            let item = detailArray[indexPath.item]
+            dailyCell.weatherImageView.image = item.icon
+            dailyCell.dayLabel.text = DateUtil.weekDay(from: item.time) ?? ""
+            dailyCell.temperatureHighLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: item.feature.temperatureHigh))
+            dailyCell.temperatureLowLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: item.feature.temperatureLow))
+            return dailyCell
+        } else {
+            
+            return summaryCell
+        }
     }
 }
 

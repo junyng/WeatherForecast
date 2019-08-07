@@ -11,8 +11,12 @@ import UIKit
 
 struct WeatherDetail {
     let time: Date
-    let summary: String
     let icon: UIImage?
+    let feature: Feature
+}
+
+struct Feature {
+    let summary: String
     let sunriseTime: Date
     let sunsetTime: Date
     let humidity: Double
