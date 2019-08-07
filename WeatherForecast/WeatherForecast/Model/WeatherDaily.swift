@@ -13,12 +13,6 @@ struct WeatherDaily {
     let summary: String
     let icon: UIImage?
     let detailArray: [WeatherDetail]
-    
-    init(dto: WeatherDailyDTO) {
-        self.summary = dto.summary ?? "-"
-        self.icon = UIImage(named: dto.icon?.rawValue ?? "")
-        self.detailArray = dto.detailArray?.compactMap { WeatherDetail(dto: $0) } ?? []
-    }
 }
 
 struct WeatherDailyDTO: Decodable {

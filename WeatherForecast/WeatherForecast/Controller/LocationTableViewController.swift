@@ -96,11 +96,10 @@ extension LocationTableViewController {
             switch result {
             case .success(let response):
                 if let dto = response?.weatherCurrently {
-                    CurrentlyWeatherParser.parse(dto: dto, completion: { (weatherCurrently) in
-                        cell.timeLabel.text = String(describing: weatherCurrently.time)
-                        cell.locationLabel.text = location.addressString() ?? "-"
-                        cell.temperatureLabel.text = "\(weatherCurrently.temperature)"
-                    })
+                    let currentWeather = CurrentlyWeatherParser.parse(dto: dto)
+                    cell.timeLabel.text = String(describing: currentWeather.time)
+                    cell.locationLabel.text = location.addressString() ?? "-"
+                    cell.temperatureLabel.text = "\(currentWeather.temperature)"
                 }
             case .failure(let error):
                 print(error)
