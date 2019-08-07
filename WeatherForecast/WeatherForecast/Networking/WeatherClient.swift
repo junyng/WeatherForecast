@@ -23,7 +23,6 @@ class WeatherClient: APIClient {
         fetch(with: request, decode: { json -> WeatherForecastDTO? in
             dispatchGroup.leave()
             guard let weatherFeedResult = json as? WeatherForecastDTO else { return nil }
-            
             return weatherFeedResult
         }, completion: completion)
     }
