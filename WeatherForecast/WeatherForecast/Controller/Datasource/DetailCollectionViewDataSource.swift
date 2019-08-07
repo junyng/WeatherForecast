@@ -20,6 +20,7 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherDailyCell", for: indexPath) as! DailyCell
         let item = detailArray[indexPath.item]
         cell.weatherImageView.image = item.icon
+        cell.dayLabel.text = DateUtil.weekDay(from: item.time) ?? ""
         cell.temperatureHighLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: item.temperatureHigh))
         cell.temperatureLowLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: item.temperatureLow))
         return cell
