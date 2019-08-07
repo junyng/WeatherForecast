@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/// 일별 날씨 정보
 struct WeatherDaily {
     let summary: String
     let icon: UIImage?

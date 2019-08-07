@@ -8,10 +8,12 @@
 
 import Foundation
 
+/// 저장소 Post 노티피케이션
 extension Notification.Name {
     static let locationsAdded = Notification.Name("locationsAdded")
 }
 
+/// 위치 정보를 저장하는 저장소
 final class LocationStore {
     private(set) var locations = [Location]()
     
@@ -47,6 +49,7 @@ final class LocationStore {
         }
     }
     
+    /// 파일 URL에 데이터를 저장한다.
     func saveChanges() {
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: locations, requiringSecureCoding: false)

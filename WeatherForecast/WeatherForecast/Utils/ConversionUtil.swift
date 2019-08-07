@@ -8,14 +8,11 @@
 
 import Foundation
 
+/// 단위 변환 편의 유틸
 struct ConversionUtil {
+    /// 화씨 -> 섭씨 변환
     static func fahrenheitToCelsius(temperature: Double) -> Double {
         let celsius = (temperature - 32.0) * (5 / 9)
         return celsius
-    }
-    
-    static func celsiusToFahrenheit(temperature: Double) -> Double {
-        let fahrenheit = (temperature * 9 / 5) + 32.0
-        return fahrenheit
     }
 }

@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
+/// 시간 별 날씨 정보
 struct WeatherHourly {
     let summary: String
     let icon: UIImage?
     let currentArray: [WeatherCurrently]
 }
-
 
 struct WeatherHourlyDTO: Decodable {
     

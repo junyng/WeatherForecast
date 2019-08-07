@@ -9,12 +9,14 @@
 import Foundation
 import UIKit
 
+/// 일별 상세 날씨 정보
 struct WeatherDetail {
     let time: Date
     let icon: UIImage?
     let feature: Feature
 }
 
+/// 상세 날씨 부가 정보
 struct Feature {
     let summary: String
     let sunriseTime: Date

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// 날짜 및 시간 편의 유틸
 struct DateUtil {
     private static let calendar = Calendar.current
     private static let dateFormatter: DateFormatter = {
@@ -18,10 +19,12 @@ struct DateUtil {
         return dateFormatter
     }()
     
-    static func localTime(from date: Date) -> String {
+    /// Date 객체의 현재 시간을 문자열로 반환한다.
+    static func currentTime(from date: Date) -> String {
         return dateFormatter.string(from: date)
     }
     
+    /// Date 객체를 입력 받아 현재 요일을 문자열로 반환한다.
     static func weekDay(from date: Date) -> String? {
         let day = calendar.dateComponents([.weekday], from: date).weekday!
         return Weekday(rawValue: day)?.day ?? ""

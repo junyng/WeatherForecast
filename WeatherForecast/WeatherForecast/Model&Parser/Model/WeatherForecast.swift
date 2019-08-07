@@ -8,13 +8,13 @@
 
 import Foundation
 
+/// 전체 날씨 정보
 struct WeatherForecast {
     let weatherCurrently: WeatherCurrently
     let weatherHourly: WeatherHourly
     let weatherDaily: WeatherDaily
 }
 
-/// 전체 날씨 정보
 struct WeatherForecastDTO: Decodable {
     
     private enum CodingKeys : String, CodingKey {

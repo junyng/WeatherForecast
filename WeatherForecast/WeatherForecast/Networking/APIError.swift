@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// API 호출 에러 정의
 enum APIError: Error {
     case invalidData
     case requestFailed

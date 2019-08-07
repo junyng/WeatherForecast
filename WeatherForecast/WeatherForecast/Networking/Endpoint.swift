@@ -8,14 +8,14 @@
 
 import Foundation
 
-/// 네트워크 요청을 정의하는 프로토콜
+/// 서비스를 위해 접근할 요청
 protocol Endpoint {
     var base: String { get }
     var path: String { get }
 }
 
 extension Endpoint {
-    
+    /// URL을 구성하는 도메인, path, query
     var urlComponents: URLComponents {
         var components = URLComponents(string: base)!
         components.path = path

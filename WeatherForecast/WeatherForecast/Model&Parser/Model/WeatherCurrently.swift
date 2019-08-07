@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/// 현재 시간의 날씨 정보
 struct WeatherCurrently {
     let time: Date
     let summary: String
@@ -16,7 +17,6 @@ struct WeatherCurrently {
     let temperature: Double
 }
 
-/// 현재 시간의 날씨 정보
 struct WeatherCurrentlyDTO: Decodable {
     let time: Int?
     let summary: String?
