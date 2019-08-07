@@ -34,7 +34,7 @@ final class LocationStore {
     }
     
     func addLocation(_ location: Location) {
-        if locations.contains(location) {
+        guard locations.contains(where: { $0 != location }) else {
             return
         }
         locations.append(location)
