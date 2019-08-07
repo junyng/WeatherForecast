@@ -99,10 +99,12 @@ extension LocationTableViewController {
                     let currentWeather = CurrentlyWeatherParser.parse(dto: dto)
                     cell.timeLabel.text = DateUtil.currentTime(from: currentWeather.time)
                     cell.locationLabel.text = location.addressString() ?? "-"
-                    cell.temperatureLabel.text = String(format: "%.1f", ConvertUtil.fahrenheitToCelsius(temperature: currentWeather.temperature))
+                    cell.temperatureLabel.text = String(format: "%.1f", ConversionUtil.fahrenheitToCelsius(temperature: currentWeather.temperature))
                 }
-            case .failure(let error):
-                print(error)
+            case .failure:
+                cell.timeLabel.text = "-"
+                cell.locationLabel.text = location.addressString() ?? "-"
+                cell.temperatureLabel.text = "-"
             }
         }
         return cell

@@ -14,7 +14,7 @@ struct HourlyWeatherParser {
         return WeatherHourly(
             summary: dto.summary ?? "-",
             icon: UIImage(named: dto.icon?.rawValue ?? ""),
-            currentArray: dto.currentArray?.compactMap { CurrentlyWeatherParser.parse(dto: $0) } ?? []
+            currentArray: dto.currentArray?.compactMap { CurrentlyWeatherParser.parse(dto: $0) }.filter { $0.time >= Date() } ?? []
         )
     }
 }
