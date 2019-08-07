@@ -11,7 +11,7 @@ import UIKit
 class LocationTableViewController: UITableViewController {
     
     private lazy var temperatureToggle: UISegmentedControl = {
-        let toggle = UISegmentedControl(items: ["°C", "°F"])
+        let toggle = UISegmentedControl(items: [UnitTemperature.celsius.symbol, UnitTemperature.fahrenheit.symbol])
         toggle.selectedSegmentIndex = 0
         return toggle
     }()
@@ -97,9 +97,9 @@ extension LocationTableViewController {
             case .success(let response):
                 if let dto = response?.weatherCurrently {
                     let currentWeather = CurrentlyWeatherParser.parse(dto: dto)
-                    cell.timeLabel.text = String(describing: currentWeather.time)
+                    cell.timeLabel.text = DateUtil.currentTime(from: currentWeather.time)
                     cell.locationLabel.text = location.addressString() ?? "-"
-                    cell.temperatureLabel.text = "\(currentWeather.temperature)"
+                    cell.temperatureLabel.text = String(format: "%.1f", ConvertUtil.fahrenheitToCelsius(temperature: currentWeather.temperature))
                 }
             case .failure(let error):
                 print(error)

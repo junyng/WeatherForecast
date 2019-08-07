@@ -15,7 +15,7 @@ struct CurrentlyWeatherParser {
             time: Date(timeIntervalSince1970: Double(dto.time ?? 0)),
             summary: dto.summary ?? "-",
             icon: UIImage(named: dto.icon?.rawValue ?? ""),
-            temperature: dto.temperature ?? 0.0
+            temperature: dto.temperature?.rounded() ?? 0.0
         )
     }
 }

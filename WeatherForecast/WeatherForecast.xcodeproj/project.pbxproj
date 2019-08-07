@@ -32,6 +32,8 @@
 		30696A6922FA559A00A886E8 /* HourlyWeatherParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30696A6822FA559A00A886E8 /* HourlyWeatherParser.swift */; };
 		30696A6B22FA567600A886E8 /* DailyWeatherParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30696A6A22FA567600A886E8 /* DailyWeatherParser.swift */; };
 		30696A6D22FA569000A886E8 /* DetailWeatherParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30696A6C22FA569000A886E8 /* DetailWeatherParser.swift */; };
+		30696A6F22FA5FF700A886E8 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30696A6E22FA5FF700A886E8 /* DateUtil.swift */; };
+		30696A7222FA63AB00A886E8 /* ConvertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30696A7122FA63AB00A886E8 /* ConvertUtil.swift */; };
 		30BDEE9822F18A97006E1C30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDEE9722F18A97006E1C30 /* AppDelegate.swift */; };
 		30BDEE9D22F18A97006E1C30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30BDEE9B22F18A97006E1C30 /* Main.storyboard */; };
 		30BDEE9F22F18A98006E1C30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BDEE9E22F18A98006E1C30 /* Assets.xcassets */; };
@@ -68,6 +70,8 @@
 		30696A6822FA559A00A886E8 /* HourlyWeatherParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherParser.swift; sourceTree = "<group>"; };
 		30696A6A22FA567600A886E8 /* DailyWeatherParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyWeatherParser.swift; sourceTree = "<group>"; };
 		30696A6C22FA569000A886E8 /* DetailWeatherParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherParser.swift; sourceTree = "<group>"; };
+		30696A6E22FA5FF700A886E8 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		30696A7122FA63AB00A886E8 /* ConvertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertUtil.swift; sourceTree = "<group>"; };
 		30BDEE9422F18A97006E1C30 /* WeatherForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BDEE9722F18A97006E1C30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30BDEE9C22F18A97006E1C30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -175,6 +179,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		30696A7022FA639900A886E8 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				30696A6E22FA5FF700A886E8 /* DateUtil.swift */,
+				30696A7122FA63AB00A886E8 /* ConvertUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		30BDEE8B22F18A97006E1C30 = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +207,7 @@
 		30BDEE9622F18A97006E1C30 /* WeatherForecast */ = {
 			isa = PBXGroup;
 			children = (
+				30696A7022FA639900A886E8 /* Util */,
 				300F19A522F678CB002A494E /* Persistence */,
 				3059767922F51FCA0035353D /* Networking */,
 				3059766522F375360035353D /* Model */,
@@ -297,6 +311,7 @@
 				3059767222F400840035353D /* SuggestedLocationTableViewController.swift in Sources */,
 				30F319A722F5C6FF00DE0A71 /* DailyCell.swift in Sources */,
 				300F19E122F9E313002A494E /* WeatherClient.swift in Sources */,
+				30696A7222FA63AB00A886E8 /* ConvertUtil.swift in Sources */,
 				300F19D022F90B09002A494E /* APIClient.swift in Sources */,
 				30F3199E22F56DF300DE0A71 /* LocationCell.swift in Sources */,
 				30696A5C22F9E7EC00A886E8 /* Location.swift in Sources */,
@@ -314,6 +329,7 @@
 				300F19E522F9E3E6002A494E /* DetailCollectionViewDataSource.swift in Sources */,
 				300F19CE22F8BFC3002A494E /* Endpoint.swift in Sources */,
 				300F199922F5CA5B002A494E /* SummaryCell.swift in Sources */,
+				30696A6F22FA5FF700A886E8 /* DateUtil.swift in Sources */,
 				30696A6722FA4E9900A886E8 /* CurrentlyWeatherParser.swift in Sources */,
 				30696A6B22FA567600A886E8 /* DailyWeatherParser.swift in Sources */,
 				305975D222F1EE350035353D /* PageViewController.swift in Sources */,
