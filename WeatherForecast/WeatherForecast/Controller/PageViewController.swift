@@ -38,7 +38,7 @@ class PageViewController: UIPageViewController {
     /// 위치 정보를 받는 날씨 뷰 컨트롤러 새로 생성한다.
     private func viewControllerAtIndex(_ index: Int) -> UIViewController? {
         guard index < pagesCount && index >= 0 else { return nil }
-        guard let weatherViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "weatherViewController") as? WeatherViewController else {
+        guard let weatherViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "weatherViewController") as? WeatherForecastController else {
             return nil
         }
         let location = locations[index]
@@ -48,7 +48,7 @@ class PageViewController: UIPageViewController {
     
     private func configureCurrentPage() {
         if let firstViewController = self.viewControllerAtIndex(currentIndex),
-            let weatherController = firstViewController as? WeatherViewController {
+            let weatherController = firstViewController as? WeatherForecastController {
             self.setViewControllers([weatherController], direction: .forward, animated: false, completion: nil)
         }
     }
@@ -71,7 +71,7 @@ extension PageViewController: UIPageViewControllerDataSource {
     /// 이전 페이지로 넘어갈 때 이전 번째 뷰 컨트롤러를 리턴
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         /// 위치 데이터의 이전 인덱스로 뷰 컨트롤러 인스턴스를 생성해 리턴
-        if let currentPageViewController = viewController as? WeatherViewController,
+        if let currentPageViewController = viewController as? WeatherForecastController,
             let location = currentPageViewController.location {
             guard let index = locations.firstIndex(of: location) else { return nil }
             currentIndex = index
@@ -84,7 +84,7 @@ extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
     {
         /// 위치 데이터의 다음 인덱스로 뷰 컨트롤러 인스턴스를 생성해 리턴
-        if let currentPageViewController = viewController as? WeatherViewController,
+        if let currentPageViewController = viewController as? WeatherForecastController,
             let location = currentPageViewController.location {
             guard let index = locations.firstIndex(of: location) else { return nil }
             currentIndex = index
@@ -99,7 +99,7 @@ extension PageViewController: UIPageViewControllerDelegate {
     /// 페이지간 전이가 일어날 때 발생
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]){
         /// 위치 데이터의 인덱스를 찾아 현재 페이지 인덱스 반영
-        if let viewController = pendingViewControllers.first as? WeatherViewController,
+        if let viewController = pendingViewControllers.first as? WeatherForecastController,
             let index = locations.firstIndex(of: viewController.location) {
             self.pageControl.currentPage = index
         }
