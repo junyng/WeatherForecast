@@ -15,6 +15,7 @@ class WeatherForecastController: UIViewController {
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // Review 스토리보드에서 설정 가능합니다.
     private lazy var weatherForecastLayout: UICollectionViewFlowLayout = {
         let layout = WeatherForecastLayout()
         let width = collectionView.frame.size.width
@@ -24,6 +25,7 @@ class WeatherForecastController: UIViewController {
     
     private let hourlyCollectionViewDataSource = HourlyCollectionViewDataSource()
     private let detailCollectionViewDataSource = DetailCollectionViewDataSource()
+    // Review: ! 주의해야합니다.
     var location: Location!
     
     override func viewWillAppear(_ animated: Bool) {

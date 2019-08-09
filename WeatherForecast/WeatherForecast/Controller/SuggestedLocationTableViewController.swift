@@ -18,7 +18,7 @@ class SuggestedLocationTableViewController: UITableViewController {
         self.init(style: .plain)
         searchCompleter.delegate = self
     }
-    
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Review: 상수 String 제거
@@ -55,6 +55,7 @@ extension SuggestedLocationTableViewController: MKLocalSearchCompleterDelegate {
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         if let error = error as NSError? {
+            // Review: Error를 처리해야합니다.
             print("MKLocalSearchCompleter encountered an error: \(error.localizedDescription)")
         }
     }

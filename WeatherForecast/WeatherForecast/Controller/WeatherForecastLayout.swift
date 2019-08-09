@@ -28,6 +28,7 @@ class WeatherForecastLayout: UICollectionViewFlowLayout {
     }
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        // Review: 성능에 좋지 않음. 
         return true
     }
 }
