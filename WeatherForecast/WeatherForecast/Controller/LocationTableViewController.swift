@@ -55,11 +55,22 @@ class LocationTableViewController: UITableViewController {
     func searchButtonDidTapped() {
         self.performSegue(withIdentifier: "search", sender: nil)
     }
-    
+
     private func setupNotification() {
+        // Review: Observer를 해제하는 코드가 없습니다.
+        // viewDidAppear ~ viewDidDisappear 더욱 안전합니다.
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTable(_:)), name: .locationsAdded, object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNotification()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .locationsAdded, object: nil)
+    }
     /// Notification 이 발생하면 테이블 뷰를 리로드
     // Review: attribute
     @objc

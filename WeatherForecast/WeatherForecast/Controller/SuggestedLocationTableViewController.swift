@@ -18,7 +18,7 @@ class SuggestedLocationTableViewController: UITableViewController {
         self.init(style: .plain)
         searchCompleter.delegate = self
     }
-     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Review: 상수 String 제거
