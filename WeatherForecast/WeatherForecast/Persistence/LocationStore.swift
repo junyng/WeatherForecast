@@ -38,7 +38,7 @@ final class LocationStore {
     
     func addLocation(_ location: Location) {
         /// 위도/경도가 같을시 리턴
-        guard locations.contains(where: { $0 != location }) else {
+        guard !locations.contains(location) else {
             return
         }
         locations.append(location)
