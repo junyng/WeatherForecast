@@ -36,26 +36,45 @@ class LocationTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "search" {
+            // Review force_cast
+            // swiftlint:disable force_cast
             let navigationController = segue.destination as! UINavigationController
             let searchLocationController = navigationController.viewControllers.first as! SearchLocationTableViewController
             searchLocationController.locationStore = locationStore
         } else if segue.identifier == "pages" {
+            // Review force_cast
+            // swiftlint:disable force_cast
             let pageController = segue.destination as! PageViewController
             pageController.locations = locationStore.locations
             pageController.currentIndex = tableView.indexPathForSelectedRow?.item ?? 0
         }
     }
     
-    @objc func searchButtonDidTapped() {
+    // Review: attribute
+    @objc
+    func searchButtonDidTapped() {
         self.performSegue(withIdentifier: "search", sender: nil)
     }
-    
+
     private func setupNotification() {
+        // Review: Observer를 해제하는 코드가 없습니다.
+        // viewDidAppear ~ viewDidDisappear 더욱 안전합니다.
         NotificationCenter.default.addObserver(self, selector: #selector(refreshTable(_:)), name: .locationsAdded, object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupNotification()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: .locationsAdded, object: nil)
+    }
     /// Notification 이 발생하면 테이블 뷰를 리로드
-    @objc func refreshTable(_ notification: Notification) {
+    // Review: attribute
+    @objc
+    func refreshTable(_ notification: Notification) {
         self.tableView.reloadData()
     }
     
@@ -83,7 +102,8 @@ extension LocationTableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as? LocationCell else { return UITableViewCell() }
         let location = locationStore.locations[indexPath.item]
         /// location의 개수 만큼 좌표별 API를 호출한다.
-        WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
+        // Review: unneeded_parentheses_in_closure_argument
+        WeatherClient.shared.getFeed(from: location.coordinate()) { result in
             switch result {
             case .success(let response):
                 if let dto = response?.weatherCurrently {
@@ -107,6 +127,7 @@ extension LocationTableViewController {
 extension LocationTableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            // Review item은 UICollectionView 에서 사용합니다. row 가 더 명확할 것 같습니다.
             let location = locationStore.locations[indexPath.item]
             locationStore.removeLocation(location)
             tableView.deleteRows(at: [indexPath], with: .automatic)

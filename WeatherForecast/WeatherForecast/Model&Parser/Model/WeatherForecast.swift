@@ -16,13 +16,14 @@ struct WeatherForecast {
 }
 
 struct WeatherForecastDTO: Decodable {
-    
-    private enum CodingKeys : String, CodingKey {
+
+    // Review: colon
+    private enum CodingKeys: String, CodingKey {
         case weatherCurrently = "currently"
         case weatherHourly = "hourly"
         case weatherDaily = "daily"
     }
-    
+
     let weatherCurrently: WeatherCurrentlyDTO
     let weatherHourly: WeatherHourlyDTO
     let weatherDaily: WeatherDailyDTO

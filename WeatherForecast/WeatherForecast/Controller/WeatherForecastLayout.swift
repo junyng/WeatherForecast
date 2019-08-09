@@ -11,7 +11,8 @@ import UIKit
 class WeatherForecastLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let layoutAttributes = super.layoutAttributesForElements(in: rect)
-        layoutAttributes?.forEach({ (attribute) in
+        // Review: unneeded_parentheses_in_closure_argument
+        layoutAttributes?.forEach({ attribute in
             if attribute.representedElementKind == UICollectionView.elementKindSectionHeader {
                 guard let collectionView = collectionView else { return }
                 let contentOffsetY = collectionView.contentOffset.y

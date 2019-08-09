@@ -15,7 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let locationStore = LocationStore()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Review: force_cast
+        // swiftlint:disable force_cast
         let navigationController = window!.rootViewController as! UINavigationController
+        // Review: force_cast force_cast
         let locationTableViewController = navigationController.topViewController as! LocationTableViewController
         locationTableViewController.locationStore = locationStore
         return true
@@ -29,4 +32,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         locationStore.saveChanges()
     }
 }
-

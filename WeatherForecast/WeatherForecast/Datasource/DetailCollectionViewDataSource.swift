@@ -38,4 +38,3 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         return UICollectionViewCell()
     }
 }
-
