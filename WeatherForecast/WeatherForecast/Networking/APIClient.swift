@@ -27,6 +27,7 @@ extension APIClient {
                 completion(nil, .requestFailed)
                 return
             }
+            // Review: statusCode 200 ~ 300 범위가 성공입니다.
             if httpResponse.statusCode == 200 {
                 if let data = data {
                     do {
