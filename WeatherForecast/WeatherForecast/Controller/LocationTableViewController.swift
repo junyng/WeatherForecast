@@ -107,6 +107,7 @@ extension LocationTableViewController {
 extension LocationTableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            // Review item은 UICollectionView 에서 사용합니다. row 가 더 명확할 것 같습니다.
             let location = locationStore.locations[indexPath.item]
             locationStore.removeLocation(location)
             tableView.deleteRows(at: [indexPath], with: .automatic)

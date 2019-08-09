@@ -22,7 +22,10 @@ class WeatherViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         locationLabel.text = location.addressString() ?? "-"
-        WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
+        
+        // Review: 순환 참조
+        WeatherClient.shared.getFeed(from: location.coordinate()) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let response):
                 if let response = response {

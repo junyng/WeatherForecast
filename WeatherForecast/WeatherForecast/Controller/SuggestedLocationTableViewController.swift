@@ -21,7 +21,8 @@ class SuggestedLocationTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(SuggestedCompletionTableViewCell.self, forCellReuseIdentifier: SuggestedCompletionTableViewCell.reuseID)
+        // Review: 상수 String 제거
+        tableView.register(SuggestedCompletionTableViewCell.self, forCellReuseIdentifier: SuggestedCompletionTableViewCell.swiftIdentifier)
     }
 }
 
@@ -32,7 +33,8 @@ extension SuggestedLocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SuggestedCompletionTableViewCell.reuseID, for: indexPath)
+        // Review: 상수 String 제거
+        let cell = tableView.dequeueReusableCell(withIdentifier: SuggestedCompletionTableViewCell.swiftIdentifier, for: indexPath)
         
         if let suggestion = completerResults?[indexPath.row] {
             cell.textLabel?.text = suggestion.title
@@ -67,9 +69,8 @@ extension SuggestedLocationTableViewController: UISearchResultsUpdating {
     }
 }
 
-private class SuggestedCompletionTableViewCell: UITableViewCell {
-    
-    static let reuseID = "SuggestedCompletionTableViewCellReuseID"
+private class SuggestedCompletionTableViewCell: UITableViewCell, SwiftNameIdentifier {
+    // Review: 상수 String 을 쓰는 건 좋지 않는 것 같아요~
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
