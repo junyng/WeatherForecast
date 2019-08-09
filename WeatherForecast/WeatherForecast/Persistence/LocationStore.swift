@@ -36,6 +36,7 @@ final class LocationStore {
         }
     }
     
+    // Review 동기화 필요
     func addLocation(_ location: Location) {
         /// 위도/경도가 같을시 리턴
 //        guard !locations.contains(location) else {
@@ -45,6 +46,7 @@ final class LocationStore {
         locationsAdded()
     }
     
+    // Review 동기화 필요
     func removeLocation(_ location: Location) {
         if let index = locations.firstIndex(of: location) {
             locations.remove(at: index)

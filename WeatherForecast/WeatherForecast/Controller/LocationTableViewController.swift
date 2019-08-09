@@ -64,6 +64,7 @@ class LocationTableViewController: UITableViewController {
     // Review: attribute
     @objc
     func refreshTable(_ notification: Notification) {
+        // Review: performBatchUpdates 적용이 필요
         self.tableView.reloadData()
     }
     
@@ -92,6 +93,7 @@ extension LocationTableViewController {
         let location = locationStore.locations[indexPath.item]
         /// location의 개수 만큼 좌표별 API를 호출한다.
         // Review: unneeded_parentheses_in_closure_argument
+        // Review: 데이터 모델을 구축하는 것이 필요해 보입니다.
         WeatherClient.shared.getFeed(from: location.coordinate()) { result in
             switch result {
             case .success(let response):

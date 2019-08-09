@@ -55,6 +55,7 @@ extension SuggestedLocationTableViewController: MKLocalSearchCompleterDelegate {
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         if let error = error as NSError? {
+            // Review: Error를 처리해야합니다.
             print("MKLocalSearchCompleter encountered an error: \(error.localizedDescription)")
         }
     }
