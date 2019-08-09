@@ -36,17 +36,23 @@ class LocationTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "search" {
+            // Review force_cast
+            // swiftlint:disable force_cast
             let navigationController = segue.destination as! UINavigationController
             let searchLocationController = navigationController.viewControllers.first as! SearchLocationTableViewController
             searchLocationController.locationStore = locationStore
         } else if segue.identifier == "pages" {
+            // Review force_cast
+            // swiftlint:disable force_cast
             let pageController = segue.destination as! PageViewController
             pageController.locations = locationStore.locations
             pageController.currentIndex = tableView.indexPathForSelectedRow?.item ?? 0
         }
     }
     
-    @objc func searchButtonDidTapped() {
+    // Review: attribute
+    @objc
+    func searchButtonDidTapped() {
         self.performSegue(withIdentifier: "search", sender: nil)
     }
     
@@ -55,7 +61,9 @@ class LocationTableViewController: UITableViewController {
     }
     
     /// Notification 이 발생하면 테이블 뷰를 리로드
-    @objc func refreshTable(_ notification: Notification) {
+    // Review: attribute
+    @objc
+    func refreshTable(_ notification: Notification) {
         self.tableView.reloadData()
     }
     
@@ -83,7 +91,8 @@ extension LocationTableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as? LocationCell else { return UITableViewCell() }
         let location = locationStore.locations[indexPath.item]
         /// location의 개수 만큼 좌표별 API를 호출한다.
-        WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
+        // Review: unneeded_parentheses_in_closure_argument
+        WeatherClient.shared.getFeed(from: location.coordinate()) { result in
             switch result {
             case .success(let response):
                 if let dto = response?.weatherCurrently {

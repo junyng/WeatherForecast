@@ -45,7 +45,7 @@ class WeatherForecastController: UIViewController {
                 }
             case .failure(let error):
                 print(error)
-                break
+                // Review: unneeded_break_in_switch
             }
         }
     }

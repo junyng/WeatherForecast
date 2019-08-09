@@ -13,6 +13,8 @@ typealias Coordinate = (Double, Double)
 
 class WeatherClient: APIClient {
     static let shared = WeatherClient()
+
+    // Review: let_var_whitespace
     private init() { }
     let session = URLSession(configuration: .default)
     

@@ -25,6 +25,7 @@ extension Endpoint {
         var components = URLComponents(string: base)!
         components.path = path
         // Review: 상수 String
+        // swiftlint:disable force_try
         let queryItems = try! QueryParam(long: "lang", value: "ko").tryQueryItem()
         components.queryItems = queryItems
         return components

@@ -14,29 +14,26 @@ class Location: NSObject, NSCoding {
     private let longitude: Double
     private let address: String?
     
+    //Review: let_var_whitespace
     init(latitude: Double, longitude: Double, address: String) {
         self.latitude = latitude
         self.longitude = longitude
         self.address = address
     }
-    
     /// NSCoding을 준수, 커스텀 객체 프로퍼티를 아카이빙해 저장
     func encode(with aCoder: NSCoder) {
         aCoder.encode(latitude, forKey: "latitude")
         aCoder.encode(longitude, forKey: "longitude")
         aCoder.encode(address, forKey: "address")
     }
-    
     required init?(coder aDecoder: NSCoder) {
         latitude = aDecoder.decodeDouble(forKey: "latitude")
         longitude = aDecoder.decodeDouble(forKey: "longitude")
         address = aDecoder.decodeObject(forKey: "address") as? String
     }
-    
     func coordinate() -> (Double, Double) {
         return (latitude, longitude)
     }
-    
     func addressString() -> String? {
         return address
     }
