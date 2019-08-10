@@ -18,16 +18,24 @@ extension Notification.Name {
 final class LocationStore {
     private(set) var locations = [Location]()
     
-    private let archiveURL: URL = {
+    private var archiveURL: URL? = {
         let documentsDirectories =
             FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentDirectory = documentsDirectories.first!
-        return documentDirectory.appendingPathComponent("locations")
+        if let documentDirectory = documentsDirectories.first {
+            return documentDirectory.appendingPathComponent("locations")
+        }
+        return nil
     }()
     
     init() {
+        guard let url = archiveURL else {
+            return
+        }
+        guard FileManager.default.fileExists(atPath: url.path) else {
+            return
+        }
         do {
-            let data = try Data(contentsOf: archiveURL)
+            let data = try Data(contentsOf: url)
             if let archivedLocations = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Location] {
                 locations = archivedLocations
             }
@@ -39,9 +47,9 @@ final class LocationStore {
     // Review 동기화 필요
     func addLocation(_ location: Location) {
         /// 위도/경도가 같을시 리턴
-//        guard !locations.contains(location) else {
-//            return
-//        }
+        guard !locations.contains(location) else {
+            return
+        }
         locations.append(location)
         locationsAdded()
     }
@@ -55,9 +63,12 @@ final class LocationStore {
     
     /// 파일 URL에 데이터를 아카이빙해 저장
     func saveChanges() {
+        guard let url = archiveURL else {
+            return
+        }
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: locations, requiringSecureCoding: false)
-            try data.write(to: archiveURL)
+            try data.write(to: url)
         } catch {
             print("파일을 저장하지 못하였습니다.")
         }
