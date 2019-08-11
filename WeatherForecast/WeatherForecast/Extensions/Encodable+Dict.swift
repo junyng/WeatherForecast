@@ -9,6 +9,7 @@
 import Foundation
 
 extension Encodable {
+    
     func tryQueryItem() throws -> [URLQueryItem] {
         let data = try JSONEncoder().encode(self)
         guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
@@ -18,6 +19,7 @@ extension Encodable {
             URLQueryItem(name: $0, value: String(describing: $1))
         }
     }
+    
     func tryAsDictionary() throws -> [String: Any] {
         let data = try JSONEncoder().encode(self)
         guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
