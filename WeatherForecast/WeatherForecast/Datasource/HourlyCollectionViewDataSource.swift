@@ -21,7 +21,7 @@ class HourlyCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         let weatherCurrently = currentArray[indexPath.item]
         cell.timeLabel.text = DateUtil.currentTime(from: weatherCurrently.time)
         cell.weatherImage.image = weatherCurrently.icon
-        cell.temperatureLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: weatherCurrently.temperature))
+        cell.temperatureLabel.text = String(format: "%.1f°", weatherCurrently.temperature.fahrenheitToCelsius())
         return cell
     }
 }

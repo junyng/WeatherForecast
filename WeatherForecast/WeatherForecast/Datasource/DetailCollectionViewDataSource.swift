@@ -26,8 +26,8 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             let weatherDetail = detailArray[indexPath.item]
             dailyCell.weatherImageView.image = weatherDetail.icon
             dailyCell.dayLabel.text = DateUtil.weekDay(from: weatherDetail.time) ?? ""
-            dailyCell.temperatureHighLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: weatherDetail.feature.temperatureHigh))
-            dailyCell.temperatureLowLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: weatherDetail.feature.temperatureLow))
+            dailyCell.temperatureHighLabel.text = String(format: "%.1f°", weatherDetail.feature.temperatureHigh.fahrenheitToCelsius())
+            dailyCell.temperatureLowLabel.text = String(format: "%.1f°", weatherDetail.feature.temperatureLow.fahrenheitToCelsius())
             return dailyCell
         } else if indexPath.item == detailArray.count {
             if let feature = feature {
