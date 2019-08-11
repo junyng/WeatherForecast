@@ -24,17 +24,15 @@ extension Endpoint {
     var urlComponents: URLComponents {
         var components = URLComponents(string: base)!
         components.path = path
-        // Review: 상수 String
-        // swiftlint:disable force_try
         let queryItems = try! QueryParam(long: "lang", value: "ko").tryQueryItem()
         components.queryItems = queryItems
         return components
     }
     
-    var request: URLRequest {
-        // Review: force casting
-        // 강제 캐스팅을 사용하지 않는 것이 좋습니다.
-        let url = urlComponents.url!
-        return URLRequest(url: url)
+    var request: URLRequest? {
+        if let url = urlComponents.url {
+            return URLRequest(url: url)
+        }
+        return nil
     }
 }
