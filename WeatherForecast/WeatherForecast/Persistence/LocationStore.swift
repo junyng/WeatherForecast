@@ -54,7 +54,6 @@ final class LocationStore {
         locationsAdded()
     }
     
-    // Review 동기화 필요
     func removeLocation(_ location: Location) {
         if let index = locations.firstIndex(of: location) {
             locations.remove(at: index)
