@@ -62,7 +62,9 @@ extension SuggestedLocationTableViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         // UISearchbar의 텍스트가 변경될 때, 완료된 suggestions를 MKLocalSearchCompleter 에게 물어본다
-        searchCompleter.queryFragment = searchController.searchBar.text ?? ""
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            searchCompleter.queryFragment = text
+        }
     }
 }
 
