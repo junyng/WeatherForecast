@@ -26,12 +26,14 @@ class WeatherForecastController: UIViewController {
     private let hourlyCollectionViewDataSource = HourlyCollectionViewDataSource()
     private let detailCollectionViewDataSource = DetailCollectionViewDataSource()
     // Review: ! 주의해야합니다.
-    var location: Location!
+    var location: Location?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        guard let location = location else {
+            return
+        }
         locationLabel.text = location.addressString() ?? "-"
-        
         // Review: 순환 참조
         WeatherClient.shared.getFeed(from: location.coordinate()) { [weak self] result in
             guard let self = self else { return }

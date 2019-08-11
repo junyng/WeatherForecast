@@ -7,17 +7,16 @@
 //
 
 import UIKit
-/// 동적인 여러 개의  콘텐츠 뷰 컨트롤러를 생성하는 페이지 뷰 컨트롤러
-// Review: UIPageViewController 보단 UICollectionView 로 구현하는 것이 좋음
+/// 동적인 여러 개의 콘텐츠 뷰 컨트롤러를 생성하는 페이지 뷰 컨트롤러
 class PageViewController: UIPageViewController {
-
+    
     var locations = [Location]()
     var currentIndex: Int = 0
     /// 위치 데이터 갯수 만큼 페이지를 생성한다.
     private var pagesCount: Int {
         return locations.count
     }
-
+    
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.currentPageIndicatorTintColor = .black
@@ -26,7 +25,7 @@ class PageViewController: UIPageViewController {
         pageControl.currentPage = currentIndex
         return pageControl
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
@@ -34,7 +33,7 @@ class PageViewController: UIPageViewController {
         configureToolbarItems()
         configureCurrentPage()
     }
-
+    
     // MARK: - Custom Methods
     /// 위치 정보를 받는 날씨 뷰 컨트롤러 새로 생성한다.
     private func viewControllerAtIndex(_ index: Int) -> UIViewController? {
@@ -46,14 +45,14 @@ class PageViewController: UIPageViewController {
         weatherViewController.location = location
         return weatherViewController
     }
-
+    
     private func configureCurrentPage() {
         if let firstViewController = self.viewControllerAtIndex(currentIndex),
             let weatherController = firstViewController as? WeatherForecastController {
             self.setViewControllers([weatherController], direction: .forward, animated: false, completion: nil)
         }
     }
-
+    
     private func configureToolbarItems() {
         let flexibleSpaceButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let pageControlButtonItem = UIBarButtonItem(customView: self.pageControl)
@@ -61,7 +60,7 @@ class PageViewController: UIPageViewController {
         self.toolbarItems = [flexibleSpaceButtonItem, pageControlButtonItem, flexibleSpaceButtonItem, listButtonItem]
         self.navigationController?.isToolbarHidden = false
     }
-    // Review: attributes
+    
     @objc
     private func popToPrevious() {
         self.navigationController?.popViewController(animated: true)
@@ -81,9 +80,8 @@ extension PageViewController: UIPageViewControllerDataSource {
         }
         return nil
     }
-
+    
     /// 다음 페이지로 넘어갈 때 다음 번째 뷰 컨트롤러를 리턴
-    // Review: opening_brace
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         /// 위치 데이터의 다음 인덱스로 뷰 컨트롤러 인스턴스를 생성해 리턴
         if let currentPageViewController = viewController as? WeatherForecastController,
@@ -103,7 +101,8 @@ extension PageViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         /// 위치 데이터의 인덱스를 찾아 현재 페이지 인덱스 반영
         if let viewController = pendingViewControllers.first as? WeatherForecastController,
-            let index = locations.firstIndex(of: viewController.location) {
+            let location = viewController.location,
+            let index = locations.firstIndex(of: location) {
             self.pageControl.currentPage = index
         }
     }
