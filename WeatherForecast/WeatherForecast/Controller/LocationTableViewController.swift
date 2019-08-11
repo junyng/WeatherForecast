@@ -32,6 +32,7 @@ class LocationTableViewController: UITableViewController {
         super.viewDidLoad()
         setupNotification()
         configureFooterView()
+        configureBackgroundView()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -68,6 +69,14 @@ class LocationTableViewController: UITableViewController {
         addLocationButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -20).isActive = true
         tableView.tableFooterView = footerView
     }
+    
+    private func configureBackgroundView() {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
+        label.numberOfLines = 2
+        label.text = "위치 정보가 없습니다. \n추가 버튼을 눌러 위치 정보를 추가하세요."
+        label.textAlignment = .center
+        self.tableView.backgroundView = label
+    }
 }
 
 // MARK: UITableViewDataSource
@@ -78,6 +87,15 @@ extension LocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if locationStore.locations.isEmpty {
+            tableView.separatorStyle = .none
+            tableView.backgroundView?.isHidden = false
+        } else {
+            tableView.separatorStyle = .singleLine
+            tableView.backgroundView?.isHidden = true
+        }
+        
         return locationStore.locations.count
     }
     
