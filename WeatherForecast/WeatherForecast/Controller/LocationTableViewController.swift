@@ -36,21 +36,16 @@ class LocationTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "search" {
-            // Review force_cast
-            // swiftlint:disable force_cast
             let navigationController = segue.destination as! UINavigationController
             let searchLocationController = navigationController.viewControllers.first as! SearchLocationTableViewController
             searchLocationController.locationStore = locationStore
         } else if segue.identifier == "pages" {
-            // Review force_cast
-            // swiftlint:disable force_cast
             let pageController = segue.destination as! PageViewController
             pageController.locations = locationStore.locations
-            pageController.currentIndex = tableView.indexPathForSelectedRow?.item ?? 0
+            pageController.currentIndex = tableView.indexPathForSelectedRow?.row ?? 0
         }
     }
     
-    // Review: attribute
     @objc
     func searchButtonDidTapped() {
         self.performSegue(withIdentifier: "search", sender: nil)
@@ -61,10 +56,8 @@ class LocationTableViewController: UITableViewController {
     }
     
     /// Notification 이 발생하면 테이블 뷰를 리로드
-    // Review: attribute
     @objc
     func refreshTable(_ notification: Notification) {
-        // Review: performBatchUpdates 적용이 필요
         self.tableView.reloadData()
     }
     
@@ -89,11 +82,9 @@ extension LocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell", for: indexPath) as? LocationCell else { return UITableViewCell() }
-        let location = locationStore.locations[indexPath.item]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.swiftIdentifier, for: indexPath) as? LocationCell else { return UITableViewCell() }
+        let location = locationStore.locations[indexPath.row]
         /// location의 개수 만큼 좌표별 API를 호출한다.
-        // Review: unneeded_parentheses_in_closure_argument
-        // Review: 데이터 모델을 구축하는 것이 필요해 보입니다.
         WeatherClient.shared.getFeed(from: location.coordinate()) { result in
             switch result {
             case .success(let response):
@@ -118,8 +109,7 @@ extension LocationTableViewController {
 extension LocationTableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Review item은 UICollectionView 에서 사용합니다. row 가 더 명확할 것 같습니다.
-            let location = locationStore.locations[indexPath.item]
+            let location = locationStore.locations[indexPath.row]
             locationStore.removeLocation(location)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }

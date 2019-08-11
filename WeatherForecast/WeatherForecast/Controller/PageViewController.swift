@@ -97,7 +97,6 @@ extension PageViewController: UIPageViewControllerDataSource {
 // MARK: UIPageViewControllerDelegate
 extension PageViewController: UIPageViewControllerDelegate {
     /// 페이지간 전이가 일어날 때 발생
-    // Review: opening_brace
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         /// 위치 데이터의 인덱스를 찾아 현재 페이지 인덱스 반영
         if let viewController = pendingViewControllers.first as? WeatherForecastController,

@@ -15,7 +15,6 @@ class WeatherForecastController: UIViewController {
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    // Review 스토리보드에서 설정 가능합니다.
     private lazy var weatherForecastLayout: UICollectionViewFlowLayout = {
         let layout = WeatherForecastLayout()
         let width = collectionView.frame.size.width
@@ -25,7 +24,6 @@ class WeatherForecastController: UIViewController {
     
     private let hourlyCollectionViewDataSource = HourlyCollectionViewDataSource()
     private let detailCollectionViewDataSource = DetailCollectionViewDataSource()
-    // Review: ! 주의해야합니다.
     var location: Location?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,9 +32,11 @@ class WeatherForecastController: UIViewController {
             return
         }
         locationLabel.text = location.addressString() ?? "-"
-        // Review: 순환 참조
+        // 순환 참조 제거
         WeatherClient.shared.getFeed(from: location.coordinate()) { [weak self] result in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             switch result {
             case .success(let response):
                 if let response = response {
@@ -49,7 +49,6 @@ class WeatherForecastController: UIViewController {
                 }
             case .failure(let error):
                 print(error)
-                // Review: unneeded_break_in_switch
             }
         }
     }

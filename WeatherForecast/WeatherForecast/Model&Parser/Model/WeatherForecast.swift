@@ -17,7 +17,6 @@ struct WeatherForecast {
 
 struct WeatherForecastDTO: Decodable {
 
-    // Review: colon
     private enum CodingKeys: String, CodingKey {
         case weatherCurrently = "currently"
         case weatherHourly = "hourly"

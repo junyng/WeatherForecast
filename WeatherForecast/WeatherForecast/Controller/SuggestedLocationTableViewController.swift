@@ -21,7 +21,6 @@ class SuggestedLocationTableViewController: UITableViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Review: 상수 String 제거
         tableView.register(SuggestedCompletionTableViewCell.self, forCellReuseIdentifier: SuggestedCompletionTableViewCell.swiftIdentifier)
     }
 }
@@ -47,7 +46,7 @@ extension SuggestedLocationTableViewController {
 
 extension SuggestedLocationTableViewController: MKLocalSearchCompleterDelegate {
     
-    /// - Tag: QueryResults
+    /// - MKLocalSearchCompleter 결과를 업데이트 완료시 동작한다
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         completerResults = completer.results
         tableView.reloadData()
@@ -55,7 +54,6 @@ extension SuggestedLocationTableViewController: MKLocalSearchCompleterDelegate {
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         if let error = error as NSError? {
-            // Review: Error를 처리해야합니다.
             print("MKLocalSearchCompleter encountered an error: \(error.localizedDescription)")
         }
     }
@@ -63,15 +61,13 @@ extension SuggestedLocationTableViewController: MKLocalSearchCompleterDelegate {
 
 extension SuggestedLocationTableViewController: UISearchResultsUpdating {
     
-    /// - Tag: UpdateQuery
     func updateSearchResults(for searchController: UISearchController) {
-        // Ask `MKLocalSearchCompleter` for new completion suggestions based on the change in the text entered in `UISearchBar`.
+        // UISearchbar의 텍스트가 변경될 때, 완료된 suggestions를 MKLocalSearchCompleter 에게 물어본다
         searchCompleter.queryFragment = searchController.searchBar.text ?? ""
     }
 }
 
 private class SuggestedCompletionTableViewCell: UITableViewCell, SwiftNameIdentifier {
-    // Review: 상수 String 을 쓰는 건 좋지 않는 것 같아요~
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)

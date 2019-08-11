@@ -11,7 +11,6 @@ import UIKit
 class WeatherForecastLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let layoutAttributes = super.layoutAttributesForElements(in: rect)
-        // Review: unneeded_parentheses_in_closure_argument
         layoutAttributes?.forEach({ attribute in
             if attribute.representedElementKind == UICollectionView.elementKindSectionHeader {
                 guard let collectionView = collectionView else { return }
@@ -28,7 +27,6 @@ class WeatherForecastLayout: UICollectionViewFlowLayout {
     }
     
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        // Review: 성능에 좋지 않음. 
         return true
     }
 }
