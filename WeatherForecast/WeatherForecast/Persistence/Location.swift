@@ -33,7 +33,7 @@ class Location: NSObject, NSCoding {
         address = aDecoder.decodeObject(forKey: "address") as? String
     }
     
-    func coordinate() -> (Double, Double) {
+    func coordinate() -> Coordinate {
         return (latitude, longitude)
     }
     
