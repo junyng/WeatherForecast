@@ -12,7 +12,6 @@ import Foundation
 protocol APIClient {
     var session: URLSession { get }
     
-    // Review: let_var_whitespace
     func fetch<T: Decodable>(with request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, Error>) -> Void)
 }
 
@@ -29,7 +28,7 @@ extension APIClient {
                 completion(nil, .requestFailed)
                 return
             }
-            // Review: statusCode 200 ~ 300 범위가 성공입니다.
+            
             if httpResponse.statusCode == 200 {
                 if let data = data {
                     do {
@@ -54,7 +53,7 @@ extension APIClient {
     
     /// 디코딩 작업 후에 JSON 반환
     func fetch<T: Decodable>(with request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, Error>) -> Void) {
-        // Review: unneeded_parentheses_in_closure_argument
+
         let task = decodingTask(with: request, type: T.self) { json, error in
             
             DispatchQueue.main.async {
