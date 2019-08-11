@@ -20,8 +20,8 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let dailyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherDailyCell", for: indexPath) as? DailyCell,
-            let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "summaryCell", for: indexPath) as? SummaryCell else { return UICollectionViewCell() }
+        guard let dailyCell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCell.swiftIdentifier, for: indexPath) as? DailyCell,
+            let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: SummaryCell.swiftIdentifier, for: indexPath) as? SummaryCell else { return UICollectionViewCell() }
         if indexPath.item < detailArray.count {
             let weatherDetail = detailArray[indexPath.item]
             dailyCell.weatherImageView.image = weatherDetail.icon
