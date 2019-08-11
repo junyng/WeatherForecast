@@ -44,7 +44,6 @@ final class LocationStore {
         }
     }
     
-    // Review 동기화 필요
     func addLocation(_ location: Location) {
         /// 위도/경도가 같을시 리턴
         guard !locations.contains(location) else {

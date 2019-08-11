@@ -32,7 +32,6 @@ extension SuggestedLocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Review: 상수 String 제거
         let cell = tableView.dequeueReusableCell(withIdentifier: SuggestedCompletionTableViewCell.swiftIdentifier, for: indexPath)
         
         if let suggestion = completerResults?[indexPath.row] {

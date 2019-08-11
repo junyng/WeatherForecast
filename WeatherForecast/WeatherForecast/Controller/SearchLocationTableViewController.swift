@@ -32,7 +32,7 @@ class SearchLocationTableViewController: UITableViewController {
         super.viewDidLoad()
         configureSearchBar()
     }
-    // Review: overridden_super_call
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         DispatchQueue.main.async {
@@ -42,12 +42,10 @@ class SearchLocationTableViewController: UITableViewController {
 
     // MARK: - Custom Methods
     /// 주소 문자열을 기준으로 좌표 정보를 반환한다.
-    // Review: colon, vertical_parameter_alignment
     private func getCoordinate(
         addressString: String,
         completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void) {
         let geocoder = CLGeocoder()
-        // Review: unneeded_parentheses_in_closure_argument
         geocoder.geocodeAddressString(addressString) { placemarks, error in
             if error == nil {
                 if let placemark = placemarks?[0] {
@@ -102,7 +100,6 @@ class SearchLocationTableViewController: UITableViewController {
             /// 직렬 큐를 생성하여 비동기 작업이 처리
             let dispatchGroup = DispatchGroup()
             DispatchQueue(label: "serial").async(group: dispatchGroup) {
-                // Review: unneeded_parentheses_in_closure_argument
                 self.getCoordinate(addressString: suggestion.title) { coordinate, error in
                     let location = Location(latitude: coordinate.latitude, longitude: coordinate.longitude, address: suggestion.title)
                     self.locationStore.addLocation(location)

@@ -32,11 +32,7 @@ class WeatherForecastController: UIViewController {
             return
         }
         locationLabel.text = location.addressString() ?? "-"
-        // 순환 참조 제거
-        WeatherClient.shared.getFeed(from: location.coordinate()) { [weak self] result in
-            guard let self = self else {
-                return
-            }
+        WeatherClient.shared.getFeed(from: location.coordinate()) { result in
             switch result {
             case .success(let response):
                 if let response = response {
