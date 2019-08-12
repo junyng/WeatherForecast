@@ -15,11 +15,11 @@ class LocationConverter {
     private init() { }
     
     /// 주소 문자열을 기준으로 좌표 정보를 반환한다.
-    func getCoordinate(from addressString: String,
-                       completionHandler: @escaping(CLLocationCoordinate2D?, Error?) -> Void) {
+    func getLocationInfo(from addressString: String,
+                       completionHandler: @escaping(CLLocationCoordinate2D?, TimeZone?, Error?) -> Void) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(addressString) { placemarks, error in
-            completionHandler(placemarks?.first?.location?.coordinate, error)
+            completionHandler(placemarks?.first?.location?.coordinate, placemarks?.first?.timeZone, error)
         }
     }
 }

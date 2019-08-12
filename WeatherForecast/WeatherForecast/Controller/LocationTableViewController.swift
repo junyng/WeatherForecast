@@ -109,7 +109,7 @@ extension LocationTableViewController {
                 if let dto = response?.weatherCurrently {
                     /// 모델 파싱 작업
                     let currentWeather = CurrentlyWeatherParser.parse(dto: dto)
-                    cell.timeLabel.text = DateUtil.currentTime(from: currentWeather.time)
+                    cell.timeLabel.text = DateUtil.currentTime(from: currentWeather.time, timezone: location.timezone)
                     cell.locationLabel.text = location.addressString() ?? "-"
                     cell.temperatureLabel.text = String(format: "%.1f°", currentWeather.temperature.fahrenheitToCelsius())
                 }

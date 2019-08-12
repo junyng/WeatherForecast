@@ -13,17 +13,20 @@ class Location: Codable {
     let latitude: Double
     let longitude: Double
     let address: String?
+    let timezone: TimeZone
     
     enum CodingKeys: String, CodingKey {
         case latitude
         case longitude
         case address
+        case timezone
     }
     
-    init(latitude: Double, longitude: Double, address: String? = nil) {
+    init(latitude: Double, longitude: Double, address: String? = nil, timezone: TimeZone) {
         self.latitude = latitude
         self.longitude = longitude
         self.address = address
+        self.timezone = timezone
     }
     
     func encode(to encoder: Encoder) throws {
@@ -31,6 +34,7 @@ class Location: Codable {
         try container.encode(latitude, forKey: .latitude)
         try container.encode(longitude, forKey: .longitude)
         try container.encode(address, forKey: .address)
+        try container.encode(timezone, forKey: .timezone)
     }
     
     required init(from decoder: Decoder) throws {
@@ -38,6 +42,7 @@ class Location: Codable {
         latitude = try container.decode(Double.self, forKey: .latitude)
         longitude = try container.decode(Double.self, forKey: .longitude)
         address = try container.decode(String.self, forKey: .address)
+        timezone = try container.decode(TimeZone.self, forKey: .timezone)
     }
     
     func coordinate() -> Coordinate {
