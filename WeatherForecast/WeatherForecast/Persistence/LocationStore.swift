@@ -36,9 +36,9 @@ final class LocationStore {
         }
         do {
             let data = try Data(contentsOf: url)
-            if let archivedLocations = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Location] {
-                locations = archivedLocations
-            }
+            guard let archivedData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Data else { return }
+            let locations = try JSONDecoder().decode([Location].self, from: archivedData)
+            self.locations = locations
         } catch {
             print("파일을 읽지 못하였습니다.")
         }
@@ -65,8 +65,9 @@ final class LocationStore {
             return
         }
         do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: locations, requiringSecureCoding: false)
-            try data.write(to: url)
+            let data = try JSONEncoder().encode(locations)
+            let archivedData = try NSKeyedArchiver.archivedData(withRootObject: data, requiringSecureCoding: false)
+            try archivedData.write(to: url)
         } catch {
             print("파일을 저장하지 못하였습니다.")
         }
