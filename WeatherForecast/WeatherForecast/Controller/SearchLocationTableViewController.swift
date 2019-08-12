@@ -80,20 +80,18 @@ class SearchLocationTableViewController: UITableViewController {
             searchController.searchBar.text = suggestion.title
             /// 직렬 큐를 생성하여 비동기 작업이 처리
             let dispatchGroup = DispatchGroup()
-            DispatchQueue(label: "serial").async(group: dispatchGroup) {
+            dispatchGroup.enter()
                 LocationConverter.shared.getCoordinate(from: suggestion.title) { coordinate, error in
                     guard let coordinate = coordinate, error == nil else {
                         return
                     }
                     let location = Location(latitude: coordinate.latitude, longitude: coordinate.longitude, address: suggestion.title)
                     self.locationStore.addLocation(location)
+                    dispatchGroup.leave()
                 }
-            }
             /// 작업이 처리 된 후, 현재 뷰 컨트롤러를 메인 스레드에서 dismiss 한다
-            dispatchGroup.notify(queue: .global()) {
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true)
-                }
+            dispatchGroup.notify(queue: .main) {
+                self.dismiss(animated: true)
             }
         }
     }
