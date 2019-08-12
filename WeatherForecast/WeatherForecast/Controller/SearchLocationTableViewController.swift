@@ -41,25 +41,6 @@ class SearchLocationTableViewController: UITableViewController {
     }
 
     // MARK: - Custom Methods
-    /// 주소 문자열을 기준으로 좌표 정보를 반환한다.
-    private func getCoordinate(
-        addressString: String,
-        completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void) {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(addressString) { placemarks, error in
-            if error == nil {
-                if let placemark = placemarks?[0] {
-                    let location = placemark.location!
-
-                    completionHandler(location.coordinate, nil)
-                    return
-                }
-            }
-
-            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
-        }
-    }
-
     private func configureSearchController() {
         suggestionController = SuggestedLocationTableViewController()
         suggestionController.tableView.delegate = self
@@ -100,7 +81,10 @@ class SearchLocationTableViewController: UITableViewController {
             /// 직렬 큐를 생성하여 비동기 작업이 처리
             let dispatchGroup = DispatchGroup()
             DispatchQueue(label: "serial").async(group: dispatchGroup) {
-                self.getCoordinate(addressString: suggestion.title) { coordinate, error in
+                LocationConverter.shared.getCoordinate(from: suggestion.title) { coordinate, error in
+                    guard let coordinate = coordinate, error == nil else {
+                        return
+                    }
                     let location = Location(latitude: coordinate.latitude, longitude: coordinate.longitude, address: suggestion.title)
                     self.locationStore.addLocation(location)
                 }
@@ -118,7 +102,7 @@ class SearchLocationTableViewController: UITableViewController {
 extension SearchLocationTableViewController: UISearchControllerDelegate { }
 
 extension SearchLocationTableViewController: UISearchBarDelegate {
-
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchController.isActive = false
         searchBar.resignFirstResponder()
