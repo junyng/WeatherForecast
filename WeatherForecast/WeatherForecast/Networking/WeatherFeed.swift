@@ -9,7 +9,7 @@
 import Foundation
 
 struct WeatherFeed: Endpoint {
-    private let coordinate: (latitude: Double, longitude: Double)
+    private let coordinate: Coordinate
     
     var base: String {
         return "https://api.darksky.net"
@@ -19,7 +19,7 @@ struct WeatherFeed: Endpoint {
         return "/forecast/693b24d34c1e7088cefd6076c3c10fd3/\(coordinate.latitude),\(coordinate.longitude)"
     }
     
-    init(coordinate: (Double, Double)) {
+    init(coordinate: Coordinate) {
         self.coordinate = coordinate
     }
 }

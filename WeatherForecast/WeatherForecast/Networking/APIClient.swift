@@ -11,6 +11,7 @@ import Foundation
 /// API 요청하는 프로토콜 정의
 protocol APIClient {
     var session: URLSession { get }
+    
     func fetch<T: Decodable>(with request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, Error>) -> Void)
 }
 
@@ -27,6 +28,7 @@ extension APIClient {
                 completion(nil, .requestFailed)
                 return
             }
+            
             if httpResponse.statusCode == 200 {
                 if let data = data {
                     do {
@@ -51,8 +53,8 @@ extension APIClient {
     
     /// 디코딩 작업 후에 JSON 반환
     func fetch<T: Decodable>(with request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, Error>) -> Void) {
-        
-        let task = decodingTask(with: request, type: T.self) { (json, error) in
+
+        let task = decodingTask(with: request, type: T.self) { json, error in
             
             DispatchQueue.main.async {
                 guard let json = json else {

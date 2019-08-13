@@ -20,22 +20,23 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let dailyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherDailyCell", for: indexPath) as? DailyCell,
-            let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "summaryCell", for: indexPath) as? SummaryCell else { return UICollectionViewCell() }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCell.swiftIdentifier, for: indexPath)
         if indexPath.item < detailArray.count {
-            let weatherDetail = detailArray[indexPath.item]
-            dailyCell.weatherImageView.image = weatherDetail.icon
-            dailyCell.dayLabel.text = DateUtil.weekDay(from: weatherDetail.time) ?? ""
-            dailyCell.temperatureHighLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: weatherDetail.feature.temperatureHigh))
-            dailyCell.temperatureLowLabel.text = String(format: "%.1f°", ConversionUtil.fahrenheitToCelsius(temperature: weatherDetail.feature.temperatureLow))
-            return dailyCell
-        } else if indexPath.item == detailArray.count {
-            if let feature = feature {
-                summaryCell.summaryTextView.text = feature.summary
+            if let dailyCell = cell as? DailyCell {
+                let weatherDetail = detailArray[indexPath.item]
+                dailyCell.weatherImageView.image = weatherDetail.icon
+                dailyCell.dayLabel.text = DateUtil.weekDay(from: weatherDetail.time) ?? ""
+                dailyCell.temperatureHighLabel.text = String(format: "%.1f°", weatherDetail.feature.temperatureHigh.fahrenheitToCelsius())
+                dailyCell.temperatureLowLabel.text = String(format: "%.1f°", weatherDetail.feature.temperatureLow.fahrenheitToCelsius())
+                return dailyCell
             }
-            return summaryCell
+        } else if indexPath.item == detailArray.count {
+            if let feature = feature,
+                let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: SummaryCell.swiftIdentifier, for: indexPath) as? SummaryCell {
+                summaryCell.summaryTextView.text = feature.summary
+                return summaryCell
+            }
         }
-        return UICollectionViewCell()
+        return cell
     }
 }
-

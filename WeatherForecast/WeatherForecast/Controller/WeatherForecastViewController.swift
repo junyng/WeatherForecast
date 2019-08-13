@@ -8,21 +8,31 @@
 
 import UIKit
 
-class WeatherViewController: UIViewController {
+class WeatherForecastController: UIViewController {
     
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var hourlyCollectionView: UICollectionView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private lazy var weatherForecastLayout: UICollectionViewFlowLayout = {
+        let layout = WeatherForecastLayout()
+        let width = collectionView.frame.size.width
+        layout.estimatedItemSize = CGSize(width: width, height: 100)
+        return layout
+    }()
+    
     private let hourlyCollectionViewDataSource = HourlyCollectionViewDataSource()
     private let detailCollectionViewDataSource = DetailCollectionViewDataSource()
-    var location: Location!
+    var location: Location?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        guard let location = location else {
+            return
+        }
         locationLabel.text = location.addressString() ?? "-"
-        WeatherClient.shared.getFeed(from: location.coordinate()) { (result) in
+        WeatherClient.shared.getFeed(from: location.coordinate()) { result in
             switch result {
             case .success(let response):
                 if let response = response {
@@ -35,12 +45,12 @@ class WeatherViewController: UIViewController {
                 }
             case .failure(let error):
                 print(error)
-                break
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.collectionViewLayout = weatherForecastLayout
     }
 }

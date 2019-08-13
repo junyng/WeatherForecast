@@ -20,7 +20,8 @@ struct DateUtil {
     }()
     
     /// Date 객체의 현재 시간 문자열 반환
-    static func currentTime(from date: Date) -> String {
+    static func currentTime(from date: Date, timezone: TimeZone? = nil) -> String {
+        dateFormatter.timeZone = timezone
         return dateFormatter.string(from: date)
     }
     
