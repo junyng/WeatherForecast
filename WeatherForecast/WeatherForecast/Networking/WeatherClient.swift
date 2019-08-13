@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias Coordinate = (Double, Double)
+typealias Coordinate = (latitude: Double, longitude: Double)
 
 class WeatherClient: APIClient {
     static let shared = WeatherClient()
