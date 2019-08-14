@@ -21,16 +21,17 @@ struct QueryParam: Codable {
 
 extension Endpoint {
     /// URL을 구성하는 도메인, path, query
-    var urlComponents: URLComponents {
-        var components = URLComponents(string: base)!
-        components.path = path
-        let queryItems = try! QueryParam(long: "lang", value: "ko").tryQueryItem()
-        components.queryItems = queryItems
+    var urlComponents: URLComponents? {
+        var components = URLComponents(string: base)
+        components?.path = path
+        if let queryItems = try? QueryParam(long: "lang", value: "ko").tryQueryItem() {
+            components?.queryItems = queryItems
+        }
         return components
     }
     
     var request: URLRequest? {
-        if let url = urlComponents.url {
+        if let url = urlComponents?.url {
             return URLRequest(url: url)
         }
         return nil
