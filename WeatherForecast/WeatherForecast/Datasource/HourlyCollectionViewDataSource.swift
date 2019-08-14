@@ -17,7 +17,7 @@ class HourlyCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCell.swiftIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCell.reuseIdentifier, for: indexPath)
         if let hourlyCell = cell as? HourlyCell {
             let weatherCurrently = currentArray[indexPath.item]
             hourlyCell.timeLabel.text = DateUtil.currentTime(from: weatherCurrently.time)

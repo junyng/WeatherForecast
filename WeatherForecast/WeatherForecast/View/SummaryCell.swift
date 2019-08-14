@@ -8,6 +8,6 @@
 
 import UIKit
 
-class SummaryCell: UICollectionViewCell, SwiftNameIdentifier {
+class SummaryCell: UICollectionViewCell, ReusableCell {
     @IBOutlet weak var summaryTextView: UITextView!
 }

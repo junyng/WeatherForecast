@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HourlyCell: UICollectionViewCell, SwiftNameIdentifier {
+class HourlyCell: UICollectionViewCell, ReusableCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!

@@ -37,7 +37,9 @@ final class LocationStore {
         }
         do {
             let data = try Data(contentsOf: url)
-            guard let archivedData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Data else { return }
+            guard let archivedData = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? Data else {
+                return
+            }
             let locations = try JSONDecoder().decode([Location].self, from: archivedData)
             self.locations = locations
         } catch {

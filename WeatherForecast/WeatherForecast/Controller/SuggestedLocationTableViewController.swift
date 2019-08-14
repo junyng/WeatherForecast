@@ -21,7 +21,7 @@ class SuggestedLocationTableViewController: UITableViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(SuggestedCompletionTableViewCell.self, forCellReuseIdentifier: SuggestedCompletionTableViewCell.swiftIdentifier)
+        tableView.register(SuggestedCompletionTableViewCell.self, forCellReuseIdentifier: SuggestedCompletionTableViewCell.reuseIdentifier)
     }
 }
 
@@ -32,7 +32,7 @@ extension SuggestedLocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SuggestedCompletionTableViewCell.swiftIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: SuggestedCompletionTableViewCell.reuseIdentifier, for: indexPath)
         
         if let suggestion = completerResults?[indexPath.row] {
             cell.textLabel?.text = suggestion.title
@@ -68,7 +68,7 @@ extension SuggestedLocationTableViewController: UISearchResultsUpdating {
     }
 }
 
-private class SuggestedCompletionTableViewCell: UITableViewCell, SwiftNameIdentifier {
+private class SuggestedCompletionTableViewCell: UITableViewCell, ReusableCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)

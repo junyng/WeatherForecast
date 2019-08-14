@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationCell: UITableViewCell, SwiftNameIdentifier {
+class LocationCell: UITableViewCell, ReusableCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!

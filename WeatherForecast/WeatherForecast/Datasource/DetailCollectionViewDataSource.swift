@@ -20,7 +20,7 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCell.swiftIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DailyCell.reuseIdentifier, for: indexPath)
         if indexPath.item < detailArray.count {
             if let dailyCell = cell as? DailyCell {
                 let weatherDetail = detailArray[indexPath.item]
@@ -32,7 +32,7 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
             }
         } else if indexPath.item == detailArray.count {
             if let feature = feature,
-                let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: SummaryCell.swiftIdentifier, for: indexPath) as? SummaryCell {
+                let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: SummaryCell.reuseIdentifier, for: indexPath) as? SummaryCell {
                 summaryCell.summaryTextView.text = feature.summary
                 return summaryCell
             }

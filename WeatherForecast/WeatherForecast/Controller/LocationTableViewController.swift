@@ -100,7 +100,7 @@ extension LocationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.swiftIdentifier, for: indexPath) as? LocationCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.reuseIdentifier, for: indexPath) as? LocationCell else { return UITableViewCell() }
         let location = locationStore.locations[indexPath.row]
         /// location의 개수 만큼 좌표별 API를 호출한다.
         WeatherClient.shared.getFeed(from: location.coordinate()) { result in
