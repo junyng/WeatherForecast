@@ -17,6 +17,7 @@ extension Notification.Name {
 /// 위치 정보 데이터 저장소
 final class LocationStore {
     private(set) var locations = [Location]()
+    private let lockQueue = DispatchQueue(label: "locationStore")
     
     private var archiveURL: URL? = {
         let documentsDirectories =
@@ -46,16 +47,20 @@ final class LocationStore {
     
     func addLocation(_ location: Location) {
         /// 위도/경도가 같을시 리턴
-        guard !locations.contains(location) else {
-            return
+        lockQueue.sync {
+            guard !self.locations.contains(location) else {
+                return
+            }
+            self.locations.append(location)
+            self.locationsAdded()
         }
-        locations.append(location)
-        locationsAdded()
     }
     
     func removeLocation(_ location: Location) {
-        if let index = locations.firstIndex(of: location) {
-            locations.remove(at: index)
+        lockQueue.sync {
+            if let index = self.locations.firstIndex(of: location) {
+                self.locations.remove(at: index)
+            }
         }
     }
     
