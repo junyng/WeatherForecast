@@ -25,7 +25,7 @@ class LocationTableViewController: UITableViewController {
     
     var locationStore: LocationStore!
     var weatherList: [WeatherCurrently?] = [WeatherCurrently?](repeating: nil, count: 20)
-    lazy var locationInfoList: [LocationInfo] = Array(zip(locationStore.locations, weatherList))
+    private lazy var locationInfoList: [LocationInfo] = Array(zip(locationStore.locations, weatherList))
     private var timer: Timer?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,33 +66,37 @@ class LocationTableViewController: UITableViewController {
     /// Notification 이 발생하면 테이블 뷰를 리로드
     @objc
     func refreshTable(_ notification: Notification) {
-        if let addedLocation = locationStore.locations.last {
-            let locationInfo: LocationInfo = (location: addedLocation, weather: nil)
-            locationInfoList.append(locationInfo)
-        }
+        let lastIndex = locationStore.locations.endIndex - 1
+        let locationInfo: LocationInfo = (location: locationStore.locations[lastIndex], weather: nil)
+        locationInfoList.append(locationInfo)
         self.tableView.reloadData()
+        fetchWeather(of: lastIndex)
     }
     
-    private func fetchWeatherList() {
-        for index in 0..<locationInfoList.count {
-            WeatherClient.shared.getFeed(from: locationInfoList[index].location.coordinate()) { result in
-                switch result {
-                case .success(let response):
-                    if let dto = response?.weatherCurrently {
-                        let currentWeather = CurrentlyWeatherParser.parse(dto: dto)
-                        self.locationInfoList[index].weather = currentWeather
-                        let indexPath = IndexPath(item: index, section: 0)
-                        self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }
-                case .failure:
-                    break
+    private func fetchWeather(of index: Int) {
+        WeatherClient.shared.getFeed(from: locationInfoList[index].location.coordinate()) { result in
+            switch result {
+            case .success(let response):
+                if let dto = response?.weatherCurrently {
+                    let currentWeather = CurrentlyWeatherParser.parse(dto: dto)
+                    self.locationInfoList[index].weather = currentWeather
+                    let indexPath = IndexPath(item: index, section: 0)
+                    self.tableView.reloadRows(at: [indexPath], with: .fade)
                 }
+            case .failure:
+                break
             }
         }
     }
     
+    private func fetchWeatherList() {
+        for index in 0..<locationInfoList.count {
+            fetchWeather(of: index)
+        }
+    }
+    
     private func createTimer() {
-        let timer = Timer(timeInterval: 1.0,
+        let timer = Timer(timeInterval: 0.01,
                           target: self,
                           selector: #selector(updateTimer),
                           userInfo: nil,
@@ -135,7 +139,6 @@ class LocationTableViewController: UITableViewController {
 
 // MARK: UITableViewDataSource
 extension LocationTableViewController {
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
