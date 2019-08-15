@@ -25,8 +25,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         locationStore.saveChanges()
     }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        locationStore.saveChanges()
-    }
 }
