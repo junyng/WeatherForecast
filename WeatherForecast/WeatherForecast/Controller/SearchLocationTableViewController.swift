@@ -13,20 +13,19 @@ import MapKit
 class SearchLocationTableViewController: UITableViewController {
     
     var locationStore: LocationStore!
-    let searchCompleter = MKLocalSearchCompleter()
-    var completerResults: [MKLocalSearchCompletion]?
+    private let searchCompleter = MKLocalSearchCompleter()
+    private var completerResults: [MKLocalSearchCompletion]?
     
     private var searchController = UISearchController(searchResultsController: nil)
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureSearchController()
+        configureSearchBar()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSearchBar()
-        tableView.register(SuggestedCompletionTableViewCell.self, forCellReuseIdentifier: SuggestedCompletionTableViewCell.reuseIdentifier)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,17 +37,17 @@ class SearchLocationTableViewController: UITableViewController {
     
     // MARK: - Custom Methods
     private func configureSearchController() {
+        self.definesPresentationContext = true
         searchCompleter.delegate = self
+        searchController.delegate = self
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
     }
     
     private func configureSearchBar() {
-        navigationItem.titleView = searchController.searchBar
-        searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.delegate = self
-        searchController.delegate = self
-        self.definesPresentationContext = true
+        navigationItem.titleView = searchController.searchBar
     }
     
     // MARK: - UITableViewDataSource
@@ -57,7 +56,7 @@ class SearchLocationTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SuggestedCompletionTableViewCell.reuseIdentifier, for: indexPath)
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
         
         if let suggestion = completerResults?[indexPath.row] {
             cell.textLabel?.text = suggestion.title
@@ -121,16 +120,5 @@ extension SearchLocationTableViewController: UISearchResultsUpdating {
         if let text = searchController.searchBar.text, !text.isEmpty {
             searchCompleter.queryFragment = text
         }
-    }
-}
-
-private class SuggestedCompletionTableViewCell: UITableViewCell, ReusableCell {
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

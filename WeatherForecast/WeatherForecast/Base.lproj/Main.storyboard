@@ -362,7 +362,7 @@
                             <outlet property="delegate" destination="b8k-14-GHL" id="LQC-7l-hbG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="hOl-Xz-yAd"/>
+                    <navigationItem key="navigationItem" prompt="도시, 우편번호 또는 공항 위치 입력" largeTitleDisplayMode="never" id="hOl-Xz-yAd"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6om-x3-gcP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
