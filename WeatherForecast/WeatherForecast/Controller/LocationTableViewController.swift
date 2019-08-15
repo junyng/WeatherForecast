@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias LocationInfo = (location: Location, weather: WeatherCurrently?)
+
 class LocationTableViewController: UITableViewController {
     
     private lazy var addLocationButton: UIButton = {
@@ -22,6 +24,8 @@ class LocationTableViewController: UITableViewController {
     }()
     
     var locationStore: LocationStore!
+    var weatherList: [WeatherCurrently?] = [WeatherCurrently?](repeating: nil, count: 20)
+    lazy var locationInfoList: [LocationInfo] = Array(zip(locationStore.locations, weatherList))
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -33,6 +37,7 @@ class LocationTableViewController: UITableViewController {
         setupNotification()
         configureFooterView()
         configureBackgroundView()
+        fetchWeatherList()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -60,6 +65,26 @@ class LocationTableViewController: UITableViewController {
     @objc
     func refreshTable(_ notification: Notification) {
         self.tableView.reloadData()
+    }
+    
+    private func fetchWeatherList() {
+        for index in 0..<locationInfoList.count {
+            WeatherClient.shared.getFeed(from: locationInfoList[index].location.coordinate()) { result in
+                switch result {
+                case .success(let response):
+                    if let dto = response?.weatherCurrently {
+                        let currentWeather = CurrentlyWeatherParser.parse(dto: dto)
+                        self.locationInfoList[index].weather = currentWeather
+                        let indexPath = IndexPath(item: index, section: 0)
+                        self.tableView.reloadRows(at: [indexPath], with: .fade)
+                        print("erefef")
+                    }
+                    break
+                case .failure:
+                    break
+                }
+            }
+        }
     }
     
     private func configureFooterView() {
@@ -96,29 +121,13 @@ extension LocationTableViewController {
             tableView.backgroundView?.isHidden = true
         }
         
-        return locationStore.locations.count
+        return locationInfoList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.reuseIdentifier, for: indexPath) as? LocationCell else { return UITableViewCell() }
-        let location = locationStore.locations[indexPath.row]
-        /// location의 개수 만큼 좌표별 API를 호출한다.
-        WeatherClient.shared.getFeed(from: location.coordinate()) { result in
-            switch result {
-            case .success(let response):
-                if let dto = response?.weatherCurrently {
-                    /// 모델 파싱 작업
-                    let currentWeather = CurrentlyWeatherParser.parse(dto: dto)
-                    cell.timeLabel.text = DateUtil.currentTime(from: currentWeather.time, timezone: location.timezone)
-                    cell.locationLabel.text = location.addressString() ?? "-"
-                    cell.temperatureLabel.text = String(format: "%.1f°", currentWeather.temperature.fahrenheitToCelsius())
-                }
-            case .failure:
-                cell.timeLabel.text = "-"
-                cell.locationLabel.text = location.addressString() ?? "-"
-                cell.temperatureLabel.text = "-"
-            }
-        }
+        let locationInfo = locationInfoList[indexPath.row]
+        cell.configure(locationInfo)
         return cell
     }
 }
