@@ -64,6 +64,10 @@ class LocationTableViewController: UITableViewController {
     /// Notification 이 발생하면 테이블 뷰를 리로드
     @objc
     func refreshTable(_ notification: Notification) {
+        if let addedLocation = locationStore.locations.last {
+            let locationInfo: LocationInfo = (location: addedLocation, weather: nil)
+            locationInfoList.append(locationInfo)
+        }
         self.tableView.reloadData()
     }
     
@@ -77,9 +81,7 @@ class LocationTableViewController: UITableViewController {
                         self.locationInfoList[index].weather = currentWeather
                         let indexPath = IndexPath(item: index, section: 0)
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                        print("erefef")
                     }
-                    break
                 case .failure:
                     break
                 }
@@ -138,6 +140,7 @@ extension LocationTableViewController {
         if editingStyle == .delete {
             let location = locationStore.locations[indexPath.row]
             locationStore.removeLocation(location)
+            locationInfoList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
