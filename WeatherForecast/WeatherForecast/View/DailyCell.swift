@@ -8,9 +8,16 @@
 
 import UIKit
 
-class DailyCell: UICollectionViewCell, ReusableCell {
+class DailyCell: UICollectionViewCell, ConfigurableCell, ReusableCell {
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var weatherImageView: UIImageView!
     @IBOutlet weak var temperatureHighLabel: UILabel!
     @IBOutlet weak var temperatureLowLabel: UILabel!
+    
+    func configure(_ item: WeatherDetail) {
+        weatherImageView.image = item.icon
+        dayLabel.text = DateUtil.weekDay(from: item.time) ?? ""
+        temperatureHighLabel.text = String(format: "%.1f°", item.feature.temperatureHigh.fahrenheitToCelsius())
+        temperatureLowLabel.text = String(format: "%.1f°", item.feature.temperatureLow.fahrenheitToCelsius())
+    }
 }

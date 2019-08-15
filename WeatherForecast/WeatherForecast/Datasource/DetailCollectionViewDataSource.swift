@@ -24,16 +24,13 @@ class DetailCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         if indexPath.item < detailArray.count {
             if let dailyCell = cell as? DailyCell {
                 let weatherDetail = detailArray[indexPath.item]
-                dailyCell.weatherImageView.image = weatherDetail.icon
-                dailyCell.dayLabel.text = DateUtil.weekDay(from: weatherDetail.time) ?? ""
-                dailyCell.temperatureHighLabel.text = String(format: "%.1f°", weatherDetail.feature.temperatureHigh.fahrenheitToCelsius())
-                dailyCell.temperatureLowLabel.text = String(format: "%.1f°", weatherDetail.feature.temperatureLow.fahrenheitToCelsius())
+                dailyCell.configure(weatherDetail)
                 return dailyCell
             }
         } else if indexPath.item == detailArray.count {
             if let feature = feature,
                 let summaryCell = collectionView.dequeueReusableCell(withReuseIdentifier: SummaryCell.reuseIdentifier, for: indexPath) as? SummaryCell {
-                summaryCell.summaryTextView.text = feature.summary
+                summaryCell.configure(feature)
                 return summaryCell
             }
         }

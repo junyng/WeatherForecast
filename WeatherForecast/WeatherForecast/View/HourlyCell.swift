@@ -8,8 +8,14 @@
 
 import UIKit
 
-class HourlyCell: UICollectionViewCell, ReusableCell {
+class HourlyCell: UICollectionViewCell, ConfigurableCell, ReusableCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var weatherImage: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
+    
+    func configure(_ item: WeatherCurrently) {
+        timeLabel.text = DateUtil.currentTime(from: item.time)
+        weatherImage.image = item.icon
+        temperatureLabel.text = String(format: "%.1f°", item.temperature.fahrenheitToCelsius())
+    }
 }

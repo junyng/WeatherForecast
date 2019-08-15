@@ -8,6 +8,10 @@
 
 import UIKit
 
-class SummaryCell: UICollectionViewCell, ReusableCell {
+class SummaryCell: UICollectionViewCell, ConfigurableCell, ReusableCell {
     @IBOutlet weak var summaryTextView: UITextView!
+    
+    func configure(_ item: Feature) {
+        summaryTextView.text = item.summary
+    }
 }

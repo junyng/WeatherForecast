@@ -1,5 +1,5 @@
 //
-//  Double+Conversions.swift
+//  Double+Conversion.swift
 //  WeatherForecast
 //
 //  Created by BLU on 10/08/2019.

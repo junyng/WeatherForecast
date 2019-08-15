@@ -20,9 +20,7 @@ class HourlyCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCell.reuseIdentifier, for: indexPath)
         if let hourlyCell = cell as? HourlyCell {
             let weatherCurrently = currentArray[indexPath.item]
-            hourlyCell.timeLabel.text = DateUtil.currentTime(from: weatherCurrently.time)
-            hourlyCell.weatherImage.image = weatherCurrently.icon
-            hourlyCell.temperatureLabel.text = String(format: "%.1f°", weatherCurrently.temperature.fahrenheitToCelsius())
+            hourlyCell.configure(weatherCurrently)
         }
         return cell
     }
