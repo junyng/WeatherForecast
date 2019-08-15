@@ -13,15 +13,10 @@ import MapKit
 class SearchLocationTableViewController: UITableViewController {
     
     var locationStore: LocationStore!
+    let searchCompleter = MKLocalSearchCompleter()
+    var completerResults: [MKLocalSearchCompletion]?
     
-    private var places: [MKMapItem]? {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
-    private var suggestionController: SuggestedLocationTableViewController!
-    private var searchController: UISearchController!
+    private var searchController = UISearchController(searchResultsController: nil)
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +26,7 @@ class SearchLocationTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSearchBar()
+        tableView.register(SuggestedCompletionTableViewCell.self, forCellReuseIdentifier: SuggestedCompletionTableViewCell.reuseIdentifier)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,10 +38,9 @@ class SearchLocationTableViewController: UITableViewController {
     
     // MARK: - Custom Methods
     private func configureSearchController() {
-        suggestionController = SuggestedLocationTableViewController()
-        suggestionController.tableView.delegate = self
-        searchController = UISearchController(searchResultsController: suggestionController)
-        searchController.searchResultsUpdater = suggestionController
+        searchCompleter.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
     }
     
     private func configureSearchBar() {
@@ -58,13 +53,15 @@ class SearchLocationTableViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return places?.count ?? 0
+        return completerResults?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        if let mapItem = places?[indexPath.row] {
-            cell.textLabel?.text = mapItem.name
+        let cell = tableView.dequeueReusableCell(withIdentifier: SuggestedCompletionTableViewCell.reuseIdentifier, for: indexPath)
+        
+        if let suggestion = completerResults?[indexPath.row] {
+            cell.textLabel?.text = suggestion.title
+            cell.detailTextLabel?.text = suggestion.subtitle
         }
         
         return cell
@@ -74,8 +71,7 @@ class SearchLocationTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if tableView == suggestionController.tableView,
-            let suggestion = suggestionController.completerResults?[indexPath.row] {
+        if let suggestion = completerResults?[indexPath.row] {
             searchController.isActive = false
             searchController.searchBar.text = suggestion.title
             LocationConverter.shared.getLocationInfo(from: suggestion.title) { coordinate, timezone, error in
@@ -87,8 +83,8 @@ class SearchLocationTableViewController: UITableViewController {
                     Location(latitude: coordinate.latitude, longitude: coordinate.longitude, address: suggestion.title, timezone: timezone)
                 self.locationStore.addLocation(location)
             }
-            self.dismiss(animated: true)
         }
+        self.dismiss(animated: true)
     }
 }
 
@@ -100,5 +96,41 @@ extension SearchLocationTableViewController: UISearchBarDelegate {
         searchController.isActive = false
         searchBar.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SearchLocationTableViewController: MKLocalSearchCompleterDelegate {
+    
+    /// - MKLocalSearchCompleter 결과를 업데이트 완료시 동작한다
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        completerResults = completer.results
+        tableView.reloadData()
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        if let error = error as NSError? {
+            print("MKLocalSearchCompleter encountered an error: \(error.localizedDescription)")
+        }
+    }
+}
+
+extension SearchLocationTableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        // UISearchbar의 텍스트가 변경될 때, 완료된 suggestions를 MKLocalSearchCompleter 에게 물어본다
+        if let text = searchController.searchBar.text, !text.isEmpty {
+            searchCompleter.queryFragment = text
+        }
+    }
+}
+
+private class SuggestedCompletionTableViewCell: UITableViewCell, ReusableCell {
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
