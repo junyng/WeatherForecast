@@ -26,6 +26,7 @@ class LocationTableViewController: UITableViewController {
     var locationStore: LocationStore!
     var weatherList: [WeatherCurrently?] = [WeatherCurrently?](repeating: nil, count: 20)
     lazy var locationInfoList: [LocationInfo] = Array(zip(locationStore.locations, weatherList))
+    private var timer: Timer?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -38,6 +39,7 @@ class LocationTableViewController: UITableViewController {
         configureFooterView()
         configureBackgroundView()
         fetchWeatherList()
+        createTimer()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -85,6 +87,31 @@ class LocationTableViewController: UITableViewController {
                 case .failure:
                     break
                 }
+            }
+        }
+    }
+    
+    private func createTimer() {
+        let timer = Timer(timeInterval: 1.0,
+                          target: self,
+                          selector: #selector(updateTimer),
+                          userInfo: nil,
+                          repeats: true)
+        RunLoop.current.add(timer, forMode: .common)
+        timer.tolerance = 0.1
+        
+        self.timer = timer
+    }
+    
+    @objc
+    private func updateTimer() {
+        guard let visibleRowsIndexPaths = tableView.indexPathsForVisibleRows else {
+            return
+        }
+        
+        for indexPath in visibleRowsIndexPaths {
+            if let cell = tableView.cellForRow(at: indexPath) as? LocationCell {
+                cell.updateTime()
             }
         }
     }

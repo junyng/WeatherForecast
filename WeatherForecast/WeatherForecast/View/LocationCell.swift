@@ -30,7 +30,7 @@ class LocationCell: UITableViewCell, ConfigurableCell, ReusableCell {
         }
     }
     
-    private func updateTime() {
+    func updateTime() {
         timeLabel.text = DateUtil.currentTime(from: Date(), timezone: timezone)
     }
 }
