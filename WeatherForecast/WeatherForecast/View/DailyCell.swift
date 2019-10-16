@@ -16,7 +16,7 @@ class DailyCell: UICollectionViewCell, ConfigurableCell, ReusableCell {
     
     func configure(_ item: WeatherDetail) {
         weatherImageView.image = item.icon
-        dayLabel.text = DateUtil.weekDay(from: item.time) ?? ""
+        dayLabel.text = DateUtil.currentDay(from: item.time) ?? ""
         temperatureHighLabel.text = String(format: "%.1f°", item.feature.temperatureHigh.fahrenheitToCelsius())
         temperatureLowLabel.text = String(format: "%.1f°", item.feature.temperatureLow.fahrenheitToCelsius())
     }

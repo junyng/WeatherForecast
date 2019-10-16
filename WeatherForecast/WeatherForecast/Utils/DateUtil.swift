@@ -26,7 +26,7 @@ struct DateUtil {
     }
     
     /// Date 객체를 입력 받아 현재 요일 문자열 반환
-    static func weekDay(from date: Date) -> String? {
+    static func currentDay(from date: Date) -> String? {
         let day = calendar.dateComponents([.weekday], from: date).weekday!
         return Weekday(rawValue: day)?.day ?? ""
     }
